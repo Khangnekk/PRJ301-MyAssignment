@@ -111,11 +111,13 @@
         .acaInfo{
 
         }
+        
         .small-part{
             border-radius: 6px;
             border: 1px solid #ccc;
             padding: 5px;
-            margin: 4px 14px;
+            margin: 5px auto;
+            
         }
         .small-part h3{
             font-size: 18px;
@@ -246,7 +248,7 @@
 
                         <p id="content" style="color: red; font-weight: bold; display: none;"></p>
                         LUK students register online by following the link below:
-                        <a href="https://bit.ly/K17P5HN-HocOnline" style="font-size: 14px;">
+                        <a href="https://bit.ly/K17P5HN-HocOnline" target="blank"style="font-size: 14px;">
                             https://bit.ly/K17P5HN-HocOnline
                         </a><br>         
                         <input type="radio" id="checkLink" name="link" onclick="checkLink()" />Update status F0 (Valid for 7 days from the time of registration)
@@ -317,7 +319,7 @@
                                                 <a href="">Tuition fee per course</a>
                                             </li>
                                             <li>
-                                                <a href="">Weekly timetable</a>
+                                                <a href="timeTable.jsp">Weekly timetable</a>
                                             </li>
                                             <li>
                                                 <a href="">Blended Online Course (BLOC) Schedules</a>
