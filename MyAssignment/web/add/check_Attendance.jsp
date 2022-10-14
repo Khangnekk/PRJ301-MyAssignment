@@ -89,7 +89,7 @@
             </header>
             <div class="top">
                 <div class="topLeft">
-                    <a href="../view/lecturer/home.jsp">Home</a>
+                    <a href="home">Home</a>
                     <a>| <b>View Schedule</b></a>
                 </div>
                 <div class="topRight">
@@ -142,7 +142,7 @@
                         </td>
                         <td></td>
                         <td class="avt_img">
-                            <img src="../img/avt.jpeg" alt="alt"/>
+                            <img src="img/avt.jpeg" alt="alt"/>
                         </td>
                     </tr>
                     <tr>
@@ -160,7 +160,7 @@
                         </td>
                         <td></td>
                         <td class="avt_img">
-                            <img src="../img/avt.jpeg" alt="alt"/>
+                            <img src="img/avt.jpeg" alt="alt"/>
                         </td>
                     </tr>
                     <tr>
@@ -178,7 +178,7 @@
                         </td>
                         <td></td>
                         <td class="avt_img">
-                            <img src="../img/avt.jpeg" alt="alt"/>
+                            <img src="img/avt.jpeg" alt="alt"/>
                         </td>
                     </tr>
                     <tr>
@@ -196,7 +196,7 @@
                         </td>
                         <td></td>
                         <td class="avt_img">
-                            <img src="../img/avt.jpeg" alt="alt"/>
+                            <img src="img/avt.jpeg" alt="alt"/>
                         </td>
                     </tr>
                     <tr>
@@ -214,7 +214,7 @@
                         </td>
                         <td></td>
                         <td class="avt_img">
-                            <img src="../img/avt.jpeg" alt="alt"/>
+                            <img src="img/avt.jpeg" alt="alt"/>
                         </td>
                     </tr>
                     <tr>
@@ -232,7 +232,7 @@
                         </td>
                         <td></td>
                         <td class="avt_img">
-                            <img src="../img/avt.jpeg" alt="alt"/>
+                            <img src="img/avt.jpeg" alt="alt"/>
                         </td>
                     </tr>
                     <tr>
@@ -250,7 +250,7 @@
                         </td>
                         <td></td>
                         <td class="avt_img">
-                            <img src="../img/avt.jpeg" alt="alt"/>
+                            <img src="img/avt.jpeg" alt="alt"/>
                         </td>
                     </tr>
                     <tr>
@@ -268,7 +268,7 @@
                         </td>
                         <td></td>
                         <td class="avt_img">
-                            <img src="../img/avt.jpeg" alt="alt"/>
+                            <img src="img/avt.jpeg" alt="alt"/>
                         </td>
                     </tr>
                     <tr>
@@ -286,7 +286,7 @@
                         </td>
                         <td></td>
                         <td class="avt_img">
-                            <img src="../img/avt.jpeg" alt="alt"/>
+                            <img src="img/avt.jpeg" alt="alt"/>
                         </td>
                     </tr>
                     <tr>
@@ -304,7 +304,7 @@
                         </td>
                         <td></td>
                         <td class="avt_img">
-                            <img src="../img/avt.jpeg" alt="alt"/>
+                            <img src="img/avt.jpeg" alt="alt"/>
                         </td>
                     </tr>
 
