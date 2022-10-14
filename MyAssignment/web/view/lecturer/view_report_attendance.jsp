@@ -72,7 +72,7 @@
             </header>
             <div class="top">
                 <div class="topLeft">
-                    <a href="home.jsp">Home</a>
+                    <a href="home">Home</a>
                     <a>| <b>View Schedule</b></a>
                 </div>
                 <div class="topRight">
