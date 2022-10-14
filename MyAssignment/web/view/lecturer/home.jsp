@@ -72,7 +72,7 @@
         </header>
         <div class="top">
             <div class="topLeft">
-                <a href="home.jsp">Home</a>
+                <a href="home">Home</a>
                 <a>| <b>View Schedule</b></a>
             </div>
             <div class="topRight">
@@ -94,9 +94,9 @@
             </div>
         </div>
         <div>
-            <a href="../../add/check_Attendance.jsp">Take attendace for today</a><br>
-            <a href="timeTable.jsp">Time Table</a><br>
-            <a href="view_report_attendance.jsp">View report attendance</a>
+            <a href="check_Attendance">Take attendace for today</a><br>
+            <a href="timeTable">Time Table</a><br>
+            <a href="view_report_attendance">View report attendance</a>
         </div>
         <div class="last">
             <b>For any comments or questions, please contact:</b> Student Service Department : Email: <a href="mailto:dichvusinhvien@fe.edu.vn">dichvusinhvien@fe.edu.vn</a> . Phone: <b>(024)7308.13.13</b><br>
