@@ -93,6 +93,11 @@
                 </a>
             </div>
         </div>
+        <div>
+            <a href="../../add/check_Attendance.jsp">Take attendace for today</a><br>
+            <a href="timeTable.jsp">Time Table</a><br>
+            <a href="view_report_attendance.jsp">View report attendance</a>
+        </div>
         <div class="last">
             <b>For any comments or questions, please contact:</b> Student Service Department : Email: <a href="mailto:dichvusinhvien@fe.edu.vn">dichvusinhvien@fe.edu.vn</a> . Phone: <b>(024)7308.13.13</b><br>
             Powered by <a href="">FPT University</a> |  <a href="">CMS</a> |  <a href="">library</a> |  <a href="">books24x7</a>
