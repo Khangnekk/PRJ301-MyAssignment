@@ -117,6 +117,7 @@
             border: 1px solid #ccc;
             padding: 5px;
             margin: 5px auto;
+            background-color: white;
             
         }
         .small-part h3{
@@ -360,7 +361,7 @@
                                     <div class="detail-small-part">
                                         <ul>
                                             <li>
-                                                <a href="">Attendance report </a>
+                                                <a href="Attendance_report.jsp">Attendance report</a>
                                             </li>
                                             <li>
                                                 <a href="">Mark Report</a>
