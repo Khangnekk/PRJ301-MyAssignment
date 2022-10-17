@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -110,8 +111,10 @@
                 </div>
                 <div class="topRight">
                     <a href="#">
-                        <span>
-                            ?
+                       <span>
+                            <c:if test="${sessionScope.account ne null}">
+                                 ${sessionScope.account.username}
+                            </c:if>
                         </span>
                     </a>
                     <a href="#">
@@ -194,7 +197,8 @@
                     <tr>
                         <td>Slot 1</td>
                         <td>
-                            <a href="" class="info">IOT1702-PRF192</a><br>
+                            <a href="" class="info">IOT1702</a>
+                            <a href="" class="info">PRF192</a><br>
                             <a href="" class="info">at BE-301</a><br>
                             <a href="" class="attended">(Attended)</a>
                             <button>
