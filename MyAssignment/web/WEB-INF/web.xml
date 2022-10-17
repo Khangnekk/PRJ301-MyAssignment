@@ -16,6 +16,14 @@
         <servlet-name>view_report_attendance</servlet-name>
         <servlet-class>controller.viewReportController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>loginController</servlet-name>
+        <servlet-class>controller.auth.LoginController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>logoutController</servlet-name>
+        <servlet-class>controller.auth.LogoutController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>check_Attendance</servlet-name>
         <url-pattern>/check_Attendance</url-pattern>
@@ -31,6 +39,14 @@
     <servlet-mapping>
         <servlet-name>view_report_attendance</servlet-name>
         <url-pattern>/view_report_attendance</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>loginController</servlet-name>
+        <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>logoutController</servlet-name>
+        <url-pattern>/logout</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
