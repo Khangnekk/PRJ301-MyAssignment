@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -95,10 +96,12 @@
                 <div class="topRight">
                     <a href="#">
                         <span>
-                            ?
+                            <c:if test="${sessionScope.account ne null}">
+                                 ${sessionScope.account.username}
+                            </c:if>
                         </span>
                     </a>
-                    <a href="#">
+                    <a href="logout">
                         <span>
                             logout
                         </span>
