@@ -320,7 +320,7 @@
                                                 <a href="">Tuition fee per course</a>
                                             </li>
                                             <li>
-                                                <a href="timeTable.jsp">Weekly timetable</a>
+                                                <a href="studentTimetable">Weekly timetable</a>
                                             </li>
                                             <li>
                                                 <a href="">Blended Online Course (BLOC) Schedules</a>

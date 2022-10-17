@@ -4,7 +4,7 @@
  */
 package controller.lecturer;
 
-import controller.auth.BaseAuthenticationController;
+import controller.auth.lecturer.BaseAuthenticationController;
 import dal.StudentDBContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
