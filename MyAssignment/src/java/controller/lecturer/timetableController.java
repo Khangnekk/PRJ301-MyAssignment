@@ -2,19 +2,24 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package controller;
+package controller.lecturer;
 
+import controller.auth.BaseAuthenticationController;
+import dal.StudentDBContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
+import model.Student;
 
 /**
  *
  * @author Khangnekk
  */
-public class viewReportController extends HttpServlet{
+public class timetableController extends HttpServlet {
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         processRequest(req, resp);
@@ -26,6 +31,7 @@ public class viewReportController extends HttpServlet{
     }
 
     void processRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("view/lecturer/view_report_attendance.jsp").forward(req, resp);
+        req.getRequestDispatcher("view/lecturer/timeTable.jsp").forward(req, resp);
     }
+
 }
