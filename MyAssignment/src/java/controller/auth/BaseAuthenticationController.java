@@ -31,7 +31,7 @@ public abstract class BaseAuthenticationController extends HttpServlet {
         }
         else
         {
-            resp.getWriter().println("access denied!");
+            req.getRequestDispatcher("view/lecturer/auth/accessDenied.jsp").forward(req, resp);
         }
     }
     protected abstract void processPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException;
@@ -45,7 +45,7 @@ public abstract class BaseAuthenticationController extends HttpServlet {
         }
         else
         {
-            resp.getWriter().println("access denied!");
+            req.getRequestDispatcher("view/lecturer/auth/accessDenied.jsp").forward(req, resp);
         }
     }
     
