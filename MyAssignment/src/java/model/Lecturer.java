@@ -5,42 +5,45 @@
 package model;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 /**
  *
  * @author Khangnekk
  */
 public class Lecturer {
-    private int leid;
-    private String lename;
-    private String leemail;
+    private int id;
+    private String name;
+    private String email;
     private boolean gender;
-    private Date ledob;
-    private String lephone;
-    private String leaddress;
+    private Date dob;
+    private String phone;
+    private String address;
+    private ArrayList<Group> groups = new ArrayList<>();
+    private ArrayList<Session> sessions = new ArrayList<>();
 
-    public int getLeid() {
-        return leid;
+    public int getId() {
+        return id;
     }
 
-    public void setLeid(int leid) {
-        this.leid = leid;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getLename() {
-        return lename;
+    public String getName() {
+        return name;
     }
 
-    public void setLename(String lename) {
-        this.lename = lename;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getLeemail() {
-        return leemail;
+    public String getEmail() {
+        return email;
     }
 
-    public void setLeemail(String leemail) {
-        this.leemail = leemail;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public boolean isGender() {
@@ -51,27 +54,46 @@ public class Lecturer {
         this.gender = gender;
     }
 
-    public Date getLedob() {
-        return ledob;
+    public Date getDob() {
+        return dob;
     }
 
-    public void setLedob(Date ledob) {
-        this.ledob = ledob;
+    public void setDob(Date dob) {
+        this.dob = dob;
     }
 
-    public String getLephone() {
-        return lephone;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setLephone(String lephone) {
-        this.lephone = lephone;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
-    public String getLeaddress() {
-        return leaddress;
+    public String getAddress() {
+        return address;
     }
 
-    public void setLeaddress(String leaddress) {
-        this.leaddress = leaddress;
+    public void setAddress(String address) {
+        this.address = address;
     }
+
+    public ArrayList<Group> getGroups() {
+        return groups;
+    }
+
+    public void setGroups(ArrayList<Group> groups) {
+        this.groups = groups;
+    }
+
+    public ArrayList<Session> getSessions() {
+        return sessions;
+    }
+
+    public void setSessions(ArrayList<Session> sessions) {
+        this.sessions = sessions;
+    }
+    
+    
+    
 }
