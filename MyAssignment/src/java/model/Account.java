@@ -14,7 +14,7 @@ public class Account {
     private String email;
     private String password;
     private String username;
-    
+    private ArrayList<Lecturer> lectures = new ArrayList<>();
     private ArrayList<Role> roles = new ArrayList<>();
     
     public String getEmail() {
@@ -48,6 +48,16 @@ public class Account {
     public void setRoles(ArrayList<Role> roles) {
         this.roles = roles;
     }
+
+    public ArrayList<Lecturer> getLectures() {
+        return lectures;
+    }
+
+    public void setLectures(ArrayList<Lecturer> lectures) {
+        this.lectures = lectures;
+    }
+    
+    
     
     
 }
