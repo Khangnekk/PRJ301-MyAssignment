@@ -18,7 +18,7 @@ import model.*;
  */
 public class SessionDBContext extends DBContext<Session> {
 
-    public ArrayList<Session> filter(int lid, Date from, Date to) {
+    public ArrayList<Session> filter(int leid, Date from, Date to) {
 
         ArrayList<Session> sessions = new ArrayList<>();
         try {
@@ -36,11 +36,11 @@ public class SessionDBContext extends DBContext<Session> {
                     + "INNER JOIN Room r ON r.rid = ses.rid\n"
                     + "INNER JOIN TimeSlot t ON t.tid = ses.tid\n"
                     + "WHERE\n"
-                    + "l.leid = 1\n"
+                    + "l.leid = ?\n"
                     + "AND ses.[date] >= ?\n"
                     + "AND ses.[date] <= ?";
             PreparedStatement stm = connection.prepareStatement(sql_get_Sesion);
-            stm.setInt(1, lid);
+            stm.setInt(1, leid);
             stm.setDate(2, from);
             stm.setDate(3, to);
             ResultSet rs = stm.executeQuery();
