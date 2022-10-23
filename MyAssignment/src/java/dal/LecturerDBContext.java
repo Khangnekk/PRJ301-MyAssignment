@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.sql.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Lecturer;
@@ -35,7 +36,22 @@ public class LecturerDBContext extends DBContext<Lecturer> {
         }
         return null;
     }
-
+    
+    public int getIdByEmail(String leemail){
+        try {
+            String sql = "SELECT leid FROM Lecturer WHERE leemail = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, leemail);
+            ResultSet rs = stm.executeQuery();
+            if(rs.next()){
+                return rs.getInt("leid");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(LecturerDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return -1;
+    }
+    
     @Override
     public void insert(Lecturer model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -53,7 +69,35 @@ public class LecturerDBContext extends DBContext<Lecturer> {
 
     @Override
     public ArrayList<Lecturer> list() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        ArrayList<Lecturer> lecturers = new ArrayList<>();
+        String sql = "SELECT * FROM Lecturer";
+        try {
+            PreparedStatement stm = connection.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Lecturer t = new Lecturer();
+                int id = rs.getInt("leid");
+                String name = rs.getString("lename");
+                String email = rs.getString("leemail");
+                boolean gender = rs.getBoolean("gender");
+                Date dob = rs.getDate("ledob");
+                String phone = rs.getString("lephone");
+                String address = rs.getString("leaddress");
+                t.setId(id);
+                t.setName(name);
+                t.setEmail(email);
+                t.setGender(gender);
+                t.setDob(dob);
+                t.setPhone(phone);
+                t.setAddress(address);
+                lecturers.add(t);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(StudentDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return lecturers;
     }
 
 }
