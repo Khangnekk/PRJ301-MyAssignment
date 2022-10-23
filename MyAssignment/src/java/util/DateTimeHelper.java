@@ -81,13 +81,13 @@ public class DateTimeHelper {
         int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
         switch(dayOfWeek)
         {
-            case 1: return "Sun";
-            case 2: return "Mon";
-            case 3: return "Tue";
-            case 4: return "Wed";
-            case 5: return "Thu";
-            case 6: return "Fri";
-            case 7: return "Sat";
+            case 1: return "SUNDAY";
+            case 2: return "MONDAY";
+            case 3: return "TUEDAY";
+            case 4: return "WEDNESDAY";
+            case 5: return "THURSDAY";
+            case 6: return "FRIDAY";
+            case 7: return "SATURDAY";
         }
         return "Error";
     }
