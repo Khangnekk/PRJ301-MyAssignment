@@ -33,7 +33,6 @@
                 text-decoration: none;
             }
             .topRight span{
-                margin-left: 10px;
                 color:white;
                 background-color: #5cb85c;
                 border-radius: 3px;
@@ -77,6 +76,7 @@
                     <a>| <b>View Schedule</b></a>
                 </div>
                 <div class="topRight">
+                    Nickname:
                     <a href="#">
                         <span>
                             <c:if test="${sessionScope.account ne null}">
@@ -84,11 +84,13 @@
                             </c:if>
                         </span>
                     </a>
+                    &nbsp;|
                     <a href="logout">
                         <span>
                             logout
                         </span>
                     </a>
+                    &nbsp;|
                     <a href="#">
                         <span>
                             Campus: FPTU - Hoa Lac
@@ -102,7 +104,7 @@
                     
                 </div>
                 <a href="check_Attendance">Take attendace for today</a><br>
-                <a href="timeTable">Time Table</a><br>
+                <a href="timeTable?email=${sessionScope.account.email}">Time Table</a><br>
                 <a href="view_report_attendance">View report attendance</a>
             </div>
             <div class="last">
