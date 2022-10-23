@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<jsp:useBean id="helper" class="util.DateTimeHelper"/>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -33,7 +34,6 @@
                 text-decoration: none;
             }
             .topRight span{
-                margin-left: 10px;
                 color:white;
                 background-color: #5cb85c;
                 border-radius: 3px;
@@ -48,8 +48,7 @@
             }
             table tr td {
                 padding:0 10px;
-                /*border:1px solid background;*/
-                border-bottom: 1px solid #f0f0f0;
+                border:1px solid black;
             }
             .table .htable{
                 background-color: #6b90da;
@@ -84,9 +83,6 @@
                 text-decoration: none;
                 color: red;
             }
-            .attended:hover {
-                color: green;
-            }
             .table button{
                 background-color: #6b90da;
                 border-radius: 8px;
@@ -96,6 +92,18 @@
             }
             .table button:hover{
                 background-color: #3366cc;
+            }
+            .timeslot{
+                text-align: left;
+            }
+            .tdes{
+                color: #f08e01;
+                text-decoration: none;
+            }
+            .tname{
+                font-weight: bold;
+                color:black;
+                text-decoration: none;
             }
         </style>
     </head>
@@ -110,18 +118,21 @@
                     <a>| <b>View Schedule</b></a>
                 </div>
                 <div class="topRight">
+                    Nickname:
                     <a href="#">
-                       <span>
+                        <span>
                             <c:if test="${sessionScope.account ne null}">
-                                 ${sessionScope.account.username}
+                                ${sessionScope.account.username}
                             </c:if>
                         </span>
                     </a>
-                    <a href="#">
+                    &nbsp;|
+                    <a href="logout">
                         <span>
                             logout
                         </span>
                     </a>
+                    &nbsp;|
                     <a href="#">
                         <span>
                             Campus: FPTU - Hoa Lac
@@ -131,298 +142,47 @@
             </div>
             <div class="description">
                 <div class="dhead">
-                    <form action="">
-                        Campus: 
-                        <select>
-                            <option>FU-HL</option>
-                            <option>FU-HL</option>
-                            <option>FU-HL</option>
-                            <option>FU-HL</option>
-                        </select><br>
-                        Lecturer: 
-                        <input type="text" name="lecturer">
-                        <input type="submit" name="view" value="View">
+                    Lecturer: <input type="text" value="${requestScope.lecturer.name}"/>
+                    <form action="timeTable" method="POST">
+                        <input type="hidden" name="leid" value="${requestScope.leid}"/>
+                        <input type="hidden" name="email" value="${requestScope.email}"/>
+                        From: <input type="date" name="from" value="${requestScope.from}"/>
+                        To: <input type="date" name="to" value="${requestScope.to}"/>
+                        <input type="submit" value="View"/> 
                     </form>
                 </div>
             </div>
             <div class="table">
-                <table style="border:1px solid white;">
+                <table>
                     <tr class="htable">
-                        <td>Year:
-                            <select>
-                                <option>2022</option>
-                                <option>2023</option>
-                                <option>2024</option>
-                                <option>2025</option>
-                            </select>
-                        </td>
+                        <td></td>
+                        <c:forEach items="${requestScope.dates}" var="d">
+                            <td>${helper.getDayNameofWeek(d)}<br>${d}</td>
+                            </c:forEach>
+                    </tr>
+                    <c:forEach items="${requestScope.slots}" var="slot">
+                        <tr>
+                            <td class="timeslot"><a class="tname">${slot.name}: </a><br><a class="tdes">(${slot.description})</a></td>
+                            <c:forEach items="${requestScope.dates}" var="d">
+                                <td>
+                                    <c:forEach items="${requestScope.sessions}" var="ses">
+                                        <c:if test="${helper.compare(ses.date,d) eq 0 and (ses.timeslot.id eq slot.id)}">
+                                            <a href="att?id=${ses.id}">${ses.group.name}-${ses.group.subject.name}</a>
+                                            <br/>
+                                            at ${ses.room.name}
+                                            <c:if test="${ses.attendated}">
+                                                <a class="attended">(Attend)</a>
+                                            </c:if>
+                                            <c:if test="${!ses.attendated}">
+                                                <a class="not_yet">(Not Yet)</a>
+                                            </c:if>
+                                        </c:if>
 
-                        <td>MON</td>
-                        <td>TUE</td>
-                        <td>WED</td>
-                        <td>THU</td>
-                        <td>FRI</td>
-                        <td>SAT</td>
-                        <td>SUN</td>
-                    </tr>
-                    <tr class="htable">
-                        <td>Week:
-                            <select>
-                                <option>10/10 - 16/10</option>
-                                <option>17/10 - 23/10</option>
-                                <option>24/10 - 30/10</option>
-                                <option>31/10 - 6/11</option>
-                                <option>7/11 - 13/11</option>
-                            </select>
-                        </td>
-
-                        <td>10/10</td>
-                        <td>11/10</td>
-                        <td>12/10</td>
-                        <td>13/10</td>
-                        <td>14/10</td>
-                        <td>15/10</td>
-                        <td>16/10</td>
-                    </tr>
-                    <tr>
-                        <td>Slot 0</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td>Slot 1</td>
-                        <td>
-                            <a href="" class="info">IOT1702</a>
-                            <a href="" class="info">PRF192</a><br>
-                            <a href="" class="info">at BE-301</a><br>
-                            <a href="" class="attended">(Attended)</a>
-                            <button>
-                                <a>Edunext</a>
-                            </button>
-                        </td>
-                        <td>
-                            -
-                        </td>
-                        <td>
-                            <a href="" class="info">IOT1702-PRF192</a><br>
-                            <a href="" class="info">at BE-301</a><br>
-                            <a href="" class="attended">(Attended)</a>
-                            <button>
-                                <a>Edunext</a>
-                            </button>
-                        </td>
-                        <td>
-                            <a href="" class="info">IOT1702-PRF192</a><br>
-                            <a href="" class="info">at BE-301</a><br>
-                            <a href="" class="not_yet">(Not yet)</a>
-                            <button>
-                                <a>Edunext</a>
-                            </button>
-                        </td>
-                        <td>
-                            <a href="" class="info">IOT1702-PRF192</a><br>
-                            <a href="" class="info">at BE-301</a><br>
-                            <a href="" class="not_yet">(Not yet)</a>
-                            <button>
-                                <a>Edunext</a>
-                            </button>
-                        </td>
-                        <td>
-                            -
-                        </td>
-                        <td>
-                            -
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Slot 2</td>
-                        <td>
-                            <a href="" class="info">AI1604 - DBI202</a><br>
-                            <a href="" class="info">at BE-315</a><br>
-                            <a href="" class="attended">(Attended)</a>
-                            <button>
-                                <a>Edunext</a>
-                            </button>
-                        </td>
-                        <td>
-                            <a href="" class="info">SE1610-PRJ301</a><br>
-                            <a href="" class="info">at DE-222</a><br>
-                            <a href="" class="attended">(Attended)</a>
-                            <button>
-                                <a>Edunext</a>
-                            </button>
-                        </td>
-                        <td>
-                            <a href="" class="info">SE1608-PRJ301</a><br>
-                            <a href="" class="info">at DE-223</a><br>
-                            <a href="" class="attended">(Attended)</a>
-                            <button>
-                                <a>Edunext</a>
-                            </button>
-                        </td>
-                        <td>
-                            <a href="" class="info">IOT1702-PRF192</a><br>
-                            <a href="" class="info">at BE-301</a><br>
-                            <a href="" class="not_yet">(Not yet)</a>
-                            <button>
-                                <a>Edunext</a>
-                            </button>
-                        </td>
-                        <td>
-                            <a href="" class="info">IOT1702-PRF192</a><br>
-                            <a href="" class="info">at BE-301</a><br>
-                            <a href="" class="not_yet">(Not yet)</a>
-                            <button>
-                                <a>Edunext</a>
-                            </button>
-                        </td>
-                        <td>
-                            -
-                        </td>
-                        <td>
-                            -  
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Slot 3</td>
-                        <td>
-                            <a href="" class="info">IOT1702-PRF192</a><br>
-                            <a href="" class="info">at BE-301</a><br>
-                            <a href="" class="attended">(Attended)</a>
-                            <button>
-                                <a>Edunext</a>
-                            </button>
-                        </td>
-                        <td>
-                            <a href="" class="info">IOT1702-PRF192</a><br>
-                            <a href="" class="info">at BE-301</a><br>
-                            <a href="" class="attended">(Attended)</a>
-                            <button>
-                                <a>Edunext</a>
-                            </button>
-                        </td>
-                        <td>
-                            <a href="" class="info">IOT1702-PRF192</a><br>
-                            <a href="" class="info">at BE-301</a><br>
-                            <a href="" class="not_yet">(Not yet)</a>
-                            <button>
-                                <a>Edunext</a>
-                            </button>
-                        </td>
-                        <td>
-                            <a href="" class="info">IOT1702-PRF192</a><br>
-                            <a href="" class="info">at BE-301</a><br>
-                            <a href="" class="not_yet">(Not yet)</a>
-                            <button>
-                                <a>Edunext</a>
-                            </button>
-                        </td>
-                        <td>
-                            <a href="" class="info">IOT1702-PRF192</a><br>
-                            <a href="" class="info">at BE-301</a><br>
-                            <a href="" class="not_yet">(Not yet)</a>
-                            <button>
-                                <a>Edunext</a>
-                            </button>
-                        </td>
-                        <td>
-                            -
-                        </td>
-                        <td>
-                            -  
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Slot 4</td>
-                        <td>
-                            <a href="" class="info">IOT1702-PRF192</a><br>
-                            <a href="" class="info">at BE-301</a><br>
-                            <a href="" class="attended">(Attended)</a>
-                            <button>
-                                <a>Edunext</a>
-                            </button>
-                        </td>
-                        <td>
-                            <a href="" class="info">IOT1702-PRF192</a><br>
-                            <a href="" class="info">at BE-301</a><br>
-                            <a href="" class="attended">(Attended)</a>
-                            <button>
-                                <a>Edunext</a>
-                            </button>
-                        </td>
-                        <td>
-                            <a href="" class="info">IOT1702-PRF192</a><br>
-                            <a href="" class="info">at BE-301</a><br>
-                            <a href="" class="not_yet">(Not yet)</a>
-                            <button>
-                                <a>Edunext</a>
-                            </button>
-                        </td>
-                        <td>
-                            <a href="" class="info">IOT1702-PRF192</a><br>
-                            <a href="" class="info">at BE-301</a><br>
-                            <a href="" class="not_yet">(Not yet)</a>
-                            <button>
-                                <a>Edunext</a>
-                            </button>
-                        </td>
-                        <td>
-                            <a href="" class="info">IOT1702-PRF192</a><br>
-                            <a href="" class="info">at BE-301</a><br>
-                            <a href="" class="not_yet">(Not yet)</a>
-                            <button>
-                                <a>Edunext</a>
-                            </button>
-                        </td>
-                        <td>
-                            -
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Slot 5</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td>Slot 6</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td>Slot 7</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td>Slot 8</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
+                                    </c:forEach>
+                                </td>
+                            </c:forEach>
+                        </tr>
+                    </c:forEach>
                 </table>
             </div>
             <div class="last">
