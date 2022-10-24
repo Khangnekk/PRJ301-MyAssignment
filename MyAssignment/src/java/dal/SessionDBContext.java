@@ -46,10 +46,10 @@ public class SessionDBContext extends DBContext<Session> {
             ResultSet rs = stm.executeQuery();
             while(rs.next())
             {
-                Session session = new Session();
-                Lecturer l = new Lecturer();
                 Room r = new Room();
                 Group g = new Group();
+                Session session = new Session();
+                Lecturer l = new Lecturer();
                 TimeSlot t = new TimeSlot();
                 Subject sub = new Subject();
                 
@@ -104,8 +104,53 @@ public class SessionDBContext extends DBContext<Session> {
 
     @Override
     public Session get(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            String sql = "SELECT * FROM [Session] WHERE seid = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, id);
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                Room r = new Room();
+                Group g = new Group();
+                Session s = new Session();
+                Lecturer l = new Lecturer();
+                TimeSlot t = new TimeSlot();
+                Subject sub = new Subject();
+                
+                s.setId(rs.getInt("seid"));
+                s.setDate(rs.getDate("date"));
+                s.setIndex(rs.getInt("index"));
+                s.setAttendated(rs.getBoolean("attend"));
+                
+                l.setId(rs.getInt("leid"));
+                l.setName(rs.getString("lename"));
+                s.setLecturer(l);
+                
+                g.setId(rs.getInt("gid"));
+                g.setName(rs.getString("gname"));
+                s.setGroup(g);
+                
+                sub.setId(rs.getInt("subid"));
+                sub.setName(rs.getString("subname"));
+                g.setSubject(sub);
+                
+                r.setId(rs.getInt("rid"));
+                r.setName(rs.getString("rname"));
+                s.setRoom(r);
+                
+                t.setId(rs.getInt("tid"));
+                t.setName("tname");
+                t.setDescription(rs.getString("description"));
+                s.setTimeslot(t);
+                
+                return s;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(LecturerDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
+    
 
     @Override
     public ArrayList<Session> list() {
