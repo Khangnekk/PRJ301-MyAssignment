@@ -42,7 +42,7 @@ public class SubjectDBContext extends DBContext<Subject>{
     @Override
     public ArrayList<Subject> list() {
         ArrayList<Subject> subjects = new ArrayList<>();
-        String sql = "SELECT * FROM TimeSlot";
+        String sql = "SELECT * FROM Subject";
         try {
             PreparedStatement stm = connection.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
