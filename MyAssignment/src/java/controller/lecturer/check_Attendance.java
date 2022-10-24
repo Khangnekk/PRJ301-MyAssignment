@@ -33,10 +33,10 @@ public class check_Attendance extends BaseAuthenticationController {
     }
 
     void processRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {    
-        int seid = Integer.parseInt(req.getParameter("id"));
+//        int seid = Integer.parseInt(req.getParameter("id"));
         SessionDBContext sesDB = new SessionDBContext();
-        Session getSessionsByID = sesDB.get(seid);
-        req.setAttribute("getSessionsByID", getSessionsByID);
+//        Session getSessionsByID = sesDB.get(seid);
+//        req.setAttribute("getSessionsByID", getSessionsByID);
         req.getRequestDispatcher("add/check_Attendance.jsp").forward(req, resp);
     }
 }
