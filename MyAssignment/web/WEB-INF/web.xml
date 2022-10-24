@@ -36,6 +36,10 @@
         <servlet-name>studentLogin</servlet-name>
         <servlet-class>controller.auth.student.StudentLoginController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>groupController</servlet-name>
+        <servlet-class>controller.lecturer.groupController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>check_Attendance</servlet-name>
         <url-pattern>/check_Attendance</url-pattern>
@@ -71,6 +75,10 @@
     <servlet-mapping>
         <servlet-name>studentLogin</servlet-name>
         <url-pattern>/studentLogin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>groupController</servlet-name>
+        <url-pattern>/group</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
