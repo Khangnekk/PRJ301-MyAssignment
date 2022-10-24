@@ -5,10 +5,15 @@
 package controller.lecturer;
 
 import controller.auth.lecturer.BaseAuthenticationController;
+import dal.AttendanceDBContext;
+import dal.GroupDBContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
+import model.Attendance;
+import model.Group;
 
 /**
  *
@@ -18,12 +23,18 @@ public class groupController extends BaseAuthenticationController {
 
     @Override
     protected void processPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        
     }
 
     @Override
     protected void processGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        GroupDBContext groupDB = new GroupDBContext();
+        AttendanceDBContext attDB = new AttendanceDBContext();
+        ArrayList<Group> groups = groupDB.list();
+        ArrayList<Attendance> attendances = attDB.list();
+        req.setAttribute("groups", groups);
+        req.setAttribute("attendancs", attendances);
+        req.getRequestDispatcher("view/lecturer/group.jsp").forward(req, resp);
     }
     
 }
