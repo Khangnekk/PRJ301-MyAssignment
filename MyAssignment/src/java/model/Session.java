@@ -20,6 +20,7 @@ public class Session {
     private Group group;
     private boolean attendated; 
     private int index;
+    
     private ArrayList<Attendance> attendances = new ArrayList<>();
 
     public int getId() {
