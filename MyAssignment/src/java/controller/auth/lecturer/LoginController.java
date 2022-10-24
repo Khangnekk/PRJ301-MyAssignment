@@ -43,25 +43,4 @@ public class LoginController extends HttpServlet {
             request.getRequestDispatcher("/view/lecturer/home.jsp").forward(request, response);
         }
     }
-
-//    @Override
-//    protected void processPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        String email = request.getParameter("email").trim().toLowerCase();
-//        String password = request.getParameter("password");
-//        AccountDBContext db = new AccountDBContext();
-//        Account account = db.get(email, password);
-//        if (account == null) {
-////            response.getWriter().println("login failed!");
-//            request.setAttribute("noti", "* Incorrect email or password");
-//            request.getRequestDispatcher("view/lecturer/auth/login.jsp").forward(request, response);
-//        } else {
-//            request.getSession().setAttribute("account", account);
-//            request.getRequestDispatcher("/view/lecturer/home.jsp").forward(request, response);
-//        }
-//    }
-//
-//    @Override
-//    protected void processGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        request.getRequestDispatcher("view/lecturer/auth/login.jsp").forward(request, response);
-//    }
 }
