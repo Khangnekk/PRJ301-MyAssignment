@@ -18,7 +18,7 @@ import model.Student;
  *
  * @author Khangnekk
  */
-public class check_Attendance extends BaseAuthenticationController{
+public class check_Attendance extends BaseAuthenticationController {
 
     @Override
     protected void processPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -29,20 +29,11 @@ public class check_Attendance extends BaseAuthenticationController{
     protected void processGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         processRequest(req, resp);
     }
-//    @Override
-//    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        processRequest(req, resp);
-//    }
-//
-//    @Override
-//    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        processRequest(req, resp);
-//    }
-//
+
     void processRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        StudentDBContext db = new StudentDBContext();
-//        ArrayList<Student> list = db.list();
-//        req.setAttribute("students", list);
+        StudentDBContext stuDB = new StudentDBContext();
+        ArrayList<Student> students = stuDB.list();
+        req.setAttribute("student", students);
         req.getRequestDispatcher("add/check_Attendance.jsp").forward(req, resp);
     }
 }
