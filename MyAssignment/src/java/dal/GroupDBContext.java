@@ -48,7 +48,7 @@ public class GroupDBContext extends DBContext<Group> {
         LecturerDBContext lecDB = new LecturerDBContext();
         ArrayList<Subject> subjects = subDB.list();
         ArrayList<Lecturer> lecturers = lecDB.list();
-        String sql = "SELECT * FROM Group";
+        String sql = "SELECT * FROM [Group]";
         try {
             PreparedStatement stm = connection.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
