@@ -20,7 +20,7 @@ public class Student {
     private Date dob;
     private String phone;
     private String address;
-    private int mid;
+    private Major mid;
     private ArrayList<Group> groups = new ArrayList<>();
     private ArrayList<Attendance> attendances = new ArrayList<>();
 
@@ -80,11 +80,11 @@ public class Student {
         this.address = address;
     }
 
-    public int getMid() {
+    public Major getMid() {
         return mid;
     }
 
-    public void setMid(int mid) {
+    public void setMid(Major mid) {
         this.mid = mid;
     }
 
