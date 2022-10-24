@@ -13,6 +13,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Attendance;
 import model.Lecturer;
+import model.Session;
+import model.Student;
 
 /**
  *
@@ -43,22 +45,38 @@ public class AttendanceDBContext extends DBContext<Attendance>{
     @Override
     public ArrayList<Attendance> list() {
         ArrayList<Attendance> attendances = new ArrayList<>();
-        String sql = "SELECT * FROM Lecturer";
+        ArrayList<Student> students = new ArrayList<>();
+        ArrayList<Session> sessions = new ArrayList<>();
+        String sql = "SELECT * FROM Attendance";
         try {
             PreparedStatement stm = connection.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
-                Attendance t = new Attendance();
-                int id = rs.getInt("leid");
-                String name = rs.getString("lename");
-                String email = rs.getString("leemail");
-                boolean gender = rs.getBoolean("gender");
-                Date dob = rs.getDate("ledob");
-                String phone = rs.getString("lephone");
-                String address = rs.getString("leaddress");
-                t.setId(id);
+                Attendance a = new Attendance();
+                int aid = rs.getInt("aid");
+                int seid = rs.getInt("seid");
+                int stuid = rs.getInt("stuid");
+                boolean present = rs.getBoolean("present");
+                String des = rs.getString("description");
+                a.setId(aid);
+                a.setPresent(present);
+                a.setDescription(des);
                 
-                attendances.add(t);
+                for(Student s : students){
+                    if(s.getId()==stuid){
+                        Student st = s;
+                        a.setStudent(st);
+                    }
+                }
+                for(Session se : sessions){
+                    if(se.getId()==seid){
+                        Session ses = se;
+                        a.setSession(ses);
+                    }
+                }
+                
+                
+                attendances.add(a);
             }
 
         } catch (SQLException ex) {
