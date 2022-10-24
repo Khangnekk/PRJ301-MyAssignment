@@ -5,18 +5,14 @@
 package controller.lecturer;
 
 import controller.auth.lecturer.BaseAuthenticationController;
-import dal.LecturerDBContext;
-import dal.SessionDBContext;
-import dal.TimeSlotDBContext;
+import dal.*;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
-import model.Lecturer;
-import model.Session;
-import model.TimeSlot;
+import model.*;
 import util.DateTimeHelper;
 
 /**
@@ -68,7 +64,7 @@ public class timetableController extends BaseAuthenticationController {
 
     @Override
     protected void processGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-         String email = req.getParameter("email");        
+        String email = req.getParameter("email");        
         LecturerDBContext lecturerDB = new LecturerDBContext();
         int leid = lecturerDB.getIdByEmail(email);
         String raw_from = req.getParameter("from");
@@ -98,13 +94,22 @@ public class timetableController extends BaseAuthenticationController {
         ArrayList<TimeSlot> slots = slotDB.list();
         req.setAttribute("slots", slots);
         
+        GroupDBContext groupDB = new GroupDBContext();
+        ArrayList<Group> groups = groupDB.list();
+        req.setAttribute("groups", groups);
+        
+        SubjectDBContext subDB = new SubjectDBContext();
+        ArrayList<Subject> subjects = subDB.list();
+        req.setAttribute("subjects", subjects);
+        
         SessionDBContext sesDB = new SessionDBContext();
         ArrayList<Session> sessions = sesDB.filter(leid, from, to);
         req.setAttribute("sessions", sessions);
         
         LecturerDBContext lecDB = new LecturerDBContext();
-        Lecturer lecturer = lecDB.get(leid);
-        req.setAttribute("lecturer", lecturer);
+        Lecturer lecturers = lecDB.get(leid);
+        req.setAttribute("lecturers", lecturers);
+
         
         req.getRequestDispatcher("view/lecturer/timeTable.jsp").forward(req, resp);
     }
