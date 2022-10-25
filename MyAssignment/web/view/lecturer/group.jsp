@@ -57,8 +57,7 @@
                 border-radius: 8px;
                 padding: 10px;
                 height: auto;
-                overflow: scroll;
-                font-size: 14px
+                overflow: auto  ;
             }
 
             .last{
@@ -91,6 +90,7 @@
                 border-radius: 9px;
                 overflow: hidden;
                 white-space: nowrap;
+                
             }
             .fullname{
                 text-align: left;
@@ -166,19 +166,35 @@
                                 <td>STUDENT</td>
                                 <td style="white-space: pre-wrap;">GROUP NAME</td>
                                 <c:forEach items="${sessionScope.sessionsByGidAndLeid}" var="sesByGAL">
-                                    <td>${sesByGAL.index}</td>
+                                    <td>Slot ${sesByGAL.index}</td>
                                 </c:forEach>
                                 <td style="color: white; font-weight: bold">Absent</td>
                             </tr> 
-                            <c:forEach items="${requestScope.students}" var="stu">
+                            <c:forEach items="${sessionScope.students}" var="stu">
                                 <tr>
                                     <td class="fullname">${stu.name}</td>
                                     <td>
                                         ${sessionScope.group.name}
                                     </td>
+
                                     <c:forEach items="${sessionScope.sessionsByGidAndLeid}" var="sesByGAL">
-                                        <td>${sesByGAL.index}</td>
+                                        <%--<c:if test="${(sessionScope.attendances.session.id eq sesByGAL.id) and(sessionScope.attendances.student.id eq stu.id) }">--%>
+                                        <!--sessionScope.attendances.present-->
+                                        <%--</c:if>--%>
+                                        <td>
+                                            <c:forEach items="${sessionScope.attendances}" var="att">
+                                                <c:if test="${(att.student.id eq stu.id) and (att.session.id eq sesByGAL.id)}">
+                                                    <c:if test="${att.present}">
+                                                        <a style="color: #5cb85c">v</a>
+                                                    </c:if>
+                                                    <c:if test="${!att.present}">
+                                                        <a style="color: red">x</a>
+                                                    </c:if>
+                                                </c:if>
+                                            </c:forEach>
+                                        </td>
                                     </c:forEach>
+
                                     <td style="color: green">0%</td>
                                 </tr>
                             </c:forEach>
