@@ -51,7 +51,7 @@
                 border:1px solid background;
                 padding: 0 15px;
             }
-            
+
             .table .htable{
                 background-color: #6b90da;
                 text-align: center;
@@ -70,9 +70,9 @@
                 width: 150px;
                 height: auto;
             }
-            
+
             .add_button{
-                width: 50px; 
+                width: 50px;
                 margin: 0 auto;
             }
             .add_button input{
@@ -97,7 +97,7 @@
                     <a href="#">
                         <span>
                             <c:if test="${sessionScope.account ne null}">
-                                 ${sessionScope.account.username}
+                                ${sessionScope.account.username}
                             </c:if>
                         </span>
                     </a>
@@ -114,205 +114,63 @@
                 </div>
             </div>
             <h1>Single Activity Attendance</h1>
-            <p>Attendance for <b>PRF192</b> with lecturer <b>SONNT5</b> at slot 3 on Wednessday 12/10/2022, Spring22 in room <b>BE-301</b> at FU-HL</p>
+            <p>Attendance for <b>Subject</b> with lecturer <b>Lecturer</b> at slot x on yyyy/mm/dd, semester-year in room <b>room name</b> at FU-HL</p>
             <form>
-            <div class="table">
-                <table>
-                    <tr class="htable">
-                        <td></td>
-                        <td>GROUP</td>
-                        <td>ROLLNUMBER</td>
-                        <td>FULL NAME</td>
-                        <td>ABSENT</td>
-                        <td>PRESENT</td>
-                        <td>COMMENT</td>
-                        <td>
-                            <input type="checkbox" name="show_image"/>SHOW IMAGE
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>SE1943</td>
-                        <td>HE190001</td>
-                        <td>Nguyen Van A</td>
-                        <td>
-                            <input type="radio" name="checkAttendance1" checked="true"> 
-                            Absent
-                        </td>
-                        <td>
-                            <input type="radio" name="checkAttendance1" > 
-                            Present
-                        </td>
-                        <td></td>
-                        <td class="avt_img">
-                            <img src="img/avt.jpeg" alt="alt"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>SE1943</td>
-                        <td>HE190002</td>
-                        <td>Nguyen Thi B</td>
-                        <td>
-                            <input type="radio" name="checkAttendance2" checked="true"> 
-                            Absent
-                        </td>
-                        <td>
-                            <input type="radio" name="checkAttendance2" > 
-                            Present
-                        </td>
-                        <td></td>
-                        <td class="avt_img">
-                            <img src="img/avt.jpeg" alt="alt"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>SE1943</td>
-                        <td>HE190003</td>
-                        <td>Nguyen Van C</td>
-                        <td>
-                            <input type="radio" name="checkAttendance3" checked="true"> 
-                            Absent
-                        </td>
-                        <td>
-                            <input type="radio" name="checkAttendance3" > 
-                            Present
-                        </td>
-                        <td></td>
-                        <td class="avt_img">
-                            <img src="img/avt.jpeg" alt="alt"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>SE1943</td>
-                        <td>HE190004</td>
-                        <td>Nguyen Thi D</td>
-                        <td>
-                            <input type="radio" name="checkAttendance4" checked="true"> 
-                            Absent
-                        </td>
-                        <td>
-                            <input type="radio" name="checkAttendance4" > 
-                            Present
-                        </td>
-                        <td></td>
-                        <td class="avt_img">
-                            <img src="img/avt.jpeg" alt="alt"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>SE1943</td>
-                        <td>HE190005</td>
-                        <td>Nguyen Van E</td>
-                        <td>
-                            <input type="radio" name="checkAttendance5" checked="true"> 
-                            Absent
-                        </td>
-                        <td>
-                            <input type="radio" name="checkAttendance5" > 
-                            Present
-                        </td>
-                        <td></td>
-                        <td class="avt_img">
-                            <img src="img/avt.jpeg" alt="alt"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>6</td>
-                        <td>SE1943</td>
-                        <td>HE190006</td>
-                        <td>Nguyen Thi F</td>
-                        <td>
-                            <input type="radio" name="checkAttendance6" checked="true"> 
-                            Absent
-                        </td>
-                        <td>
-                            <input type="radio" name="checkAttendance6" > 
-                            Present
-                        </td>
-                        <td></td>
-                        <td class="avt_img">
-                            <img src="img/avt.jpeg" alt="alt"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>7</td>
-                        <td>SE1943</td>
-                        <td>HE190007</td>
-                        <td>Nguyen Van G</td>
-                        <td>
-                            <input type="radio" name="checkAttendance7" checked="true"> 
-                            Absent
-                        </td>
-                        <td>
-                            <input type="radio" name="checkAttendance7" > 
-                            Present
-                        </td>
-                        <td></td>
-                        <td class="avt_img">
-                            <img src="img/avt.jpeg" alt="alt"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>8</td>
-                        <td>SE1943</td>
-                        <td>HE190007</td>
-                        <td>Nguyen Thi H</td>
-                        <td>
-                            <input type="radio" name="checkAttendance8" checked="true"> 
-                            Absent
-                        </td>
-                        <td>
-                            <input type="radio" name="checkAttendance8" > 
-                            Present
-                        </td>
-                        <td></td>
-                        <td class="avt_img">
-                            <img src="img/avt.jpeg" alt="alt"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>9</td>
-                        <td>SE1943</td>
-                        <td>HE190009</td>
-                        <td>Nguyen Van I</td>
-                        <td>
-                            <input type="radio" name="checkAttendance9" checked="true"> 
-                            Absent
-                        </td>
-                        <td>
-                            <input type="radio" name="checkAttendance9" > 
-                            Present
-                        </td>
-                        <td></td>
-                        <td class="avt_img">
-                            <img src="img/avt.jpeg" alt="alt"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>10</td>
-                        <td>SE1943</td>
-                        <td>HE190010</td>
-                        <td>Nguyen Thi K</td>
-                        <td>
-                            <input type="radio" name="checkAttendance10" checked="true"> 
-                            Absent
-                        </td>
-                        <td>
-                            <input type="radio" name="checkAttendance10" > 
-                            Present
-                        </td>
-                        <td></td>
-                        <td class="avt_img">
-                            <img src="img/avt.jpeg" alt="alt"/>
-                        </td>
-                    </tr>
+                <div class="table">
+                    <table>
+                        <tr class="htable">
+                            <td></td>
+                            <td>GROUP</td>
+                            <td>ROLLNUMBER</td>
+                            <td>FULL NAME</td>
+                            <td>ABSENT</td>
+                            <td>PRESENT</td>
+                            <td>COMMENT</td>
+                            <td>
+                                <input type="checkbox" name="show_image"/>SHOW IMAGE
+                            </td>
+                        </tr>
+                        <tr>
+                                <td>1</td>
+                                <td>SE1943</td>
+                                <td>1</td>
+                                <td>Nguyen Van A</td>
+                                <td>
+                                    <input type="radio" name="checkAttendance1" checked="true"> 
+                                    Absent
+                                </td>
+                                <td>
+                                    <input type="radio" name="checkAttendance1" > 
+                                    Present
+                                </td>
+                                <td></td>
+                                <td class="avt_img">
+                                    <img src="img/avt.jpeg" alt="alt"/>
+                                </td>
 
-                </table>
-            </div>
+                        </tr>
+                        <tr>
+                                <td>2</td>
+                                <td>SE1943</td>
+                                <td>2</td>
+                                <td>Nguyen Thi B</td>
+                                <td>
+                                    <input type="radio" name="checkAttendance2" checked="true"> 
+                                    Absent
+                                </td>
+                                <td>
+                                    <input type="radio" name="checkAttendance2" > 
+                                    Present
+                                </td>
+                                <td></td>
+                                <td class="avt_img">
+                                    <img src="img/avt.jpeg" alt="alt"/>
+                                </td>
+
+                        </tr>
+
+                    </table>
+                </div>
                 <div class="add_button">
                     <input type="submit" value="Add"/>
                 </div>
