@@ -11,8 +11,6 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Major;
-import model.Student;
-import model.TimeSlot;
 
 /**
  *
@@ -43,8 +41,6 @@ public class MajorDBContext extends DBContext<Major>{
     @Override
    public ArrayList<Major> list() {
         ArrayList<Major> majors = new ArrayList<>();
-//        StudentDBContext stuDB = new StudentDBContext();
-//        ArrayList<Student> students = stuDB.list();
         String sql = "SELECT * FROM Major";
         try {
             PreparedStatement stm = connection.prepareStatement(sql);
