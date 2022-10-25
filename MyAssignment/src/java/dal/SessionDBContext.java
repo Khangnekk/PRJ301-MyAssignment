@@ -12,11 +12,72 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.*;
+
 /**
  *
  * @author Khangnekk
  */
 public class SessionDBContext extends DBContext<Session> {
+
+    public ArrayList<Session> getSessionByGidAndLeid(int leid_input, int gid_input) {
+        ArrayList<Session> sessions = new ArrayList<>();
+        try {
+            String sql_get_Sesion = "SELECT * FROM [Session]\n"
+                    + "WHERE gid = ? AND leid = ?";
+            PreparedStatement stm = connection.prepareStatement(sql_get_Sesion);
+            stm.setInt(1, gid_input);
+            stm.setInt(2, leid_input);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Session s = new Session();
+                
+                GroupDBContext gDB = new GroupDBContext();
+                RoomDBContext rDB = new RoomDBContext();
+                TimeSlotDBContext tiDB = new TimeSlotDBContext();
+                LecturerDBContext leDB = new LecturerDBContext();
+                
+                ArrayList<Group> groups = gDB.list();
+                ArrayList<Lecturer> lecturers = leDB.list();
+                ArrayList<Room> rooms = rDB.list();
+                ArrayList<TimeSlot> ts = tiDB.list();
+                
+                s.setId(rs.getInt("seid"));
+                int gid = rs.getInt("gid");
+                for (Group g : groups) {
+                    if(g.getId()==gid){
+                        s.setGroup(g);
+                    }
+                }
+                int rid = rs.getInt("rid");
+                for (Room r : rooms) {
+                    if(r.getId()==rid){
+                        s.setRoom(r);
+                    }
+                }
+                s.setDate(rs.getDate("date"));
+                int tid = rs.getInt("tid");
+                for (TimeSlot t : ts) {
+                    if(t.getId()==tid){
+                        s.setTimeslot(t);
+                    }
+                }
+                int leid = rs.getInt("leid");
+                for (Lecturer l : lecturers) {
+                    if(l.getId()==leid){
+                        s.setLecturer(l);
+                    }
+                }
+                s.setAttendated(rs.getBoolean("attend"));
+                s.setIndex(rs.getInt("index"));
+
+                sessions.add(s);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(SessionDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return sessions;
+
+    }
 
     public ArrayList<Session> filter(int leid, Date from, Date to) {
 
@@ -44,41 +105,40 @@ public class SessionDBContext extends DBContext<Session> {
             stm.setDate(2, from);
             stm.setDate(3, to);
             ResultSet rs = stm.executeQuery();
-            while(rs.next())
-            {
-                Room r = new Room();
-                Group g = new Group();
+            while (rs.next()) {
                 Session session = new Session();
+                Group g = new Group();
+                Room r = new Room();
                 Lecturer l = new Lecturer();
                 TimeSlot t = new TimeSlot();
                 Subject sub = new Subject();
-                
+
                 session.setId(rs.getInt("seid"));
                 session.setDate(rs.getDate("date"));
                 session.setIndex(rs.getInt("index"));
                 session.setAttendated(rs.getBoolean("attend"));
-                
+
                 l.setId(rs.getInt("leid"));
                 l.setName(rs.getString("lename"));
                 session.setLecturer(l);
-                
+
                 g.setId(rs.getInt("gid"));
                 g.setName(rs.getString("gname"));
                 session.setGroup(g);
-                
+
                 sub.setId(rs.getInt("subid"));
                 sub.setName(rs.getString("subname"));
                 g.setSubject(sub);
-                
+
                 r.setId(rs.getInt("rid"));
                 r.setName(rs.getString("rname"));
                 session.setRoom(r);
-                
+
                 t.setId(rs.getInt("tid"));
                 t.setName("tname");
                 t.setDescription(rs.getString("description"));
                 session.setTimeslot(t);
-                
+
                 sessions.add(session);
             }
         } catch (SQLException ex) {
@@ -110,39 +170,46 @@ public class SessionDBContext extends DBContext<Session> {
             stm.setInt(1, id);
             ResultSet rs = stm.executeQuery();
             if (rs.next()) {
-                Room r = new Room();
-                Group g = new Group();
                 Session s = new Session();
-                Lecturer l = new Lecturer();
-                TimeSlot t = new TimeSlot();
-                Subject sub = new Subject();
+                
+                GroupDBContext gDB = new GroupDBContext();
+                RoomDBContext rDB = new RoomDBContext();
+                TimeSlotDBContext tiDB = new TimeSlotDBContext();
+                LecturerDBContext leDB = new LecturerDBContext();
+                
+                ArrayList<Group> groups = gDB.list();
+                ArrayList<Lecturer> lecturers = leDB.list();
+                ArrayList<Room> rooms = rDB.list();
+                ArrayList<TimeSlot> ts = tiDB.list();
                 
                 s.setId(rs.getInt("seid"));
+                int gid = rs.getInt("gid");
+                for (Group g : groups) {
+                    if(g.getId()==gid){
+                        s.setGroup(g);
+                    }
+                }
+                int rid = rs.getInt("rid");
+                for (Room r : rooms) {
+                    if(r.getId()==rid){
+                        s.setRoom(r);
+                    }
+                }
                 s.setDate(rs.getDate("date"));
-                s.setIndex(rs.getInt("index"));
+                int tid = rs.getInt("tid");
+                for (TimeSlot t : ts) {
+                    if(t.getId()==tid){
+                        s.setTimeslot(t);
+                    }
+                }
+                int leid = rs.getInt("leid");
+                for (Lecturer l : lecturers) {
+                    if(l.getId()==leid){
+                        s.setLecturer(l);
+                    }
+                }
                 s.setAttendated(rs.getBoolean("attend"));
-                
-                l.setId(rs.getInt("leid"));
-                l.setName(rs.getString("lename"));
-                s.setLecturer(l);
-                
-                g.setId(rs.getInt("gid"));
-                g.setName(rs.getString("gname"));
-                s.setGroup(g);
-                
-                sub.setId(rs.getInt("subid"));
-                sub.setName(rs.getString("subname"));
-                g.setSubject(sub);
-                
-                r.setId(rs.getInt("rid"));
-                r.setName(rs.getString("rname"));
-                s.setRoom(r);
-                
-                t.setId(rs.getInt("tid"));
-                t.setName("tname");
-                t.setDescription(rs.getString("description"));
-                s.setTimeslot(t);
-                
+                s.setIndex(rs.getInt("index"));
                 return s;
             }
         } catch (SQLException ex) {
@@ -150,7 +217,6 @@ public class SessionDBContext extends DBContext<Session> {
         }
         return null;
     }
-    
 
     @Override
     public ArrayList<Session> list() {
