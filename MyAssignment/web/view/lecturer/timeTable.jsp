@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<jsp:useBean id="helper" class="util.DateTimeHelper"/>
+<jsp:useBean id="DateTimeHelper" class="util.DateTimeHelper"/>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -157,7 +157,7 @@
                     <tr class="htable">
                         <td></td>
                         <c:forEach items="${requestScope.dates}" var="d">
-                            <td>${helper.getDayNameofWeek(d)}<br>${d}</td>
+                            <td>${DateTimeHelper.getDayNameofWeek(d)}<br>${d}</td>
                             </c:forEach>
                     </tr>
                     <c:forEach items="${requestScope.slots}" var="slot">
@@ -166,7 +166,7 @@
                             <c:forEach items="${requestScope.dates}" var="d">
                                 <td>
                                     <c:forEach items="${requestScope.sessions}" var="ses">
-                                        <c:if test="${helper.compare(ses.date,d) eq 0 and (ses.timeslot.id eq slot.id)}">
+                                        <c:if test="${DateTimeHelper.compare(ses.date,d) eq 0 and (ses.timeslot.id eq slot.id)}">
                                             <a href="check_Attendance?id=${ses.id}">${ses.group.name}-${ses.group.subject.name}</a>
                                             <br/>
                                             at ${ses.room.name}
