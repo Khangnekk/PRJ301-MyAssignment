@@ -90,6 +90,11 @@
             .table-details{
                 border-radius: 9px;
                 overflow: hidden;
+                white-space: nowrap;
+            }
+            .fullname{
+                text-align: left;
+                padding: 0 10px;
             }
         </style>
     </head>
@@ -134,7 +139,7 @@
                             <ul>
                                 <c:forEach items="${requestScope.groups}" var="g">
                                     <li>
-                                        <a href="group?gid=${g.id}">
+                                        <a href="group?email=${sessionScope.account.email}&gid=${g.id}">
                                             ${g.name}
                                             -
                                             ${g.subject.name}
@@ -159,144 +164,24 @@
                         <table class="table-details">
                             <tr class="dhead">
                                 <td>STUDENT</td>
-                                <td>GROUP NAME</td>
-                                <td>01</td>
-                                <td>02</td>
-                                <td>03</td>
-                                <td>04</td>
-                                <td>05</td>
-                                <td>06</td>
-                                <td>07</td>
-                                <td>08</td>
-                                <td>09</td>
-                                <td>10</td>
-                                <td>11</td>
-                                <td>12</td>
-                                <td>13</td>
-                                <td>14</td>
-                                <td>15</td>
-                                <td>16</td>
-                                <td>17</td>
-                                <td>18</td>
-                                <td>19</td>
-                                <td>20</td>
-                                <td>21</td>
-                                <td>22</td>
-                                <td>23</td>
-                                <td>24</td>
-                                <td>25</td>
-                                <td>26</td>
-                                <td>27</td>
-                                <td>28</td>
-                                <td>29</td>
-                                <td>30</td>
-                                <td>Absent(%)</td>
-                            </tr>                           
-                            <tr>
-                                <td>Nguyen Luong Khang</td>
-                                <td>SE1643</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>0%</td>
-                            </tr>
-                            <tr>
-                                <td>Nguyen Van A</td>
-                                <td>SE1643</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>21%</td>
-                            </tr>
-                            <tr>
-                                <td>Nguyen Thi C</td>
-                                <td>SE1643</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>v</td>
-                                <td>8%</td>
-                            </tr>
+                                <td style="white-space: pre-wrap;">GROUP NAME</td>
+                                <c:forEach items="${sessionScope.sessionsByGidAndLeid}" var="sesByGAL">
+                                    <td>${sesByGAL.index}</td>
+                                </c:forEach>
+                                <td style="color: white; font-weight: bold">Absent</td>
+                            </tr> 
+                            <c:forEach items="${requestScope.students}" var="stu">
+                                <tr>
+                                    <td class="fullname">${stu.name}</td>
+                                    <td>
+                                        ${sessionScope.group.name}
+                                    </td>
+                                    <c:forEach items="${sessionScope.sessionsByGidAndLeid}" var="sesByGAL">
+                                        <td>${sesByGAL.index}</td>
+                                    </c:forEach>
+                                    <td style="color: green">0%</td>
+                                </tr>
+                            </c:forEach>
                         </table>
                     </div>
 
