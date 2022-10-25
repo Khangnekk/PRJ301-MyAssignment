@@ -45,7 +45,7 @@ public class AttendanceDBContext extends DBContext<Attendance> {
     @Override
     public ArrayList<Attendance> list() {
         ArrayList<Attendance> attendances = new ArrayList<>();
-
+        
         String sql = "SELECT * FROM Attendance";
         try {
             PreparedStatement stm = connection.prepareStatement(sql);
