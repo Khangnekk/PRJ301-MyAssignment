@@ -39,20 +39,6 @@
                 padding: 0 3px;
                 font-size: 75%;
             }
-            .table{
-                height: 100%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-            table tr td {
-                padding:0 10px;
-                border:1px solid background;
-            }
-            .table .htable{
-                background-color: #6b90da;
-                text-align: center;
-            }
 
             .last{
                 text-align: center;
@@ -62,6 +48,26 @@
             .dhead{
                 text-align: center;
                 margin: 5px auto;
+            }
+            .main-content{
+                width: auto;
+                margin: 40px auto;
+                /*text-align: center;*/
+                border: 1px solid #ccc;
+                border-radius: 9px;
+                padding: 0 3% 5% 3%;
+            }
+            .main-content a{
+                text-decoration: none;
+            }
+            .partName{
+                width: 30%;
+                text-align: center;
+                margin: -18px auto 23px auto;
+                border-radius: 9px; 
+                color: white;
+                background-image: linear-gradient(#feb52a,#f08e01);
+                font-size: 24px;
             }
         </style>
     </head>
@@ -80,7 +86,7 @@
                     <a href="#">
                         <span>
                             <c:if test="${sessionScope.account ne null}">
-                                 ${sessionScope.account.username}
+                                ${sessionScope.account.username}
                             </c:if>
                         </span>
                     </a>
@@ -101,11 +107,19 @@
             <div>
                 <div class="welcome">
                     <p>Hello, ${sessionScope.account.username}<br>Have a nice day!</p>
-                    
+
                 </div>
-                <a href="check_Attendance">Take attendace for today</a><br>
-                <a href="timeTable?email=${sessionScope.account.email}">Time Table</a><br>
-                <a href="view_report_attendance">View report attendance</a>
+                
+                <div class="main-content">
+                    <div>
+                        <h3 class="partName">Name part here</h3>
+                    </div>
+                    <div>
+                    <a href="group?email=${sessionScope.account.email}&gid=-1">Group</a><br>
+                    <a href="timeTable?email=${sessionScope.account.email}">Timetable</a><br>
+                    <a href="check_Attendance">Check Attendance</a>
+                    </div>
+                </div>
             </div>
             <div class="last">
                 <b>For any comments or questions, please contact:</b> Student Service Department : Email: <a href="mailto:dichvusinhvien@fe.edu.vn">dichvusinhvien@fe.edu.vn</a> . Phone: <b>(024)7308.13.13</b><br>
