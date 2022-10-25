@@ -30,40 +30,40 @@ public class SessionDBContext extends DBContext<Session> {
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 Session s = new Session();
-                
+
                 GroupDBContext gDB = new GroupDBContext();
                 RoomDBContext rDB = new RoomDBContext();
                 TimeSlotDBContext tiDB = new TimeSlotDBContext();
                 LecturerDBContext leDB = new LecturerDBContext();
-                
+
                 ArrayList<Group> groups = gDB.list();
                 ArrayList<Lecturer> lecturers = leDB.list();
                 ArrayList<Room> rooms = rDB.list();
                 ArrayList<TimeSlot> ts = tiDB.list();
-                
+
                 s.setId(rs.getInt("seid"));
                 int gid = rs.getInt("gid");
                 for (Group g : groups) {
-                    if(g.getId()==gid){
+                    if (g.getId() == gid) {
                         s.setGroup(g);
                     }
                 }
                 int rid = rs.getInt("rid");
                 for (Room r : rooms) {
-                    if(r.getId()==rid){
+                    if (r.getId() == rid) {
                         s.setRoom(r);
                     }
                 }
                 s.setDate(rs.getDate("date"));
                 int tid = rs.getInt("tid");
                 for (TimeSlot t : ts) {
-                    if(t.getId()==tid){
+                    if (t.getId() == tid) {
                         s.setTimeslot(t);
                     }
                 }
                 int leid = rs.getInt("leid");
                 for (Lecturer l : lecturers) {
-                    if(l.getId()==leid){
+                    if (l.getId() == leid) {
                         s.setLecturer(l);
                     }
                 }
@@ -171,40 +171,40 @@ public class SessionDBContext extends DBContext<Session> {
             ResultSet rs = stm.executeQuery();
             if (rs.next()) {
                 Session s = new Session();
-                
+
                 GroupDBContext gDB = new GroupDBContext();
                 RoomDBContext rDB = new RoomDBContext();
                 TimeSlotDBContext tiDB = new TimeSlotDBContext();
                 LecturerDBContext leDB = new LecturerDBContext();
-                
+
                 ArrayList<Group> groups = gDB.list();
                 ArrayList<Lecturer> lecturers = leDB.list();
                 ArrayList<Room> rooms = rDB.list();
                 ArrayList<TimeSlot> ts = tiDB.list();
-                
+
                 s.setId(rs.getInt("seid"));
                 int gid = rs.getInt("gid");
                 for (Group g : groups) {
-                    if(g.getId()==gid){
+                    if (g.getId() == gid) {
                         s.setGroup(g);
                     }
                 }
                 int rid = rs.getInt("rid");
                 for (Room r : rooms) {
-                    if(r.getId()==rid){
+                    if (r.getId() == rid) {
                         s.setRoom(r);
                     }
                 }
                 s.setDate(rs.getDate("date"));
                 int tid = rs.getInt("tid");
                 for (TimeSlot t : ts) {
-                    if(t.getId()==tid){
+                    if (t.getId() == tid) {
                         s.setTimeslot(t);
                     }
                 }
                 int leid = rs.getInt("leid");
                 for (Lecturer l : lecturers) {
-                    if(l.getId()==leid){
+                    if (l.getId() == leid) {
                         s.setLecturer(l);
                     }
                 }
@@ -220,7 +220,60 @@ public class SessionDBContext extends DBContext<Session> {
 
     @Override
     public ArrayList<Session> list() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        ArrayList<Session> sessions = new ArrayList<>();
+        try {
+            String sql_get_Sesion = "SELECT * FROM [Session]";
+            PreparedStatement stm = connection.prepareStatement(sql_get_Sesion);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Session s = new Session();
+
+                GroupDBContext gDB = new GroupDBContext();
+                RoomDBContext rDB = new RoomDBContext();
+                TimeSlotDBContext tiDB = new TimeSlotDBContext();
+                LecturerDBContext leDB = new LecturerDBContext();
+
+                ArrayList<Group> groups = gDB.list();
+                ArrayList<Lecturer> lecturers = leDB.list();
+                ArrayList<Room> rooms = rDB.list();
+                ArrayList<TimeSlot> ts = tiDB.list();
+
+                s.setId(rs.getInt("seid"));
+                int gid = rs.getInt("gid");
+                for (Group g : groups) {
+                    if (g.getId() == gid) {
+                        s.setGroup(g);
+                    }
+                }
+                int rid = rs.getInt("rid");
+                for (Room r : rooms) {
+                    if (r.getId() == rid) {
+                        s.setRoom(r);
+                    }
+                }
+                s.setDate(rs.getDate("date"));
+                int tid = rs.getInt("tid");
+                for (TimeSlot t : ts) {
+                    if (t.getId() == tid) {
+                        s.setTimeslot(t);
+                    }
+                }
+                int leid = rs.getInt("leid");
+                for (Lecturer l : lecturers) {
+                    if (l.getId() == leid) {
+                        s.setLecturer(l);
+                    }
+                }
+                s.setAttendated(rs.getBoolean("attend"));
+                s.setIndex(rs.getInt("index"));
+
+                sessions.add(s);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(SessionDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return sessions;
+
     }
 
 }
