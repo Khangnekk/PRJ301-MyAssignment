@@ -21,7 +21,7 @@ import model.Student;
  * @author Khangnekk
  */
 public class AttendanceDBContext extends DBContext<Attendance>{
-
+    
     @Override
     public void insert(Attendance model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
