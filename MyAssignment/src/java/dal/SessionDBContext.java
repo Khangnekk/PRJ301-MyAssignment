@@ -226,47 +226,7 @@ public class SessionDBContext extends DBContext<Session> {
             PreparedStatement stm = connection.prepareStatement(sql_get_Sesion);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
-                Session s = new Session();
-
-                GroupDBContext gDB = new GroupDBContext();
-                RoomDBContext rDB = new RoomDBContext();
-                TimeSlotDBContext tiDB = new TimeSlotDBContext();
-                LecturerDBContext leDB = new LecturerDBContext();
-
-                ArrayList<Group> groups = gDB.list();
-                ArrayList<Lecturer> lecturers = leDB.list();
-                ArrayList<Room> rooms = rDB.list();
-                ArrayList<TimeSlot> ts = tiDB.list();
-
-                s.setId(rs.getInt("seid"));
-                int gid = rs.getInt("gid");
-                for (Group g : groups) {
-                    if (g.getId() == gid) {
-                        s.setGroup(g);
-                    }
-                }
-                int rid = rs.getInt("rid");
-                for (Room r : rooms) {
-                    if (r.getId() == rid) {
-                        s.setRoom(r);
-                    }
-                }
-                s.setDate(rs.getDate("date"));
-                int tid = rs.getInt("tid");
-                for (TimeSlot t : ts) {
-                    if (t.getId() == tid) {
-                        s.setTimeslot(t);
-                    }
-                }
-                int leid = rs.getInt("leid");
-                for (Lecturer l : lecturers) {
-                    if (l.getId() == leid) {
-                        s.setLecturer(l);
-                    }
-                }
-                s.setAttendated(rs.getBoolean("attend"));
-                s.setIndex(rs.getInt("index"));
-
+                Session s = get(rs.getInt("seid"));
                 sessions.add(s);
             }
         } catch (SQLException ex) {
