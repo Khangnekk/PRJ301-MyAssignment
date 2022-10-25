@@ -53,6 +53,7 @@ public class StudentDBContext extends DBContext<Student>{
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 Student s = new Student();
+                
                 int id = rs.getInt("stuid");
                 String name = rs.getString("stuname");
                 String email = rs.getString("stuemail");
@@ -61,13 +62,15 @@ public class StudentDBContext extends DBContext<Student>{
                 String phone = rs.getString("stuphone");
                 String address = rs.getString("stuaddress");
                 int mid = rs.getInt("mid");
+                
                 s.setId(id);
                 s.setName(name);
                 s.setEmail(email);
                 s.setGender(gender);
                 s.setDob(dob);
                 s.setPhone(phone);
-                s.setAddress(address);               
+                s.setAddress(address);   
+                
                 for(Major majs : majors){
                     if(majs.getId()==mid){
                         Major m = majs;
