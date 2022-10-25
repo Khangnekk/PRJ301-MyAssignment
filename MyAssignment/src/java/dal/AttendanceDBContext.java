@@ -20,8 +20,8 @@ import model.Student;
  *
  * @author Khangnekk
  */
-public class AttendanceDBContext extends DBContext<Attendance>{
-    
+public class AttendanceDBContext extends DBContext<Attendance> {
+
     @Override
     public void insert(Attendance model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -45,14 +45,17 @@ public class AttendanceDBContext extends DBContext<Attendance>{
     @Override
     public ArrayList<Attendance> list() {
         ArrayList<Attendance> attendances = new ArrayList<>();
-        ArrayList<Student> students = new ArrayList<>();
-        ArrayList<Session> sessions = new ArrayList<>();
+
         String sql = "SELECT * FROM Attendance";
         try {
             PreparedStatement stm = connection.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 Attendance a = new Attendance();
+                StudentDBContext stuDB = new StudentDBContext();
+                SessionDBContext sesDB = new SessionDBContext();
+                ArrayList<Student> students = stuDB.list();
+                ArrayList<Session> sessions = sesDB.list();
                 int aid = rs.getInt("aid");
                 int seid = rs.getInt("seid");
                 int stuid = rs.getInt("stuid");
@@ -61,29 +64,27 @@ public class AttendanceDBContext extends DBContext<Attendance>{
                 a.setId(aid);
                 a.setPresent(present);
                 a.setDescription(des);
-                
-                for(Student s : students){
-                    if(s.getId()==stuid){
+
+                for (Student s : students) {
+                    if (s.getId() == stuid) {
                         Student st = s;
                         a.setStudent(st);
                     }
                 }
-                for(Session se : sessions){
-                    if(se.getId()==seid){
+                for (Session se : sessions) {
+                    if (se.getId() == seid) {
                         Session ses = se;
                         a.setSession(ses);
                     }
                 }
-                
-                
                 attendances.add(a);
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(StudentDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AttendanceDBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return attendances;
     }
-    
+
 }
