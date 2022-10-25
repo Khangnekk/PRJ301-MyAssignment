@@ -56,8 +56,8 @@ public class groupController extends BaseAuthenticationController {
         req.getSession().setAttribute("sessionsByGidAndLeid", sessionsByGidAndLeid);
         req.getSession().setAttribute("group", group);
         req.setAttribute("groups", groups);
-        req.setAttribute("students", students);
-        req.setAttribute("attendancs", attendances);
+        req.getSession().setAttribute("students", students);
+        req.getSession().setAttribute("attendances", attendances);
 
         req.getRequestDispatcher("view/lecturer/group.jsp").forward(req, resp);
     }
