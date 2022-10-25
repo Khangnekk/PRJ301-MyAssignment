@@ -90,7 +90,7 @@
                 border-radius: 9px;
                 overflow: hidden;
                 white-space: nowrap;
-                
+                margin: 5px auto;
             }
             .fullname{
                 text-align: left;
