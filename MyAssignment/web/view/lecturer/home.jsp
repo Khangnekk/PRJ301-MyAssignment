@@ -117,7 +117,8 @@
                     <div>
                     <a href="group?email=${sessionScope.account.email}&gid=-1">Group</a><br>
                     <a href="timeTable?email=${sessionScope.account.email}">Timetable</a><br>
-                    <a href="check_Attendance">Check Attendance</a>
+                    <!--// get Session by group and lecturer, then put seid param to check_Attendance -->
+                    <a href="check_Attendance?email=${sessionScope.account.email}&gid=-1&seid=-1">Check Attendance</a>
                     </div>
                 </div>
             </div>
