@@ -81,6 +81,14 @@
                 color: white;
                 border: 1px solid white;
             }
+            .input-info{
+                text-align: center;
+                width: 40%;
+                margin: 10px auto;
+            }
+            .input-info select option{
+                text-align: center;
+            }
         </style>
     </head>
     <body>
@@ -113,8 +121,32 @@
                     </a>
                 </div>
             </div>
-            <h1>Single Activity Attendance</h1>
-            <p>Attendance for <b>Subject</b> with lecturer <b>Lecturer</b> at slot x on yyyy/mm/dd, semester-year in room <b>room name</b> at FU-HL</p>
+            <form>
+                <div class="input-info">
+                    <select name="gid" >
+                        <option id="groupid" value="${sessionScope.group.id}">-- Select Group --</option>
+                        <c:forEach items="${sessionScope.groupss}" var="g">                            
+                            <option "
+                                    <c:if test="${sessionScope.group.id eq g.id}">
+                                        selected="selected"
+                                    </c:if>
+                                    value="${g.id}">
+                                ${g.name}
+                            </option>
+                        </c:forEach>
+                    </select>
+                    <select id="gid_element" name="seid">
+                        <option value="${sessionScope.group.id}">-- Select slot --</option>
+                        <c:forEach items="${sessionScope.sessionsByGidAndLeid}" var="SBI">
+                            <option value="${SBI.id}">
+                                Slot ${SBI.index}
+                            </option>
+                        </c:forEach>
+                    </select>
+                    <input type="hidden" value="${requestScope.email}" name="email">
+                    <input id="submit" type="submit" value="Search">
+                </div>
+            </form>
             <form>
                 <div class="table">
                     <table>
@@ -130,17 +162,18 @@
                                 <input type="checkbox" name="show_image"/>SHOW IMAGE
                             </td>
                         </tr>
-                        <tr>
-                                <td>1</td>
-                                <td>SE1943</td>
-                                <td>1</td>
-                                <td>Nguyen Van A</td>
+                        <c:forEach items="${requestScope.attendances}" var="att">
+                            <tr>
+                                <td>${att.index}</td>
+                                <td>${sessionScope.group.name}</td>
+                                <td>${att.student.id}</td>
+                                <td>${att.student.name}</td>
                                 <td>
-                                    <input type="radio" name="checkAttendance1" checked="true"> 
+                                    <input type="radio" name="${att.id}" checked="true"> 
                                     Absent
                                 </td>
                                 <td>
-                                    <input type="radio" name="checkAttendance1" > 
+                                    <input type="radio" name="${att.id}" > 
                                     Present
                                 </td>
                                 <td></td>
@@ -148,27 +181,8 @@
                                     <img src="img/avt.jpeg" alt="alt"/>
                                 </td>
 
-                        </tr>
-                        <tr>
-                                <td>2</td>
-                                <td>SE1943</td>
-                                <td>2</td>
-                                <td>Nguyen Thi B</td>
-                                <td>
-                                    <input type="radio" name="checkAttendance2" checked="true"> 
-                                    Absent
-                                </td>
-                                <td>
-                                    <input type="radio" name="checkAttendance2" > 
-                                    Present
-                                </td>
-                                <td></td>
-                                <td class="avt_img">
-                                    <img src="img/avt.jpeg" alt="alt"/>
-                                </td>
-
-                        </tr>
-
+                            </tr>
+                        </c:forEach>                        
                     </table>
                 </div>
                 <div class="add_button">
@@ -181,4 +195,16 @@
             </div>
         </div>
     </body>
+    <script>
+        var gid = document.getElementById("groupid").value;
+        document.getElementById("submit").value = 'Search group';
+
+        var gid_element = document.getElementById("gid_element");
+        if (gid <= 0) {
+            gid_element.style.display = 'none';
+        } else {
+            document.getElementById("submit").value = 'Search slot';
+        }
+
+    </script>
 </html>
