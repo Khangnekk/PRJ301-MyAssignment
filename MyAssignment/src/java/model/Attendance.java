@@ -14,6 +14,7 @@ public class Attendance {
     private String description;
     private Student student;
     private Session session;
+    private int index;
 
     public int getId() {
         return id;
@@ -54,6 +55,15 @@ public class Attendance {
     public void setSession(Session session) {
         this.session = session;
     }
+
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
+    }
+    
     
     
 }
