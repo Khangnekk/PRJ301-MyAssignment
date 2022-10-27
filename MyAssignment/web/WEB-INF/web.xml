@@ -40,6 +40,10 @@
         <servlet-name>groupController</servlet-name>
         <servlet-class>controller.lecturer.groupController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>getInfoControlller</servlet-name>
+        <servlet-class>controller.lecturer.getInfoController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>check_Attendance</servlet-name>
         <url-pattern>/check_Attendance</url-pattern>
@@ -79,6 +83,10 @@
     <servlet-mapping>
         <servlet-name>groupController</servlet-name>
         <url-pattern>/group</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>getInfoControlller</servlet-name>
+        <url-pattern>/getInfo</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
