@@ -158,7 +158,7 @@
                                 <td>STUDENT</td>
                                 <td style="white-space: pre-wrap;">GROUP NAME</td>
                                 <c:forEach items="${requestScope.sessionsByGidAndLeid}" var="sesByGAL">
-                                    <td>Slot ${sesByGAL.index}</td>
+                                    <td>Slot ${sesByGAL.index}<br>${sesByGAL.date}</td>
                                 </c:forEach>
                                 <td style="color: white; font-weight: bold">Absent</td>
                             </tr> 

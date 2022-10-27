@@ -72,6 +72,7 @@
             .input-info select{
                 border-radius: 8px;
                 padding: 3px;
+                text-align: center;
             }
             .partName{
                 width: 30%;
@@ -140,7 +141,7 @@
                                     <option id="gid_element" value="${SBI.id}" <c:if test="${SBI.id eq seid}">
                                             selected="selected"
                                         </c:if>>
-                                        Slot ${SBI.index}                        
+                                        Slot ${SBI.index} / ${SBI.date}                        
                                     </option>
                                 </c:forEach>
                             </select>
