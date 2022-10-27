@@ -172,14 +172,13 @@
                                     <c:forEach items="${requestScope.sessionsByGidAndLeid}" var="sesByGAL">
                                         <td>
                                             <c:forEach items="${requestScope.attendances}" var="att">
-                                                <c:if test="${att.student.id eq stu.id and (att.session.id eq sesByGAL.id)}">
-                                                    <%--<c:if test="${att.present}">--%>
-                                                        <!--<a style="color: #5cb85c">v</a>-->
-                                                    <%--</c:if>--%>
-                                                    <%--<c:if test="${!att.present}">--%>
-                                                        <!--<a style="color: red">x</a>-->
-                                                    <%--</c:if>--%>
-                                                    ok
+                                                <c:if test="${(att.student.id eq stu.id) and (att.session.index eq sesByGAL.index)}">
+                                                    <c:if test="${att.present}">
+                                                        <a style="color: #5cb85c">v</a>
+                                                    </c:if>
+                                                    <c:if test="${!att.present}">
+                                                        <a style="color: red">x</a>
+                                                    </c:if>
                                                 </c:if>
                                             </c:forEach>
                                         </td>
