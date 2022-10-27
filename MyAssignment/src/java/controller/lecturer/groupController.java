@@ -27,38 +27,41 @@ public class groupController extends BaseAuthenticationController {
 
     @Override
     protected void processPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        processRequest(req, resp);
-    }
-
-    @Override
-    protected void processGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        processRequest(req, resp);
-    }
-
-    void processRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
         LecturerDBContext lecturerDB = new LecturerDBContext();
         AttendanceDBContext attDB = new AttendanceDBContext();
         GroupDBContext groupDB = new GroupDBContext();
         SessionDBContext sesDB = new SessionDBContext();
         Group group;
-        
+
         String email = req.getParameter("email");
         int gid = Integer.parseInt(req.getParameter("gid"));
         int lid = lecturerDB.getIdByEmail(email);
 
         ArrayList<Attendance> attendances = attDB.list();
-        ArrayList<Group> groups = groupDB.listGroupByLeid(lid);
         ArrayList<Student> students = groupDB.listStudentBygid(gid);
         ArrayList<Session> sessionsByGidAndLeid = sesDB.getSessionByGidAndLeid(lid, gid);
+        ArrayList<Group> groups = groupDB.listGroupByLeid(lid);
         group = groupDB.get(gid);
-        
-        req.getSession().setAttribute("sessionsByGidAndLeid", sessionsByGidAndLeid);
-        req.getSession().setAttribute("group", group);
-        req.getSession().setAttribute("groups", groups);
-        req.getSession().setAttribute("students", students);
-        req.getSession().setAttribute("attendances", attendances);
+        req.setAttribute("sessionsByGidAndLeid", sessionsByGidAndLeid);
+        req.setAttribute("group", group);
+        req.setAttribute("groups", groups);
+        req.setAttribute("students", students);
+        req.setAttribute("attendances", attendances);
+        req.getRequestDispatcher("view/lecturer/group.jsp").forward(req, resp);
+    }
 
+    @Override
+    protected void processGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        LecturerDBContext lecturerDB = new LecturerDBContext();
+        GroupDBContext groupDB = new GroupDBContext();
+        int gid = Integer.parseInt(req.getParameter("gid"));
+        String email = req.getParameter("email");
+        int lid = lecturerDB.getIdByEmail(email);
+        ArrayList<Group> groups = groupDB.listGroupByLeid(lid);
+        Group group = groupDB.get(gid);
+        req.setAttribute("groups", groups);
+        req.setAttribute("group", group);
+        req.setAttribute("email", email);
         req.getRequestDispatcher("view/lecturer/group.jsp").forward(req, resp);
     }
 }

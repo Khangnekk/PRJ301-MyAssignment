@@ -135,9 +135,9 @@
 
                                 <select name="gid" style="padding: 1.5px; border-radius: 6px;">
                                     <option id="groupid" value="-1">-- Select Group --</option>
-                                    <c:forEach items="${sessionScope.groups}" var="g">                            
+                                    <c:forEach items="${requestScope.groups}" var="g">                            
                                         <option "
-                                                <c:if test="${sessionScope.group.id eq g.id}">
+                                                <c:if test="${requestScope.group.id eq g.id}">
                                                     selected="selected"
                                                 </c:if>
                                                 value="${g.id}">
@@ -145,7 +145,7 @@
                                         </option>
                                     </c:forEach>
                                 </select>
-                                <input type="hidden" value="${sessionScope.email}" name="email">
+                                <input type="hidden" value="${sessionScope.account.email}" name="email">
 
                                 <input style="border-radius: 6px; border: 1px solid #ccc;" type="submit" value="Search"/> 
                                 <input style="border-radius: 6px; border: 1px solid #ccc;" type="reset" value="Re-select"/>
@@ -157,31 +157,29 @@
                             <tr class="dhead">
                                 <td>STUDENT</td>
                                 <td style="white-space: pre-wrap;">GROUP NAME</td>
-                                <c:forEach items="${sessionScope.sessionsByGidAndLeid}" var="sesByGAL">
+                                <c:forEach items="${requestScope.sessionsByGidAndLeid}" var="sesByGAL">
                                     <td>Slot ${sesByGAL.index}</td>
                                 </c:forEach>
                                 <td style="color: white; font-weight: bold">Absent</td>
                             </tr> 
-                            <c:forEach items="${sessionScope.students}" var="stu">
+                            <c:forEach items="${requestScope.students}" var="stu">
                                 <tr>
                                     <td class="fullname">${stu.name}</td>
                                     <td>
-                                        ${sessionScope.group.name}
+                                        ${requestScope.group.name}
                                     </td>
 
-                                    <c:forEach items="${sessionScope.sessionsByGidAndLeid}" var="sesByGAL">
-                                        <%--<c:if test="${(sessionScope.attendances.session.id eq sesByGAL.id) and(sessionScope.attendances.student.id eq stu.id) }">--%>
-                                        <!--sessionScope.attendances.present-->
-                                        <%--</c:if>--%>
+                                    <c:forEach items="${requestScope.sessionsByGidAndLeid}" var="sesByGAL">
                                         <td>
-                                            <c:forEach items="${sessionScope.attendances}" var="att">
-                                                <c:if test="${(att.student.id eq stu.id) and (att.session.id eq sesByGAL.id)}">
-                                                    <c:if test="${att.present}">
-                                                        <a style="color: #5cb85c">v</a>
-                                                    </c:if>
-                                                    <c:if test="${!att.present}">
-                                                        <a style="color: red">x</a>
-                                                    </c:if>
+                                            <c:forEach items="${requestScope.attendances}" var="att">
+                                                <c:if test="${att.student.id eq stu.id and (att.session.id eq sesByGAL.id)}">
+                                                    <%--<c:if test="${att.present}">--%>
+                                                        <!--<a style="color: #5cb85c">v</a>-->
+                                                    <%--</c:if>--%>
+                                                    <%--<c:if test="${!att.present}">--%>
+                                                        <!--<a style="color: red">x</a>-->
+                                                    <%--</c:if>--%>
+                                                    ok
                                                 </c:if>
                                             </c:forEach>
                                         </td>
