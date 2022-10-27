@@ -54,13 +54,10 @@ public class AttendanceDBContext extends DBContext<Attendance> {
                 SessionDBContext sesDB = new SessionDBContext();
                 ArrayList<Student> students = stuDB.list();
                 ArrayList<Session> sessions = sesDB.list();
-                int aid = rs.getInt("aid");
                 int seid = rs.getInt("seid");
                 int stuid = rs.getInt("stuid");
                 boolean present = rs.getBoolean("present");
                 String des = rs.getString("description");
-                int index = rs.getInt("index");
-                a.setId(aid);
                 a.setPresent(present);
                 a.setDescription(des);
 
@@ -76,7 +73,6 @@ public class AttendanceDBContext extends DBContext<Attendance> {
                         a.setSession(ses);
                     }
                 }
-                a.setIndex(index);
                 attendances.add(a);
             }
 
@@ -101,13 +97,10 @@ public class AttendanceDBContext extends DBContext<Attendance> {
                 SessionDBContext sesDB = new SessionDBContext();
                 ArrayList<Student> students = stuDB.list();
                 ArrayList<Session> sessions = sesDB.list();
-                int aid = rs.getInt("aid");
                 int seid = rs.getInt("seid");
                 int stuid = rs.getInt("stuid");
                 boolean present = rs.getBoolean("present");
                 String des = rs.getString("description");
-                int index = rs.getInt("index");
-                a.setId(aid);
                 a.setPresent(present);
                 a.setDescription(des);
 
@@ -123,7 +116,6 @@ public class AttendanceDBContext extends DBContext<Attendance> {
                         a.setSession(ses);
                     }
                 }
-                a.setIndex(index);
                 attendances.add(a);
             }
 
