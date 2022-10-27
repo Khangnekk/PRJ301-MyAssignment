@@ -37,24 +37,24 @@
                 font-size: 75%;
             }
             .content{
-                display: grid;
-                grid-template-columns: 15% 84%;
+                display: flex;
+                /*grid-template-columns: 15% 84%;*/
                 margin: 10px auto;
                 justify-content: space-between;
 
             }
             .group{
-                border: 1px solid red;
-                border-radius: 8px;
-                padding: 10px;
-                height: 80vh;
+                /*border: 1px solid red;*/
+                /*border-radius: 8px;*/
+                text-align: center;
+                margin: 10px auto;
+                /*                padding: 10px;
+                                height: 80vh;*/
             }
 
             .group-details{
                 display: block;
                 text-align: center;
-                border: 1px solid orange;
-                border-radius: 8px;
                 padding: 10px;
                 height: auto;
                 overflow: auto  ;
@@ -68,10 +68,6 @@
             .dhead{
                 margin: 5px auto;
                 background-color: #6b90da;
-            }
-            .gtitle{
-                font-size: 18px;
-                font-weight: bold;
             }
             .gcontent ul li{
                 list-style: square;
@@ -134,33 +130,29 @@
             <div>
                 <div class="row content">
                     <div class="group">
-                        <div class="gtitle">>List of Group:</div>
                         <div class="gcontent">
-                            <ul>
-                                <c:forEach items="${requestScope.groups}" var="g">
-                                    <li>
-                                        <a href="group?email=${sessionScope.account.email}&gid=${g.id}">
-                                            ${g.name}
-                                            -
-                                            ${g.subject.name}
-                                        </a>
-                                    </li>
-                                </c:forEach>
-                            </ul>
+                            <form action="group" method="post">
+
+                                <select name="gid" style="padding: 1.5px; border-radius: 6px;">
+                                    <option id="groupid" value="-1">-- Select Group --</option>
+                                    <c:forEach items="${sessionScope.groups}" var="g">                            
+                                        <option "
+                                                <c:if test="${sessionScope.group.id eq g.id}">
+                                                    selected="selected"
+                                                </c:if>
+                                                value="${g.id}">
+                                            ${g.name} - ${g.subject.name}
+                                        </option>
+                                    </c:forEach>
+                                </select>
+                                <input type="hidden" value="${sessionScope.email}" name="email">
+
+                                <input style="border-radius: 6px; border: 1px solid #ccc;" type="submit" value="Search"/> 
+                                <input style="border-radius: 6px; border: 1px solid #ccc;" type="reset" value="Re-select"/>
+                            </form>
                         </div>                        
                     </div>
                     <div class="group-details">
-                        <div class="instruction" style="text-align: left">
-                            Note: 
-                            <ul>
-                                <li>
-                                    Numbers from 01 to 30 correspond to slot 1 to slot 30
-                                </li>
-                                <li>
-                                    If column Absent exceeds ?%, this student will fail the course
-                                </li>
-                            </ul>             
-                        </div>
                         <table class="table-details">
                             <tr class="dhead">
                                 <td>STUDENT</td>
