@@ -173,7 +173,7 @@ public class SessionDBContext extends DBContext<Session> {
                         + "           ([seid]\n"
                         + "           ,[stuid]\n"
                         + "           ,[present]\n"
-                        + "           ,[description])   `\n"
+                        + "           ,[description])\n"
                         + "     VALUES\n"
                         + "           (?\n"
                         + "           ,?\n"
