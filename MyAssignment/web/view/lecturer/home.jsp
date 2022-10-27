@@ -115,10 +115,10 @@
                         <h3 class="partName">Name part here</h3>
                     </div>
                     <div>
-                    <a href="group?email=${sessionScope.account.email}&gid=-1">Group</a><br>
+                    <a href="group?email=${sessionScope.account.email}">Group</a><br>
                     <a href="timeTable?email=${sessionScope.account.email}">Timetable</a><br>
                     <!--// get Session by group and lecturer, then put seid param to check_Attendance -->
-                    <a href="check_Attendance?email=${sessionScope.account.email}&gid=-1&seid=-1">Check Attendance</a>
+                    <a href="check_Attendance?seid=-1">Check Attendance</a>
                     </div>
                 </div>
             </div>

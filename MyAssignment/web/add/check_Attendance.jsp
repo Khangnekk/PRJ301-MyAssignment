@@ -121,33 +121,8 @@
                     </a>
                 </div>
             </div>
-            <form>
-                <div class="input-info">
-                    <select name="gid" >
-                        <option id="groupid" value="${sessionScope.group.id}">-- Select Group --</option>
-                        <c:forEach items="${sessionScope.groupss}" var="g">                            
-                            <option "
-                                    <c:if test="${sessionScope.group.id eq g.id}">
-                                        selected="selected"
-                                    </c:if>
-                                    value="${g.id}">
-                                ${g.name}
-                            </option>
-                        </c:forEach>
-                    </select>
-                    <select id="gid_element" name="seid">
-                        <option value="${sessionScope.group.id}">-- Select slot --</option>
-                        <c:forEach items="${sessionScope.sessionsByGidAndLeid}" var="SBI">
-                            <option value="${SBI.id}">
-                                Slot ${SBI.index}
-                            </option>
-                        </c:forEach>
-                    </select>
-                    <input type="hidden" value="${requestScope.email}" name="email">
-                    <input id="submit" type="submit" value="Search">
-                </div>
-            </form>
-            <form>
+            <form method="POST" action="check_Attendance">
+                <input type="hidden" name="seid" value="${requestScope.seid}"/>
                 <div class="table">
                     <table>
                         <tr class="htable">
@@ -155,34 +130,38 @@
                             <td>GROUP</td>
                             <td>ROLLNUMBER</td>
                             <td>FULL NAME</td>
-                            <td>ABSENT</td>
                             <td>PRESENT</td>
+                            <td>ABSENT</td>
                             <td>COMMENT</td>
                             <td>
                                 <input type="checkbox" name="show_image"/>SHOW IMAGE
                             </td>
                         </tr>
-                        <c:forEach items="${requestScope.attendances}" var="att">
-                            <tr>
-                                <td>${att.index}</td>
-                                <td>${sessionScope.group.name}</td>
-                                <td>${att.student.id}</td>
-                                <td>${att.student.name}</td>
-                                <td>
-                                    <input type="radio" name="${att.id}" checked="true"> 
-                                    Absent
+                        <c:forEach items="${requestScope.ses.attendances}" var="a" varStatus="loop">
+                            <tr style="border-bottom: 2px solid #ccc; text-align: center">
+                                <td>${loop.index+1}</td>
+                                <td>${requestScope.ses.group.name}
+                                    <input type="hidden" name="stuid" value="${a.student.id}"/>
                                 </td>
-                                <td>
-                                    <input type="radio" name="${att.id}" > 
-                                    Present
-                                </td>
-                                <td></td>
+                                <td>${a.student.id}</td>
+                                <td>${a.student.name}</td>
+                                <td><input type="radio"
+                                           <c:if test="${a.present}">
+                                               checked="checked"
+                                           </c:if>
+                                           name="present${a.student.id}" value="present" /></td>
+                                <td><input type="radio"
+                                           <c:if test="${!a.present}">
+                                               checked="checked"
+                                           </c:if>
+                                           name="present${a.student.id}" value="absent" /></td>
+                                <td><input type="text" name="description${a.student.id}" value="${a.description}" /></td>
                                 <td class="avt_img">
                                     <img src="img/avt.jpeg" alt="alt"/>
                                 </td>
+                            </tr>   
 
-                            </tr>
-                        </c:forEach>                        
+                        </c:forEach>                    
                     </table>
                 </div>
                 <div class="add_button">
