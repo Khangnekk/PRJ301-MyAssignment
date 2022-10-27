@@ -50,9 +50,9 @@
                 margin: 5px auto;
             }
             .main-content{
-                width: auto;
+                width: 50%;
                 margin: 40px auto;
-                /*text-align: center;*/
+                text-align: center;
                 border: 1px solid #ccc;
                 border-radius: 9px;
                 padding: 0 3% 5% 3%;
@@ -61,13 +61,17 @@
                 text-decoration: none;
             }
             .partName{
-                width: 30%;
+                width: 50%;
                 text-align: center;
                 margin: -18px auto 23px auto;
+                padding: 3px;
                 border-radius: 9px; 
                 color: white;
                 background-image: linear-gradient(#feb52a,#f08e01);
                 font-size: 24px;
+            }
+            .welcome{
+                margin: 20px;
             }
         </style>
     </head>
@@ -106,13 +110,13 @@
             </div>
             <div>
                 <div class="welcome">
-                    <p>Hello, ${sessionScope.account.username}<br>Have a nice day!</p>
-
+                    <h2>Hello, ${sessionScope.account.username}</h2>
+                    <p>Nice to see you back</p>
                 </div>
                 
                 <div class="main-content">
                     <div>
-                        <h3 class="partName">Name part here</h3>
+                        <h3 class="partName">Section for lecturer</h3>
                     </div>
                     <div>
                     <a href="group?email=${sessionScope.account.email}&gid=-1">Group</a><br>

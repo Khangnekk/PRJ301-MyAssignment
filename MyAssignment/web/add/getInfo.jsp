@@ -6,66 +6,190 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>FAP University Academic Portal</title>
+        <!-- link favicon logo -->
+        <link rel="icon" href="#" />
+        <!-- link bootstrap -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+              integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <style>
-            .gcontent ul li{
-                list-style: square;
+
+            html, body {
+                height: 100%;
             }
-            .gcontent a{
+            body{
+                margin: 0;
+                padding: 0;
+            }
+            .container{
+                margin: 0 auto;
+            }
+            .top{
+                display: flex;
+                background-color: #f5f5f5;
+                padding: 10px;
+                justify-content: space-between;
+                border-radius: 6px;
+            }
+            .top a{
                 text-decoration: none;
             }
-            .gcontent a:hover{
-                color: #feb52a;
+            .topRight span{
+                color:white;
+                background-color: #5cb85c;
+                border-radius: 3px;
+                padding: 0 3px;
+                font-size: 75%;
+            }
+
+            .last{
+                text-align: center;
+                font-size: 14px;
+                padding-bottom: 20px;
+            }
+            .dhead{
+                text-align: center;
+                margin: 5px auto;
+            }
+            .main-content{
+                width: 40%;
+                margin: 40px auto;
+                text-align: center;
+                border: 1px solid #ccc;
+                border-radius: 9px;
+                padding: 20px 10px;
+            }
+            .getGroupAndSlot{
+                margin: 40px auto;
+            }
+            .main-content a{
+                text-decoration: none;
+            }
+            .input-info select{
+                border-radius: 8px;
+                padding: 3px;
+            }
+            .partName{
+                width: 30%;
+                text-align: center;
+                margin: -18px auto 23px auto;
+                border-radius: 9px;
+                color: white;
+                background-image: linear-gradient(#feb52a,#f08e01);
+                font-size: 24px;
             }
         </style>
     </head>
     <body>
-        <form action="getInfo?gid=-1">
-            <div class="input-info">
-                <select name="gid" >
-                    <option id="groupid" value="${sessionScope.group.id}">-- Select Group --</option>
-                    <c:forEach items="${sessionScope.groups}" var="g">                            
-                        <option "
-                                <c:if test="${sessionScope.group.id eq g.id}">
-                                    selected="selected"
-                                </c:if>
-                                value="${g.id}">
-                            ${g.name}
-                        </option>
-                    </c:forEach>
-                </select>
-                <select id="gid_element" name="seid">
-                    <option value="${sessionScope.group.id}">-- Select slot --</option>
-                    <c:forEach items="${sessionScope.sessionsByGidAndLeid}" var="SBI">
-                        <option value="${SBI.id}" <c:if test="${SBI.id eq seid}">
-                                selected="selected"
-                            </c:if>>
-                            Slot ${SBI.index}                        
-                        </option>
-                    </c:forEach>
-                </select>
-                <input type="hidden" value="${sessionScope.email}" name="email">
-                <input id="submit" type="submit" value="Search group">
+        <div class="container">
+            <header>
+                <h1>FPT University Academic Portal</h1>
+            </header>
+            <div class="top">
+                <div class="topLeft">
+                    <a href="home">Home</a>
+                    <a>| <b>View Schedule</b></a>
+                </div>
+                <div class="topRight">
+                    Nickname:
+                    <a href="#">
+                        <span>
+                            <c:if test="${sessionScope.account ne null}">
+                                ${sessionScope.account.username}
+                            </c:if>
+                        </span>
+                    </a>
+                    &nbsp;|
+                    <a href="logout">
+                        <span>
+                            logout
+                        </span>
+                    </a>
+                    &nbsp;|
+                    <a href="#">
+                        <span>
+                            Campus: FPTU - Hoa Lac
+                        </span>
+                    </a>
+                </div>
             </div>
-        </form>
-        <div>
-            <form action="getInfo" method="post">
-                <input type="hidden" value="${requestScope.emailInfo}" name="emailInfo">
-                <input type="hidden" value="${requestScope.gidInfo}" name="gidInfo">
-                <input type="hidden" value="${requestScope.seInfo}" name="seidInfo">
-                <input id="submit" type="submit" value="Take Attendance">
-            </form>
+            <div class="main-content">
+                <h3>Select group and select session</h3>
+                <div class="getGroupAndSlot">
+                    <form action="getInfo?gid=-1">
+                        <div class="input-info">
+                            <select id="groupid" name="gid">
+                                <option  value="-1">-- Select Group --</option>
+                                <c:forEach items="${sessionScope.groups}" var="g">                            
+                                    <option id="groupid"
+                                            <c:if test="${sessionScope.group.id eq g.id}">
+                                                selected="selected"
+                                            </c:if>
+                                            value="${g.id}">
+                                        ${g.name}
+                                    </option>
+                                </c:forEach>
+                            </select>
+                            <select id="gid_element" name="seid" style="text-align: center;">
+                                <option value="-1">-- Select slot --</option>
+                                <c:forEach items="${sessionScope.sessionsByGidAndLeid}" var="SBI">
+                                    <option id="gid_element" value="${SBI.id}" <c:if test="${SBI.id eq seid}">
+                                            selected="selected"
+                                        </c:if>>
+                                        Slot ${SBI.index}                        
+                                    </option>
+                                </c:forEach>
+                            </select>
+                            <input type="hidden" value="${sessionScope.email}" name="email">
+                            <input id="submit" type="submit" value="" style="border-radius: 6px">
+                        </div>
+                    </form>
+                </div>
+                <div>
+                    <form action="getInfo" method="post">
+                        <input type="hidden" value="${requestScope.emailInfo}" name="emailInfo">
+                        <input type="hidden" value="${requestScope.gidInfo}" name="gidInfo">
+                        <input type="hidden" value="${requestScope.seInfo}" name="seidInfo">
+                        <input id="submit2" type="submit" value="Take Attendance" style="border-radius: 6px">
+                    </form>
+                </div>
+                <p id="content" style="margin-top: 5px; color: red"></p>
+                <p id="content2" style="margin-top: 5px; color: red"></p>
+            </div>
+            <div class="last">
+                <b>For any comments or questions, please contact:</b> Student Service Department : Email: <a href="mailto:dichvusinhvien@fe.edu.vn">dichvusinhvien@fe.edu.vn</a> . Phone: <b>(024)7308.13.13</b><br>
+                Powered by <a href="">FPT University</a> |  <a href="">CMS</a> |  <a href="">library</a> |  <a href="">books24x7</a>
+            </div>
         </div>
     </body>
     <script>
         var x1 = document.getElementById("groupid").value;
+        var x2 = document.getElementById("gid_element").value;
+        const noti = document.getElementById("content");
+        const noti2 = document.getElementById("content2");
         if (x1 <= 0) {
             document.getElementById("gid_element").style.display = 'none';
+            document.getElementById("submit2").style.display = 'none';
+            document.getElementById("submit").value = 'Search group';
+            noti.innerHTML = "*Select the group you want to take attendance";
+            noti2.innerHTML = "STATUS: Not ready to take attendance (1/3)";
         } else {
-            document.getElementById("gid_element").style.display = 'block';
+            document.getElementById("gid_element").style.display = 'initial';
+            document.getElementById("submit2").style.display = 'none';
+            document.getElementById("submit").value = 'Search session';
+            noti.innerHTML = "*Now you have to choose the session you want to take attendance";
+            noti2.innerHTML = "STATUS: Not ready to take attendance (2/3)";
+        }
+        if (x1 > 0 && x2 > 0) {
+            noti.innerHTML = "STATUS: Ready to take attendance (3/3)";
+            noti.style.color = 'green';
+            noti2.innerHTML = "Click the button \"Take Attendance\" above to take attendance now";
+            noti2.style.color = 'green';
+            document.getElementById("submit2").style.display = 'initial';
         }
     </script>
 </html>
