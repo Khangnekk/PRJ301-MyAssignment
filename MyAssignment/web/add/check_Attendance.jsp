@@ -121,6 +121,19 @@
                     </a>
                 </div>
             </div>
+            <div>
+                <h3>Take Attendance for ${requestScope.ses.group.name}</h3>
+                Date: ${requestScope.ses.date}<br>
+                Room: ${requestScope.ses.room.name}<br>
+                Status Attendance: 
+                    <c:if test="${requestScope.ses.attendated}">
+                        <a style="color:green; font-weight: bold">Attended</a>
+                    </c:if>
+                    <c:if test="${!requestScope.ses.attendated}">
+                        <a style="color:red;font-weight: bold">Not yet</a>
+                    </c:if><br>
+                
+            </div>
             <form method="POST" action="check_Attendance">
                 <input type="hidden" name="seid" value="${requestScope.seid}"/>
                 <div class="table">
