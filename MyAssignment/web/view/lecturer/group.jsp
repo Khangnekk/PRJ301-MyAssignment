@@ -92,9 +92,37 @@
                 text-align: left;
                 padding: 0 10px;
             }
+
+            .load{
+                width: 100%;
+                height: 100%;
+                opacity: 0.88;
+                background: #ffff;
+                position: fixed;
+                top: 0;
+                left: 0;
+                z-index: 100000000000000000;
+                display: block;
+                overflow: hidden;
+            }
+            .load img{
+                width: 150px;
+                position: absolute;
+                height: 150px;
+                top: 50%;
+                left: 50%;
+                margin-top: -75px;
+                margin-left: -76px;
+            }
         </style>
     </head>
-    <body>
+    <body class="preloading">
+        <!--        <div class="load">
+                    <img src="img/loading.gif">
+                </div> -->
+        <!--        <div class="loader">
+                    <span class="fas fa-spinner xoay icon"></span>
+                </div>-->
         <div class="container">
             <header>
                 <h1>FPT University Academic Portal</h1>
@@ -153,13 +181,16 @@
                         </div>                        
                     </div>
                     <div class="group-details">
+<!--                        <div class="load">
+                            <img src="img/loading.gif">
+                        </div> -->
                         <table class="table-details">
                             <tr class="dhead">
                                 <td>STUDENT</td>
                                 <td style="white-space: pre-wrap;">GROUP NAME</td>
                                 <c:forEach items="${requestScope.sessionsByGidAndLeid}" var="sesByGAL">
                                     <td>Slot ${sesByGAL.index}<br>${sesByGAL.date}</td>
-                                </c:forEach>
+                                    </c:forEach>
                                 <td style="color: white; font-weight: bold">Absent</td>
                             </tr> 
                             <c:forEach items="${requestScope.students}" var="stu">
@@ -172,7 +203,7 @@
                                     <c:forEach items="${requestScope.sessionsByGidAndLeid}" var="sesByGAL">
                                         <td>
                                             <c:forEach items="${requestScope.attendances}" var="att">
-                                                <c:if test="${(att.student.id == stu.id) and (att.session.index == sesByGAL.index)}">
+                                                <c:if test="${(att.student.id eq stu.id) and (att.session.id  eq sesByGAL.id)}">
                                                     <c:if test="${att.present}">
                                                         <a style="color: #5cb85c">v</a>
                                                     </c:if>
@@ -198,4 +229,7 @@
             </div>
         </div>
     </body>
+    <script>
+
+    </script>
 </html>
