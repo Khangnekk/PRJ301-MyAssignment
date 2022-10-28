@@ -5,6 +5,7 @@
 package controller.lecturer;
 
 import controller.auth.lecturer.BaseAuthenticationController;
+import controller.auth.lecturer.BaseAuthorizationController;
 import dal.AttendanceDBContext;
 import dal.GroupDBContext;
 import dal.LecturerDBContext;
@@ -15,6 +16,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
+import model.Account;
 import model.Attendance;
 import model.Group;
 import model.Session;
@@ -24,7 +26,7 @@ import model.Student;
  *
  * @author Khangnekk
  */
-public class getInfoController extends BaseAuthenticationController{
+public class getInfoController extends BaseAuthorizationController{
 
     @Override
     protected void processPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -65,6 +67,16 @@ public class getInfoController extends BaseAuthenticationController{
         req.setAttribute("gidInfo", gidInfo);
         req.setAttribute("seInfo", seInfo);
         req.getRequestDispatcher("add/getInfo.jsp").forward(req, resp);
+    }
+
+    @Override
+    protected void processPost(HttpServletRequest req, HttpServletResponse resp, Account account) throws ServletException, IOException {
+        processPost(req, resp);
+    }
+
+    @Override
+    protected void processGet(HttpServletRequest req, HttpServletResponse resp, Account account) throws ServletException, IOException {
+        processGet(req, resp);
     }
     
 }

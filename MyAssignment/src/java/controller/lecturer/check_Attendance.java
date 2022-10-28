@@ -5,6 +5,7 @@
 package controller.lecturer;
 
 import controller.auth.lecturer.BaseAuthenticationController;
+import controller.auth.lecturer.BaseAuthorizationController;
 import dal.AttendanceDBContext;
 import dal.GroupDBContext;
 import dal.LecturerDBContext;
@@ -15,6 +16,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
+import model.Account;
 import model.Attendance;
 import model.Session;
 import model.Student;
@@ -23,7 +25,7 @@ import model.Student;
  *
  * @author Khangnekk
  */
-public class check_Attendance extends BaseAuthenticationController {
+public class check_Attendance extends BaseAuthorizationController {
     
     @Override
     protected void processPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -52,5 +54,15 @@ public class check_Attendance extends BaseAuthenticationController {
         req.setAttribute("ses", ses);
         req.setAttribute("seid", seid);
         req.getRequestDispatcher("add/check_Attendance.jsp").forward(req, resp);
+    }
+
+    @Override
+    protected void processPost(HttpServletRequest req, HttpServletResponse resp, Account account) throws ServletException, IOException {
+        processPost(req, resp);
+    }
+
+    @Override
+    protected void processGet(HttpServletRequest req, HttpServletResponse resp, Account account) throws ServletException, IOException {
+        processGet(req, resp);
     }
 }
