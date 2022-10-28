@@ -102,7 +102,6 @@
                 top: 0;
                 left: 0;
                 z-index: 100000000000000000;
-                display: block;
                 overflow: hidden;
             }
             .load img{
@@ -175,15 +174,15 @@
                                 </select>
                                 <input type="hidden" value="${sessionScope.account.email}" name="email">
 
-                                <input style="border-radius: 6px; border: 1px solid #ccc;" type="submit" value="Search"/> 
+                                <input style="border-radius: 6px; border: 1px solid #ccc;" onload="loading()" type="submit" value="Search"/> 
                                 <input style="border-radius: 6px; border: 1px solid #ccc;" type="reset" value="Re-select"/>
                             </form>
                         </div>                        
                     </div>
                     <div class="group-details">
-<!--                        <div class="load">
+                        <div class="load" style="display: none">
                             <img src="img/loading.gif">
-                        </div> -->
+                        </div> 
                         <table class="table-details">
                             <tr class="dhead">
                                 <td>STUDENT</td>
@@ -230,6 +229,8 @@
         </div>
     </body>
     <script>
-
+        function loading(){
+            document.getElementsByClassName("load").style.display = 'block';
+        }
     </script>
 </html>
