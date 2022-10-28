@@ -289,12 +289,49 @@ public class SessionDBContext extends DBContext<Session> {
     @Override
     public ArrayList<Session> list() {
         ArrayList<Session> sessions = new ArrayList<>();
+
+        LecturerDBContext leDB = new LecturerDBContext();
+        GroupDBContext gDB = new GroupDBContext();
+        TimeSlotDBContext tiDB = new TimeSlotDBContext();
+        RoomDBContext rDB = new RoomDBContext();
+
         try {
             String sql_get_Sesion = "SELECT * FROM [Session]";
             PreparedStatement stm = connection.prepareStatement(sql_get_Sesion);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
-                Session s = get(rs.getInt("seid"));
+
+                Session s = new Session();
+                s.setId(rs.getInt("seid"));
+                s.setIndex(rs.getInt("index"));
+                s.setAttendated(rs.getBoolean("attend"));
+                s.setDate(rs.getDate("date"));
+
+                ArrayList<Lecturer> ls = leDB.list();
+                ArrayList<Room> ros = rDB.list();
+                ArrayList<TimeSlot> ts = tiDB.list();
+                ArrayList<Group> gs = gDB.list();
+
+                for (Lecturer l : ls) {
+                    if(l.getId()==rs.getInt("leid")){
+                        s.setLecturer(l);
+                    }
+                }
+                for (Room r : ros) {
+                    if(r.getId()==rs.getInt("leid")){
+                        s.setRoom(r);
+                    }
+                }
+                for (TimeSlot t : ts) {
+                    if(t.getId()==rs.getInt("leid")){
+                        s.setTimeslot(t);
+                    }
+                }
+                for (Group g : gs) {
+                    if(g.getId()==rs.getInt("leid")){
+                        s.setGroup(g);
+                    }
+                }
                 sessions.add(s);
             }
         } catch (SQLException ex) {
