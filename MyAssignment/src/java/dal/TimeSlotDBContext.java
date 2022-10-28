@@ -20,6 +20,7 @@ import model.TimeSlot;
  */
 public class TimeSlotDBContext extends DBContext<TimeSlot>{
 
+    @Override
     public ArrayList<TimeSlot> list() {
         ArrayList<TimeSlot> timeslots = new ArrayList<>();
         String sql = "SELECT * FROM TimeSlot";
