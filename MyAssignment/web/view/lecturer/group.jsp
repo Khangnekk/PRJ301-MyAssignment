@@ -115,7 +115,7 @@
             }
         </style>
     </head>
-    <body class="preloading">
+    <body>
         <!--        <div class="load">
                     <img src="img/loading.gif">
                 </div> -->
@@ -180,9 +180,9 @@
                         </div>                        
                     </div>
                     <div class="group-details">
-                        <div class="load" style="display: none">
-                            <img src="img/loading.gif">
-                        </div> 
+                        <!--                        <div class="load" style="display: none">
+                                                    <img src="img/loading.gif">
+                                                </div> -->
                         <table class="table-details">
                             <tr class="dhead">
                                 <td>STUDENT</td>
@@ -198,7 +198,7 @@
                                     <td>
                                         ${requestScope.group.name}
                                     </td>
-
+                                    <% int x = 0; int y = 0; double k;%>
                                     <c:forEach items="${requestScope.sessionsByGidAndLeid}" var="sesByGAL">
                                         <td>
                                             <c:forEach items="${requestScope.attendances}" var="att">
@@ -207,14 +207,29 @@
                                                         <a style="color: #5cb85c">v</a>
                                                     </c:if>
                                                     <c:if test="${!att.present}">
+                                                        <% x++; %>
                                                         <a style="color: red">x</a>
                                                     </c:if>
                                                 </c:if>
                                             </c:forEach>
                                         </td>
+                                        <% y++; %>
                                     </c:forEach>
 
-                                    <td style="color: green">0%</td>
+                                    <%
+                                        k = x*100;
+                                        k/=y;
+                                    %>
+
+                                    <% if (k>20) { %>
+                                    <td style="color: red">
+                                        <%=k%> %
+                                    </td>
+                                    <% } else { %>
+                                    <td style="color: green">
+                                        <%=k%> %
+                                    </td>
+                                    <% } %>
                                 </tr>
                             </c:forEach>
                         </table>
@@ -229,8 +244,6 @@
         </div>
     </body>
     <script>
-        function loading(){
-            document.getElementsByClassName("load").style.display = 'block';
-        }
+
     </script>
 </html>
