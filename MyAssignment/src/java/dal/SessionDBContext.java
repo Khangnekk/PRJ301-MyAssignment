@@ -311,24 +311,29 @@ public class SessionDBContext extends DBContext<Session> {
                 ArrayList<Room> ros = rDB.list();
                 ArrayList<TimeSlot> ts = tiDB.list();
                 ArrayList<Group> gs = gDB.list();
-
+                
+                int leid = rs.getInt("leid");
+                int rid = rs.getInt("rid");
+                int tid = rs.getInt("tid");
+                int gid = rs.getInt("gid");
+                
                 for (Lecturer l : ls) {
-                    if(l.getId()==rs.getInt("leid")){
+                    if(l.getId()==leid){
                         s.setLecturer(l);
                     }
                 }
                 for (Room r : ros) {
-                    if(r.getId()==rs.getInt("leid")){
+                    if(r.getId()==rid){
                         s.setRoom(r);
                     }
                 }
                 for (TimeSlot t : ts) {
-                    if(t.getId()==rs.getInt("leid")){
+                    if(t.getId()==tid){
                         s.setTimeslot(t);
                     }
                 }
                 for (Group g : gs) {
-                    if(g.getId()==rs.getInt("leid")){
+                    if(g.getId()==gid){
                         s.setGroup(g);
                     }
                 }

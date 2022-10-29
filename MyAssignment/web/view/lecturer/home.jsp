@@ -65,7 +65,7 @@
                 text-align: center;
                 margin: -18px auto 23px auto;
                 padding: 3px;
-                border-radius: 9px; 
+                border-radius: 9px;
                 color: white;
                 background-image: linear-gradient(#feb52a,#f08e01);
                 font-size: 24px;
@@ -113,15 +113,15 @@
                     <h2>Hello, ${sessionScope.account.username}</h2>
                     <p>Nice to see you back</p>
                 </div>
-                
+
                 <div class="main-content">
                     <div>
                         <h3 class="partName">Section for lecturer</h3>
                     </div>
                     <div>
-                    <a href="group?email=${sessionScope.account.email}&gid=-1">View Report Attendance</a><br>
-                    <a href="timeTable?email=${sessionScope.account.email}">Timetable</a><br>
-                    <a href="getInfo?emailInfo=${sessionScope.account.email}&gidInfo=-1&seInfo=-1&gid=-1&seid=-1&email=${sessionScope.account.email}">Check Attendance</a>
+                        <a href="timeTable?email=${sessionScope.account.email}">Timetable</a><br>
+                        <a href="getInfo?emailInfo=${sessionScope.account.email}&gidInfo=-1&seInfo=-1&gid=-1&seid=-1&email=${sessionScope.account.email}">Check Attendance</a><br>
+                        <a href="group?email=${sessionScope.account.email}&gid=-1">View Report Attendance</a>
                     </div>
                 </div>
             </div>
