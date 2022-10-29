@@ -19,7 +19,7 @@ import model.Student;
  * @author Khangnekk
  */
 public class AttendanceDBContext extends DBContext<Attendance> {
-    
+
     @Override
     public void insert(Attendance model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -43,17 +43,16 @@ public class AttendanceDBContext extends DBContext<Attendance> {
     @Override
     public ArrayList<Attendance> list() {
         ArrayList<Attendance> attendances = new ArrayList<>();
-
+        StudentDBContext stuDB = new StudentDBContext();
+        SessionDBContext sesDB = new SessionDBContext();
+        ArrayList<Student> students = stuDB.list();
+        ArrayList<Session> sessions = sesDB.list();
         String sql = "SELECT * FROM Attendance";
         try {
             PreparedStatement stm = connection.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 Attendance a = new Attendance();
-                StudentDBContext stuDB = new StudentDBContext();
-                SessionDBContext sesDB = new SessionDBContext();
-                ArrayList<Student> students = stuDB.list();
-                ArrayList<Session> sessions = sesDB.list();
                 int seid = rs.getInt("seid");
                 int stuid = rs.getInt("stuid");
                 boolean present = rs.getBoolean("present");
@@ -61,18 +60,8 @@ public class AttendanceDBContext extends DBContext<Attendance> {
                 a.setPresent(present);
                 a.setDescription(des);
 
-                for (Student s : students) {
-                    if (s.getId() == stuid) {
-                        Student st = s;
-                        a.setStudent(st);
-                    }
-                }
-                for (Session se : sessions) {
-                    if (se.getId() == seid) {
-                        Session ses = se;
-                        a.setSession(ses);
-                    }
-                }
+                a.setStudent(students.stream().filter(t -> t.getId() == stuid).findAny().get());
+                a.setSession(sessions.stream().filter(t -> t.getId() == seid).findAny().get());
                 attendances.add(a);
             }
 
@@ -85,7 +74,11 @@ public class AttendanceDBContext extends DBContext<Attendance> {
 
     public ArrayList<Attendance> getAttendancesBySeid(int seid_input) {
         ArrayList<Attendance> attendances = new ArrayList<>();
-
+        StudentDBContext stuDB = new StudentDBContext();
+        SessionDBContext sesDB = new SessionDBContext();
+        ArrayList<Student> students = stuDB.list();
+        ArrayList<Session> sessions = sesDB.list();
+        
         String sql = "SELECT * FROM Attendance WHERE seid = ?";
         try {
             PreparedStatement stm = connection.prepareStatement(sql);
@@ -93,10 +86,7 @@ public class AttendanceDBContext extends DBContext<Attendance> {
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 Attendance a = new Attendance();
-                StudentDBContext stuDB = new StudentDBContext();
-                SessionDBContext sesDB = new SessionDBContext();
-                ArrayList<Student> students = stuDB.list();
-                ArrayList<Session> sessions = sesDB.list();
+
                 int seid = rs.getInt("seid");
                 int stuid = rs.getInt("stuid");
                 boolean present = rs.getBoolean("present");
@@ -104,21 +94,10 @@ public class AttendanceDBContext extends DBContext<Attendance> {
                 a.setPresent(present);
                 a.setDescription(des);
 
-                for (Student s : students) {
-                    if (s.getId() == stuid) {
-                        Student st = s;
-                        a.setStudent(st);
-                    }
-                }
-                for (Session se : sessions) {
-                    if (se.getId() == seid) {
-                        Session ses = se;
-                        a.setSession(ses);
-                    }
-                }
+                a.setStudent(students.stream().filter(st -> st.getId() == stuid).findAny().get());
+                a.setSession(sessions.stream().filter(se -> se.getId() == seid).findAny().get());
                 attendances.add(a);
             }
-
         } catch (SQLException ex) {
             Logger.getLogger(AttendanceDBContext.class.getName()).log(Level.SEVERE, null, ex);
         }

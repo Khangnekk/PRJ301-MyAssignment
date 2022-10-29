@@ -21,6 +21,15 @@ public class SessionDBContext extends DBContext<Session> {
 
     public ArrayList<Session> getSessionByGidAndLeid(int leid_input, int gid_input) {
         ArrayList<Session> sessions = new ArrayList<>();
+        GroupDBContext gDB = new GroupDBContext();
+        RoomDBContext rDB = new RoomDBContext();
+        TimeSlotDBContext tiDB = new TimeSlotDBContext();
+        LecturerDBContext leDB = new LecturerDBContext();
+
+        ArrayList<Group> groups = gDB.list();
+        ArrayList<Lecturer> lecturers = leDB.list();
+        ArrayList<Room> rooms = rDB.list();
+        ArrayList<TimeSlot> ts = tiDB.list();
         try {
             String sql_get_Sesion = "SELECT * FROM [Session]\n"
                     + "WHERE gid = ? AND leid = ?";
@@ -31,43 +40,18 @@ public class SessionDBContext extends DBContext<Session> {
             while (rs.next()) {
                 Session s = new Session();
 
-                GroupDBContext gDB = new GroupDBContext();
-                RoomDBContext rDB = new RoomDBContext();
-                TimeSlotDBContext tiDB = new TimeSlotDBContext();
-                LecturerDBContext leDB = new LecturerDBContext();
-
-                ArrayList<Group> groups = gDB.list();
-                ArrayList<Lecturer> lecturers = leDB.list();
-                ArrayList<Room> rooms = rDB.list();
-                ArrayList<TimeSlot> ts = tiDB.list();
-
                 s.setId(rs.getInt("seid"));
                 int gid = rs.getInt("gid");
-                for (Group g : groups) {
-                    if (g.getId() == gid) {
-                        s.setGroup(g);
-                    }
-                }
+                s.setGroup(groups.stream().filter(t -> t.getId() == gid).findAny().get());
                 int rid = rs.getInt("rid");
-                for (Room r : rooms) {
-                    if (r.getId() == rid) {
-                        s.setRoom(r);
-                    }
-                }
+                s.setRoom(rooms.stream().filter(
+                        r -> r.getId() == rid).findAny().get());
                 s.setDate(rs.getDate("date"));
                 int tid = rs.getInt("tid");
-                for (TimeSlot t : ts) {
-                    if (t.getId() == tid) {
-                        s.setTimeslot(t);
-                    }
-                }
+                // stream api
+                s.setTimeslot(ts.stream().filter(t -> t.getId() == tid).findAny().get());
                 int leid = rs.getInt("leid");
-                for (Lecturer l : lecturers) {
-                    if (l.getId() == leid) {
-                        s.setLecturer(l);
-                    }
-                }
-                s.setAttendated(rs.getBoolean("attend"));
+                s.setLecturer(lecturers.stream().filter(t -> t.getId() == leid).findAny().get());
                 s.setIndex(rs.getInt("index"));
 
                 sessions.add(s);
@@ -82,6 +66,11 @@ public class SessionDBContext extends DBContext<Session> {
     public ArrayList<Session> filter(int leid, Date from, Date to) {
 
         ArrayList<Session> sessions = new ArrayList<>();
+        Group g = new Group();
+        Room r = new Room();
+        Lecturer l = new Lecturer();
+        TimeSlot t = new TimeSlot();
+        Subject sub = new Subject();
         try {
             String sql_get_Sesion = "SELECT \n"
                     + "ses.seid,ses.[date],ses.[index],ses.attend,\n"
@@ -107,11 +96,6 @@ public class SessionDBContext extends DBContext<Session> {
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 Session session = new Session();
-                Group g = new Group();
-                Room r = new Room();
-                Lecturer l = new Lecturer();
-                TimeSlot t = new TimeSlot();
-                Subject sub = new Subject();
 
                 session.setId(rs.getInt("seid"));
                 session.setDate(rs.getDate("date"));
@@ -295,6 +279,11 @@ public class SessionDBContext extends DBContext<Session> {
         TimeSlotDBContext tiDB = new TimeSlotDBContext();
         RoomDBContext rDB = new RoomDBContext();
 
+        ArrayList<Lecturer> ls = leDB.list();
+        ArrayList<Room> ros = rDB.list();
+        ArrayList<TimeSlot> ts = tiDB.list();
+        ArrayList<Group> gs = gDB.list();
+
         try {
             String sql_get_Sesion = "SELECT * FROM [Session]";
             PreparedStatement stm = connection.prepareStatement(sql_get_Sesion);
@@ -307,36 +296,14 @@ public class SessionDBContext extends DBContext<Session> {
                 s.setAttendated(rs.getBoolean("attend"));
                 s.setDate(rs.getDate("date"));
 
-                ArrayList<Lecturer> ls = leDB.list();
-                ArrayList<Room> ros = rDB.list();
-                ArrayList<TimeSlot> ts = tiDB.list();
-                ArrayList<Group> gs = gDB.list();
-                
                 int leid = rs.getInt("leid");
+                s.setLecturer(ls.stream().filter(l -> l.getId() == leid).findAny().get());
                 int rid = rs.getInt("rid");
+                s.setRoom(ros.stream().filter(ro -> ro.getId() == rid).findAny().get());
                 int tid = rs.getInt("tid");
+                s.setTimeslot(ts.stream().filter(t -> t.getId() == tid).findAny().get());
                 int gid = rs.getInt("gid");
-                
-                for (Lecturer l : ls) {
-                    if(l.getId()==leid){
-                        s.setLecturer(l);
-                    }
-                }
-                for (Room r : ros) {
-                    if(r.getId()==rid){
-                        s.setRoom(r);
-                    }
-                }
-                for (TimeSlot t : ts) {
-                    if(t.getId()==tid){
-                        s.setTimeslot(t);
-                    }
-                }
-                for (Group g : gs) {
-                    if(g.getId()==gid){
-                        s.setGroup(g);
-                    }
-                }
+                s.setGroup(gs.stream().filter(g -> g.getId() == gid).findAny().get());
                 sessions.add(s);
             }
         } catch (SQLException ex) {

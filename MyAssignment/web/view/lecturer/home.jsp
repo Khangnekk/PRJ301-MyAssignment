@@ -120,7 +120,7 @@
                     </div>
                     <div>
                         <a href="timeTable?email=${sessionScope.account.email}">Timetable</a><br>
-                        <a href="getInfo?emailInfo=${sessionScope.account.email}&gidInfo=-1&seInfo=-1&gid=-1&seid=-1&email=${sessionScope.account.email}">Check Attendance</a><br>
+                        <a href="getInfo?emailInfo=${sessionScope.account.email}&gidInfo=-1&seInfo=-1&gid=-1&seid=-1&email=${sessionScope.account.email}">Take Attendance</a><br>
                         <a href="group?email=${sessionScope.account.email}&gid=-1">View Report Attendance</a>
                     </div>
                 </div>

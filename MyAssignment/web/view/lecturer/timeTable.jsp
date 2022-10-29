@@ -167,7 +167,7 @@
                                 <td>
                                     <c:forEach items="${requestScope.sessions}" var="ses">
                                         <c:if test="${DateTimeHelper.compare(ses.date,d) eq 0 and (ses.timeslot.id eq slot.id)}">
-                                            <a href="check_Attendance?id=${ses.id}">${ses.group.name}-${ses.group.subject.name}</a>
+                                            <a href="check_Attendance?seid=${ses.id}">${ses.group.name}-${ses.group.subject.name}</a>
                                             <br/>
                                             at ${ses.room.name}
                                             <c:if test="${ses.attendated}">

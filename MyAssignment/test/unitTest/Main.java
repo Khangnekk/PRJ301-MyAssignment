@@ -18,38 +18,7 @@ import unitTest.model.Test.objectTest;
 public class Main {
 
     public static void main(String[] args) {
+
         
-        System.out.println(mySearch(1).toString());
-    }
-
-    public static ArrayList<objectTest> quickSort() {
-        objectTestDBContext objDB = new objectTestDBContext();
-        List<objectTest> list = objDB.getAll();
-        Comparator<objectTest> comparator = new Comparator<objectTest>() {
-            @Override
-            public int compare(objectTest left, objectTest right) {
-                return left.getId() - right.getId(); // use your logic
-            }
-        };
-
-        Collections.sort(list, comparator); // use the comparator as much as u want
-        return (ArrayList<objectTest>) list;
-    }
-
-    public static objectTest mySearch(int i) {
-        objectTest x = null;
-        
-        objectTestDBContext objDB = new objectTestDBContext();
-        ArrayList<objectTest> myList = objDB.getAll();
-//Fill up myList with your Data Points
-
-//Traversal
-        for (objectTest myPoint : myList) {
-            if (myPoint.getName() != null && myPoint.getId()==i) {
-                System.out.println("Found it!");
-                 x = myPoint;
-            }
-        }
-       return x;
     }
 }
