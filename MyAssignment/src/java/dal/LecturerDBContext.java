@@ -19,7 +19,6 @@ import model.Lecturer;
  */
 public class LecturerDBContext extends DBContext<Lecturer> {
 
-    @Override
     public Lecturer get(int lid) {
         try {
             String sql = "SELECT leid,lename FROM Lecturer WHERE leid = ?";
@@ -95,7 +94,7 @@ public class LecturerDBContext extends DBContext<Lecturer> {
             }
 
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            Logger.getLogger(StudentDBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return lecturers;

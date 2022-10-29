@@ -123,15 +123,15 @@
                 <div class="getGroupAndSlot">
                     <form action="getInfo?gid=-1">
                         <div class="input-info">
-                            <select name="gid" style="padding: 1.5px; border-radius: 6px;">
-                                <option id="groupid" value="-1">-- Select Group --</option>
-                                <c:forEach items="${requestScope.groups}" var="g">                            
-                                    <option "
-                                            <c:if test="${requestScope.group.id eq g.id}">
+                            <select id="groupid" name="gid">
+                                <option  value="-1">-- Select Group --</option>
+                                <c:forEach items="${sessionScope.groups}" var="g">                            
+                                    <option id="groupid"
+                                            <c:if test="${sessionScope.group.id eq g.id}">
                                                 selected="selected"
                                             </c:if>
                                             value="${g.id}">
-                                        ${g.name} - ${g.subject.name}
+                                        ${g.name}
                                     </option>
                                 </c:forEach>
                             </select>

@@ -57,9 +57,9 @@ public class getInfoController extends BaseAuthorizationController{
         Group group = groupDB.get(gid);
         ArrayList<Group> groups = groupDB.listGroupByLeid(lid);
         ArrayList<Session> sessionsByGidAndLeid = sesDB.getSessionByGidAndLeid(lid, gid);
-        req.setAttribute("groups", groups);
+        req.getSession().setAttribute("groups", groups);
         req.getSession().setAttribute("sessionsByGidAndLeid", sessionsByGidAndLeid);
-        req.setAttribute("group", group);
+        req.getSession().setAttribute("group", group);
         req.getSession().setAttribute("email", email);
         req.getSession().setAttribute("seid", req.getParameter("seid"));
         

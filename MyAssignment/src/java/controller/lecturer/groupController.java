@@ -60,7 +60,9 @@ public class groupController extends BaseAuthorizationController {
         String email = req.getParameter("email");
         int lid = lecturerDB.getIdByEmail(email);
         ArrayList<Group> groups = groupDB.listGroupByLeid(lid);
+        Group group = groupDB.get(gid);
         req.setAttribute("groups", groups);
+        req.setAttribute("group", group);
         req.setAttribute("email", email);
         req.getRequestDispatcher("view/lecturer/group.jsp").forward(req, resp);
     }

@@ -47,8 +47,8 @@ public class RoomDBContext extends DBContext<Room> {
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 Room r = new Room();
-                int id = rs.getInt("rid");
-                String name = rs.getString("rname");
+                int id = rs.getInt("mid");
+                String name = rs.getString("mname");
                 r.setId(id);
                 r.setName(name);
                 rooms.add(r);
