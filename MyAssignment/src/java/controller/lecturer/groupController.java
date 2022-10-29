@@ -43,7 +43,7 @@ public class groupController extends BaseAuthorizationController {
         ArrayList<Student> students = groupDB.listStudentBygid(gid);
         ArrayList<Session> sessionsByGidAndLeid = sesDB.getSessionByGidAndLeid(lid, gid);
         ArrayList<Group> groups = groupDB.listGroupByLeid(lid);
-        group = groupDB.get(gid);       
+        group = groupDB.get(gid);
         req.setAttribute("sessionsByGidAndLeid", sessionsByGidAndLeid);
         req.setAttribute("group", group);
         req.setAttribute("groups", groups);
