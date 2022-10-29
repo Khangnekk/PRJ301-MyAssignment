@@ -47,7 +47,7 @@ public class GroupDBContext extends DBContext<Group> {
         ArrayList<Lecturer> lecturers = lecDB.list();
         Group group = new Group();
         try {
-            String sql_get_group = "SELECT * FROM [Group] g WHERE g.gid = ?";
+            String sql_get_group = "SELECT * FROM [Group] WHERE gid = ?";
             PreparedStatement stm = connection.prepareStatement(sql_get_group);
             stm.setInt(1, gid);
             ResultSet rs = stm.executeQuery();
@@ -61,24 +61,15 @@ public class GroupDBContext extends DBContext<Group> {
                 int year = rs.getInt("year");
                 gr.setId(id);
                 gr.setName(name);
-                for (Subject subs : subjects) {
-                    if (subs.getId() == subid) {
-                        Subject s = subs;
-                        gr.setSubject(s);
-                    }
-                }
-                for (Lecturer lecs : lecturers) {
-                    if (lecs.getId() == leid) {
-                        Lecturer l = lecs;
-                        gr.setLecturer(l);
-                    }
-                }
+                gr.setSubject(subjects.stream().filter(sub -> sub.getId() == subid).findAny().get());
+                gr.setLecturer(lecturers.stream().filter(lec -> lec.getId() == leid).findAny().get());
                 gr.setSemester(semester);
                 gr.setYear(year);
                 group = gr;
             }
+            connection.close();
         } catch (SQLException ex) {
-            Logger.getLogger(GroupDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
         return group;
     }
@@ -90,8 +81,8 @@ public class GroupDBContext extends DBContext<Group> {
         LecturerDBContext lecDB = new LecturerDBContext();
         ArrayList<Subject> subjects = subDB.list();
         ArrayList<Lecturer> lecturers = lecDB.list();
-        String sql = "SELECT * FROM [Group]";
         try {
+            String sql = "SELECT * FROM [Group]";
             PreparedStatement stm = connection.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
@@ -104,18 +95,8 @@ public class GroupDBContext extends DBContext<Group> {
                 int year = rs.getInt("year");
                 g.setId(id);
                 g.setName(name);
-                for (Subject subs : subjects) {
-                    if (subs.getId() == subid) {
-                        Subject s = subs;
-                        g.setSubject(s);
-                    }
-                }
-                for (Lecturer lecs : lecturers) {
-                    if (lecs.getId() == leid) {
-                        Lecturer l = lecs;
-                        g.setLecturer(l);
-                    }
-                }
+                g.setSubject(subjects.stream().filter(sub -> sub.getId() == subid).findAny().get());
+                g.setLecturer(lecturers.stream().filter(lec -> lec.getId() == leid).findAny().get());
                 g.setSemester(semester);
                 g.setYear(year);
                 groups.add(g);
@@ -134,8 +115,8 @@ public class GroupDBContext extends DBContext<Group> {
         LecturerDBContext lecDB = new LecturerDBContext();
         ArrayList<Subject> subjects = subDB.list();
         ArrayList<Lecturer> lecturers = lecDB.list();
-        String sql = "SELECT * FROM [Group] WHERE leid = ?";
         try {
+            String sql = "SELECT * FROM [Group] WHERE leid = ?";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, lid);
             ResultSet rs = stm.executeQuery();
@@ -147,25 +128,16 @@ public class GroupDBContext extends DBContext<Group> {
                 int leid = rs.getInt("leid");
                 String semester = rs.getString("semester");
                 int year = rs.getInt("year");
+
                 g.setId(id);
                 g.setName(name);
-                for (Subject subs : subjects) {
-                    if (subs.getId() == subid) {
-                        Subject s = subs;
-                        g.setSubject(s);
-                    }
-                }
-                for (Lecturer lecs : lecturers) {
-                    if (lecs.getId() == leid) {
-                        Lecturer l = lecs;
-                        g.setLecturer(l);
-                    }
-                }
+                g.setSubject(subjects.stream().filter(sub -> sub.getId() == subid).findAny().get());
+                g.setLecturer(lecturers.stream().filter(lec -> lec.getId() == leid).findAny().get());
                 g.setSemester(semester);
                 g.setYear(year);
                 groups.add(g);
             }
-
+            connection.close();
         } catch (SQLException ex) {
             Logger.getLogger(StudentDBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -177,9 +149,9 @@ public class GroupDBContext extends DBContext<Group> {
         ArrayList<Student> students = new ArrayList<>();
         MajorDBContext majDB = new MajorDBContext();
         ArrayList<Major> majors = majDB.list();
-        String sql = "SELECT s.stuid,s.stuname,s.stuemail,s.stugender,s.studob,s.stuphone,s.stuaddress,s.mid FROM Student s, Student_Group sg, [Group] g\n"
-                + "WHERE sg.gid = g.gid AND sg.stuid = s.stuid AND g.gid = ?";
         try {
+            String sql = "SELECT s.stuid,s.stuname,s.stuemail,s.stugender,s.studob,s.stuphone,s.stuaddress,s.mid FROM Student s, Student_Group sg, [Group] g\n"
+                    + "WHERE sg.gid = g.gid AND sg.stuid = s.stuid AND g.gid = ?";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, gid);
             ResultSet rs = stm.executeQuery();
@@ -201,15 +173,10 @@ public class GroupDBContext extends DBContext<Group> {
                 s.setDob(dob);
                 s.setPhone(phone);
                 s.setAddress(address);
-                for (Major majs : majors) {
-                    if (majs.getId() == mid) {
-                        Major m = majs;
-                        s.setMid(m);
-                    }
-                }
+                s.setMid(majors.stream().filter(m -> m.getId() == mid).findAny().get());
                 students.add(s);
             }
-
+            connection.close();
         } catch (SQLException ex) {
 
         }

@@ -19,7 +19,7 @@ import model.Student;
  * @author Khangnekk
  */
 public class AttendanceDBContext extends DBContext<Attendance> {
-    
+
     @Override
     public void insert(Attendance model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -61,18 +61,8 @@ public class AttendanceDBContext extends DBContext<Attendance> {
                 a.setPresent(present);
                 a.setDescription(des);
 
-                for (Student s : students) {
-                    if (s.getId() == stuid) {
-                        Student st = s;
-                        a.setStudent(st);
-                    }
-                }
-                for (Session se : sessions) {
-                    if (se.getId() == seid) {
-                        Session ses = se;
-                        a.setSession(ses);
-                    }
-                }
+                a.setStudent(students.stream().filter(t -> t.getId() == stuid).findAny().get());
+                a.setSession(sessions.stream().filter(t -> t.getId() == seid).findAny().get());
                 attendances.add(a);
             }
 
@@ -104,21 +94,11 @@ public class AttendanceDBContext extends DBContext<Attendance> {
                 a.setPresent(present);
                 a.setDescription(des);
 
-                for (Student s : students) {
-                    if (s.getId() == stuid) {
-                        Student st = s;
-                        a.setStudent(st);
-                    }
-                }
-                for (Session se : sessions) {
-                    if (se.getId() == seid) {
-                        Session ses = se;
-                        a.setSession(ses);
-                    }
-                }
+                a.setStudent(students.stream().filter(st -> st.getId()==stuid).findAny().get());
+                a.setSession(sessions.stream().filter(se -> se.getId()==seid).findAny().get());
                 attendances.add(a);
             }
-
+            connection.close();
         } catch (SQLException ex) {
             Logger.getLogger(AttendanceDBContext.class.getName()).log(Level.SEVERE, null, ex);
         }

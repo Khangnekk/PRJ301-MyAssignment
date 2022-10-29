@@ -19,6 +19,7 @@ import model.Lecturer;
  */
 public class LecturerDBContext extends DBContext<Lecturer> {
 
+    @Override
     public Lecturer get(int lid) {
         try {
             String sql = "SELECT leid,lename FROM Lecturer WHERE leid = ?";
@@ -79,7 +80,7 @@ public class LecturerDBContext extends DBContext<Lecturer> {
                 int id = rs.getInt("leid");
                 String name = rs.getString("lename");
                 String email = rs.getString("leemail");
-                boolean gender = rs.getBoolean("gender");
+                boolean gender = rs.getBoolean("legender");
                 Date dob = rs.getDate("ledob");
                 String phone = rs.getString("lephone");
                 String address = rs.getString("leaddress");
@@ -94,7 +95,7 @@ public class LecturerDBContext extends DBContext<Lecturer> {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(StudentDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
 
         return lecturers;
