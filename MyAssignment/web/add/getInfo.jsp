@@ -12,9 +12,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>FAP University Academic Portal</title>
         <!-- link favicon logo -->
-        <link rel="icon" href="#" />
+        <link rel="icon" href="assets/favicon/fu-favicon.jpg" />
         <!-- link bootstrap -->
         <link rel="stylesheet" href="assets/css/bootstrap/bootstrap.min.css"/>
+        <!--link font-awesome-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
         <style>
 
             html, body {
@@ -91,7 +93,7 @@
             </header>
             <div class="top">
                 <div class="topLeft">
-                    <a href="home">Home</a>
+                    <a href="home"><i class="fas fa-home" style="color: orangered; font-size: 25px"></i></a>
                     <a>| <b>View Schedule</b></a>
                 </div>
                 <div class="topRight">
@@ -128,7 +130,7 @@
                                     <option "
                                             <c:if test="${requestScope.group.id eq g.id}">
                                                 selected="selected"
-                                                
+
                                             </c:if>
                                             value="${g.id}">
                                         ${g.name} - ${g.subject.name}

@@ -12,6 +12,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Login FAP for Lecturer</title>
         <link rel="stylesheet" href="assets/css/myStyle/Style.css">
+        <link rel="icon" href="assets/favicon/fu-favicon.jpg" />
         <style>
             p{
                 color: red;

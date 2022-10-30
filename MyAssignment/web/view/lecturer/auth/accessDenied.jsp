@@ -10,6 +10,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Access Denied!</title>
+        <link rel="icon" href="assets/favicon/fu-favicon.jpg" />
         <style>
             body{
                 background-color: black;
@@ -43,18 +44,18 @@
                 font-size: 16px;
             }
         </style>
-            
+
     </head>
     <body>
         <div class="content">
             <img style="width: 100px;" src="assets/img/fpt-logo.png">
             <h2>Access denied!</h2>
             <p>You don't have permission to view this<br>
-            You need to login first to be able to access</p>
+                You need to login first to be able to access</p>
             <button onclick="Login();">> Click here to login</a</button>
         </div>
         <script>
-            function Login(){
+            function Login() {
                 window.location = "login";
             }
         </script>

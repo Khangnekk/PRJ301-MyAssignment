@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>FAP University Academic Portal</title>
         <!-- link favicon logo -->
-        <link rel="icon" href="#" />
+        <link rel="icon" href="assets/favicon/fu-favicon.jpg" />
         <!-- link bootstrap -->
         <link rel="stylesheet" href="assets/css/bootstrap/bootstrap.min.css"/>
         <!-- link Style.css -->
@@ -39,6 +39,8 @@
                 font-weight: bold;
             }
             .item{
+                border: 2px solid background;
+                border-radius: 9px;
                 padding: 10px;
             }
             .item:hover{
@@ -54,8 +56,7 @@
             </header>
             <div class="top">
                 <div class="topLeft">
-                    <a href="home">Home</a>
-                    <a>| <b>View Schedule</b></a>
+                    <a href="home"><i class="fas fa-home" style="color: orangered; font-size: 25px"></i></a>
                 </div>
                 <div class="topRight">
                     Nickname:
