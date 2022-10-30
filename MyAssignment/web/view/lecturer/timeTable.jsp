@@ -15,15 +15,6 @@
         <!--link font-awesome-->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
         <style>
-            .table{
-                border-radius: 9px;
-                overflow: hidden;
-                height: 100%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-
-            }
             table tr td {
                 padding:0 10px;
                 border:1px solid black;
