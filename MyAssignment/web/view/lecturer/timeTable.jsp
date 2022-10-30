@@ -76,7 +76,7 @@
     <body>
         <div class="container">
             <header>
-                <h1>FPT University Academic Portal</h1>
+                <h1><img style="width: 100px;" src="assets/img/fpt-logo.png"> FPT University Academic Portal</h1>
             </header>
             <div class="top">
                 <div class="topLeft">
@@ -129,7 +129,7 @@
                     <c:forEach items="${requestScope.slots}" var="slot">
                         <tr>
                             <td class="timeslot"><a class="tname">${slot.name}: </a><br><a class="tdes">(${slot.description})</a></td>
-                            <c:forEach items="${requestScope.dates}" var="d">
+                                <c:forEach items="${requestScope.dates}" var="d">
                                 <td>
                                     <c:forEach items="${requestScope.sessions}" var="ses">
                                         <c:if test="${DateTimeHelper.compare(ses.date,d) eq 0 and (ses.timeslot.id eq slot.id)}">

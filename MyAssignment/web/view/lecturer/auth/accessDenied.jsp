@@ -11,53 +11,46 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Access Denied!</title>
         <style>
+            body{
+                background-color: black;
+            }
             .content{
-                width: 300px;
                 margin: 10em auto;
-                border: 1px solid #ccc;
-                border-radius: 9px;
+                width: 50%;
                 padding: 15px;
                 text-align: center;
-                
+                border: 1px solid #ccc;
+                border-radius: 9px;
             }
-            .content a{
-                text-decoration: none;
+            .content h2{
+                font-size: 50px;
+                font-family: cursive;
+                color: red;
             }
             button{
                 border: 1px solid #ccc;
                 border-radius: 9px;
-                padding: 2px 10px;
-                animation: load 0.8s linear infinite;
+                padding: 10px;
+                font-family: cursive;
+                color: red;
+                font-weight: bold;
+                font-size: 16px;
             }
-            button:hover{
-                animation: loadHover 2.5s linear infinite;
-            }
-            @keyframes load{
-                0%{
-                    width: 50%;
-                }
-                100%{
-                    width: 100%;
-                }
-            }
-            @keyframes loadHover{
-                0%{
-                    width: 50%;
-                    color: white;
-                    background-color: red;
-                }
-                100%{
-                    width: 100%;
-                    color: white;
-                    background-color: red;
-                }
+            p{
+                color: white;
+                font-family: cursive;
+                font-weight: bold;
+                font-size: 16px;
             }
         </style>
             
     </head>
     <body>
         <div class="content">
-            <h2>Warning: Access denied!</h2>
+            <img style="width: 100px;" src="assets/img/fpt-logo.png">
+            <h2>Access denied!</h2>
+            <p>You don't have permission to view this<br>
+            You need to login first to be able to access</p>
             <button onclick="Login();">> Click here to login</a</button>
         </div>
         <script>
