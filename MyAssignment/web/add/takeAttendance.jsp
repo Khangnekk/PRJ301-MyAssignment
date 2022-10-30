@@ -57,7 +57,7 @@
                 </c:if><br>
 
             </div>
-            <form method="POST" action="check_Attendance">
+            <form method="POST" action="takeAttendance">
                 <input type="hidden" name="seid" value="${requestScope.seid}"/>
                 <div class="table">
                     <table>
