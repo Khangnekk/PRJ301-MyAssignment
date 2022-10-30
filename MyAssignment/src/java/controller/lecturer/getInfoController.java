@@ -26,7 +26,7 @@ import model.Student;
  *
  * @author Khangnekk
  */
-public class getInfoController extends BaseAuthorizationController{
+public class getInfoController extends BaseAuthorizationController {
 
     @Override
     protected void processPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -36,7 +36,7 @@ public class getInfoController extends BaseAuthorizationController{
         req.setAttribute("emailInfo", email);
         req.setAttribute("gidInfo", gid);
         req.setAttribute("seidInfo", seid);
-        resp.sendRedirect("takeAttendance?seid="+seid);
+        resp.sendRedirect("takeAttendance?seid=" + seid);
 //        req.getRequestDispatcher("check_Attendance?seid="+seid).forward(req, resp);
     }
 
@@ -52,18 +52,18 @@ public class getInfoController extends BaseAuthorizationController{
         String emailInfo = email;
         int gidInfo = gid;
         int seInfo = Integer.parseInt(req.getParameter("seid"));
-        
+
         
         Group group = groupDB.get(gid);
         ArrayList<Group> groups = groupDB.listGroupByLeid(lid);
         ArrayList<Session> sessionsByGidAndLeid = sesDB.getSessionByGidAndLeid(lid, gid);
-        
+
         req.setAttribute("groups", groups);
         req.setAttribute("sessionsByGidAndLeid", sessionsByGidAndLeid);
         req.setAttribute("group", group);
         req.getSession().setAttribute("email", email);
         req.getSession().setAttribute("seid", req.getParameter("seid"));
-        
+
         req.setAttribute("emailInfo", emailInfo);
         req.setAttribute("gidInfo", gidInfo);
         req.setAttribute("seInfo", seInfo);
@@ -79,5 +79,5 @@ public class getInfoController extends BaseAuthorizationController{
     protected void processGet(HttpServletRequest req, HttpServletResponse resp, Account account) throws ServletException, IOException {
         processGet(req, resp);
     }
-    
+
 }
