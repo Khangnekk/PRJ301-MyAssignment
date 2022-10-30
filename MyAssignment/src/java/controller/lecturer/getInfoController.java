@@ -36,7 +36,7 @@ public class getInfoController extends BaseAuthorizationController{
         req.setAttribute("emailInfo", email);
         req.setAttribute("gidInfo", gid);
         req.setAttribute("seidInfo", seid);
-        resp.sendRedirect("check_Attendance?seid="+seid);
+        resp.sendRedirect("takeAttendance?seid="+seid);
 //        req.getRequestDispatcher("check_Attendance?seid="+seid).forward(req, resp);
     }
 

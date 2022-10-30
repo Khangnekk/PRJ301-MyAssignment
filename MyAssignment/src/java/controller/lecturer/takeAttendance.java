@@ -25,7 +25,7 @@ import model.Student;
  *
  * @author Khangnekk
  */
-public class check_Attendance extends BaseAuthorizationController {
+public class takeAttendance extends BaseAuthorizationController {
     
     @Override
     protected void processPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -43,7 +43,7 @@ public class check_Attendance extends BaseAuthorizationController {
         }
         SessionDBContext db = new SessionDBContext();
         db.update(ses);     
-        resp.sendRedirect("check_Attendance?seid=" + ses.getId());
+        resp.sendRedirect("takeAttendance?seid=" + ses.getId());
     }
     
     @Override
@@ -53,7 +53,7 @@ public class check_Attendance extends BaseAuthorizationController {
         Session ses = sesDB.get(seid);
         req.setAttribute("ses", ses);
         req.setAttribute("seid", seid);
-        req.getRequestDispatcher("add/check_Attendance.jsp").forward(req, resp);
+        req.getRequestDispatcher("add/takeAttendance.jsp").forward(req, resp);
     }
 
     @Override

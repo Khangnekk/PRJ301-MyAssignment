@@ -8,88 +8,9 @@
         <!-- link favicon logo -->
         <link rel="icon" href="#" />
         <!-- link bootstrap -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-              integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-        <style>
-
-            html, body {
-                height: 100%;
-            }
-            body{
-                margin: 0;
-                padding: 0;
-            }
-            .container{
-                margin: 0 auto;
-            }
-            .top{
-                display: flex;
-                background-color: #f5f5f5;
-                padding: 10px;
-                justify-content: space-between;
-                border-radius: 6px;
-            }
-            .top a{
-                text-decoration: none;
-            }
-            .topRight span{
-                margin-left: 10px;
-                color:white;
-                background-color: #5cb85c;
-                border-radius: 3px;
-                padding: 0 3px;
-                font-size: 75%;
-            }
-            .table{
-                height: 100%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                margin-top: 10px;
-            }
-            table tr td {
-                border:1px solid background;
-                padding: 0 15px;
-            }
-
-            .table .htable{
-                background-color: #6b90da;
-                text-align: center;
-            }
-
-            .last{
-                text-align: center;
-                font-size: 14px;
-                padding-bottom: 20px;
-            }
-            .dhead{
-                text-align: center;
-                margin: 5px auto;
-            }
-            .avt_img img{
-                width: 150px;
-                height: auto;
-            }
-
-            .add_button{
-                width: 50px;
-                margin: 0 auto;
-            }
-            .add_button input{
-                border-radius: 7px;
-                background-color: #6b90da;
-                color: white;
-                border: 1px solid white;
-            }
-            .input-info{
-                text-align: center;
-                width: 40%;
-                margin: 10px auto;
-            }
-            .input-info select option{
-                text-align: center;
-            }
-        </style>
+        <link rel="stylesheet" href="assets/css/bootstrap/bootstrap.min.css"/>
+        <!-- link Style.css -->
+        <link rel="stylesheet" href="assets/css/myStyle/Style.css">
     </head>
     <body>
         <div class="container">
@@ -126,13 +47,13 @@
                 Date: ${requestScope.ses.date}<br>
                 Room: ${requestScope.ses.room.name}<br>
                 Status Attendance: 
-                    <c:if test="${requestScope.ses.attendated}">
-                        <a style="color:green; font-weight: bold">Attended</a>
-                    </c:if>
-                    <c:if test="${!requestScope.ses.attendated}">
-                        <a style="color:red;font-weight: bold">Not yet</a>
-                    </c:if><br>
-                
+                <c:if test="${requestScope.ses.attendated}">
+                    <a style="color:green; font-weight: bold">Attended</a>
+                </c:if>
+                <c:if test="${!requestScope.ses.attendated}">
+                    <a style="color:red;font-weight: bold">Not yet</a>
+                </c:if><br>
+
             </div>
             <form method="POST" action="check_Attendance">
                 <input type="hidden" name="seid" value="${requestScope.seid}"/>
@@ -162,15 +83,15 @@
                                            <c:if test="${a.present}">
                                                checked="checked"
                                            </c:if>
-                                           name="present${a.student.id}" value="present" /></td>
+                                           name="present${a.student.id}" value="present" /> present</td>
                                 <td><input type="radio"
                                            <c:if test="${!a.present}">
                                                checked="checked"
                                            </c:if>
-                                           name="present${a.student.id}" value="absent" /></td>
+                                           name="present${a.student.id}" value="absent" /> absent</td>
                                 <td><input type="text" name="description${a.student.id}" value="${a.description}" /></td>
                                 <td class="avt_img">
-                                    <img src="img/avt.jpeg" alt="alt"/>
+                                    <img src="assets/img/avt.jpeg" alt="alt"/>
                                 </td>
                             </tr>   
 
@@ -190,13 +111,13 @@
     <script>
         var gid = document.getElementById("groupid").value;
         document.getElementById("submit").value = 'Search group';
-
+        
         var gid_element = document.getElementById("gid_element");
         if (gid <= 0) {
             gid_element.style.display = 'none';
         } else {
             document.getElementById("submit").value = 'Search slot';
         }
-
+        
     </script>
 </html>

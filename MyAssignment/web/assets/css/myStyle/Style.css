@@ -1,0 +1,107 @@
+html, body {
+    height: 100%;
+}
+body{
+    margin: 0;
+    padding: 0;
+}
+.container{
+    margin: 0 auto;
+}
+.top{
+    display: flex;
+    background-color: #f5f5f5;
+    padding: 10px;
+    justify-content: space-between;
+    border-radius: 6px;
+}
+.top a{
+    text-decoration: none;
+}
+.topRight span{
+    margin-left: 10px;
+    color:white;
+    background-color: #5cb85c;
+    border-radius: 3px;
+    padding: 0 3px;
+    font-size: 75%;
+}
+.table{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+}
+table tr td {
+    border:1px solid background;
+    padding: 0 15px;
+}
+
+.table .htable{
+    background-color: #6b90da;
+    text-align: center;
+}
+
+.last{
+    text-align: center;
+    font-size: 14px;
+    padding-bottom: 20px;
+}
+.dhead{
+    text-align: center;
+    margin: 5px auto;
+}
+.avt_img img{
+    width: 150px;
+    height: auto;
+}
+
+.add_button{
+    width: 50px;
+    margin: 0 auto;
+}
+.add_button input{
+    border-radius: 7px;
+    background-color: #6b90da;
+    color: white;
+    border: 1px solid white;
+}
+.input-info{
+    text-align: center;
+    width: 40%;
+    margin: 10px auto;
+}
+.input-info select option{
+    text-align: center;
+}
+
+
+.main-content{
+    width: 40%;
+    margin: 40px auto;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 9px;
+    padding: 20px 10px;
+}
+.getGroupAndSlot{
+    margin: 40px auto;
+}
+.main-content a{
+    text-decoration: none;
+}
+.input-info select{
+    border-radius: 8px;
+    padding: 3px;
+    text-align: center;
+}
+.partName{
+    width: 60%;
+    text-align: center;
+    margin: -35px auto 23px auto;
+    border-radius: 9px;
+    color: white;
+    background-image: linear-gradient(#feb52a,#f08e01);
+    font-size: 24px;
+}

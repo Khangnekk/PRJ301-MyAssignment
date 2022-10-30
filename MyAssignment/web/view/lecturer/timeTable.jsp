@@ -9,42 +9,18 @@
         <!-- link favicon logo -->
         <link rel="icon" href="#" />
         <!-- link bootstrap -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-              integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link rel="stylesheet" href="assets/css/bootstrap/bootstrap.min.css"/>
+        <!-- link Style.css -->
+        <link rel="stylesheet" href="assets/css/myStyle/Style.css">
         <style>
-
-            html, body {
-                height: 100%;
-            }
-            body{
-                margin: 0;
-                padding: 0;
-            }
-            .container{
-                margin: 0 auto;
-            }
-            .top{
-                display: flex;
-                background-color: #f5f5f5;
-                padding: 10px;
-                justify-content: space-between;
-                border-radius: 6px;
-            }
-            .top a{
-                text-decoration: none;
-            }
-            .topRight span{
-                color:white;
-                background-color: #5cb85c;
-                border-radius: 3px;
-                padding: 0 3px;
-                font-size: 75%;
-            }
             .table{
+                border-radius: 9px;
+                overflow: hidden;
                 height: 100%;
                 display: flex;
                 align-items: center;
                 justify-content: center;
+
             }
             table tr td {
                 padding:0 10px;
@@ -53,16 +29,6 @@
             .table .htable{
                 background-color: #6b90da;
                 text-align: center;
-            }
-
-            .last{
-                text-align: center;
-                font-size: 14px;
-                padding-bottom: 20px;
-            }
-            .dhead{
-                text-align: center;
-                margin: 5px auto;
             }
             .dhead input{
                 border-radius: 6px;
@@ -167,7 +133,7 @@
                                 <td>
                                     <c:forEach items="${requestScope.sessions}" var="ses">
                                         <c:if test="${DateTimeHelper.compare(ses.date,d) eq 0 and (ses.timeslot.id eq slot.id)}">
-                                            <a href="check_Attendance?seid=${ses.id}">${ses.group.name}-${ses.group.subject.name}</a>
+                                            <a href="takeAttendance?seid=${ses.id}">${ses.group.name}-${ses.group.subject.name}</a>
                                             <br/>
                                             at ${ses.room.name}
                                             <c:if test="${ses.attendated}">
