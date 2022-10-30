@@ -22,7 +22,7 @@
         <div class="login-form">
             <img style="width: 100px;" src="assets/img/fpt-logo.png">
             <form action="login" method="POST">
-                <div class="login-title">
+                <div class="login-t itle">
                     <h2>Login FAP for Lecturer</h2>
                 </div>
                 <div class="login-input-data">
