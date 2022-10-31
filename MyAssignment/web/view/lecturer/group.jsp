@@ -53,7 +53,7 @@
             }
             .group{
                 text-align: center;
-                margin: 10px auto;
+                margin: 0 auto;
             }
 
             .group-details{
@@ -130,6 +130,13 @@
             </div>
             <div>
                 <div class="row content">
+                    <marquee>
+                        <p style="color: red">
+                        If the percentage of absent is greater than 20, 
+                        the student will not be able to take the exam for
+                        that semester of that subject
+                        </p>
+                    </marquee>
                     <div class="group">
                         <div class="gcontent">
                             <form action="group" method="post">
