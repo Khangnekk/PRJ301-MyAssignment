@@ -30,6 +30,11 @@
             .top a{
                 text-decoration: none;
             }
+            .topLeft a {
+                color: black;
+                font-size: 20px;
+                font-weight: bold;
+            }
             .topRight span{
                 color:white;
                 background-color: #5cb85c;
@@ -98,7 +103,7 @@
             </header>
             <div class="top">
                 <div class="topLeft">
-                    <a href="home"><i class="fas fa-home" style="color: orangered; font-size: 25px"></i></a>
+                    <a href="home">Home</a>
                     <a>| <b>View Schedule</b></a>
                 </div>
                 <div class="topRight">

@@ -18,6 +18,11 @@ body{
 .top a{
     text-decoration: none;
 }
+.topLeft a {
+   color: black;
+   font-size: 20px;
+   font-weight: bold;
+}
 .topRight span{
     margin-left: 10px;
     color:white;
