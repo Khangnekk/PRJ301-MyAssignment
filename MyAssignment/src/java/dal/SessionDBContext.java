@@ -53,7 +53,7 @@ public class SessionDBContext extends DBContext<Session> {
                 int leid = rs.getInt("leid");
                 s.setLecturer(lecturers.stream().filter(t -> t.getId() == leid).findAny().get());
                 s.setIndex(rs.getInt("index"));
-
+                s.setAttendated(rs.getBoolean("attend"));
                 sessions.add(s);
             }
         } catch (SQLException ex) {

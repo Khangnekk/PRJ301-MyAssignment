@@ -91,10 +91,10 @@
                     <div class="row">
                         <div class="col-md-4 items">
                             <div class="item">
-                                <a href="timeTable?email=${sessionScope.account.email}">
-                                    <i class="fas fa-table" style="font-size: 100px; color: orangered;"></i><br>
+                                <a href="group?email=${sessionScope.account.email}&gid=-1">
+                                    <i class="fas fa-paste" style="font-size: 100px; color: orangered;"></i><br>
                                 </a>
-                                <a href="timeTable?email=${sessionScope.account.email}">Timetable</a>
+                                <a href="group?email=${sessionScope.account.email}&gid=-1">View Report Attendance</a>
                             </div>
                         </div>
                         <div class="col-md-4 items">
@@ -105,12 +105,13 @@
                                 <a href="getInfo?emailInfo=${sessionScope.account.email}&gidInfo=-1&seInfo=-1&gid=-1&seid=-1&email=${sessionScope.account.email}">Take Attendance</a>
                             </div>
                         </div>
+
                         <div class="col-md-4 items">
                             <div class="item">
-                                <a href="group?email=${sessionScope.account.email}&gid=-1">
-                                    <i class="fas fa-paste" style="font-size: 100px; color: orangered;"></i><br>
+                                <a href="timeTable?email=${sessionScope.account.email}">
+                                    <i class="fas fa-table" style="font-size: 100px; color: orangered;"></i><br>
                                 </a>
-                                <a href="group?email=${sessionScope.account.email}&gid=-1">View Report Attendance</a>
+                                <a href="timeTable?email=${sessionScope.account.email}">Timetable</a>
                             </div>
                         </div>
                     </div>

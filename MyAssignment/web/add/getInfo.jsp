@@ -101,7 +101,6 @@
             <div class="top">
                 <div class="topLeft">
                     <a href="home">Home</a>
-                    <a>| <b>View Schedule</b></a>
                 </div>
                 <div class="topRight">
                     Nickname:

@@ -74,7 +74,6 @@
             <div class="top">
                 <div class="topLeft">
                     <a href="home">Home</a>
-                    <a>| <b>View Schedule</b></a>
                 </div>
                 <div class="topRight">
                     Nickname:
@@ -101,9 +100,9 @@
             </div>
             <div class="description">
                 <div class="dhead">
-                    Lecturer: <input type="text" value="${requestScope.lecturer.name}"/>
                     <form action="timeTable" method="POST">
                         <input type="hidden" name="leid" value="${requestScope.leid}"/>
+                        Lecturer: <input type="text" value="${requestScope.lecturer.name}"/>
                         <input type="hidden" name="email" value="${requestScope.email}"/>
                         From: <input type="date" name="from" value="${requestScope.from}"/>
                         To: <input type="date" name="to" value="${requestScope.to}"/>
