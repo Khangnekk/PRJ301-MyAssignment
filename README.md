@@ -21,7 +21,7 @@ Class: SE1643 (Slot2Day246) <br/>
 	* Back-end: Java <br/>
 	* Front-end: HTML/CSS/JS <br/>
 
-<strong>-Open-source CSS framework:</strong>
+<strong>-Open-source CSS framework:</strong> <br/>
 	* Bootstrap v5 <br/>
 
 <strong>-Database:</strong><br/>
