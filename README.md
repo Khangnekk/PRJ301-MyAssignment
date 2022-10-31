@@ -13,16 +13,16 @@ Class: SE1643 (Slot2Day246) <br/>
  	(include: take attendance, view report attendance and view timetable)</p>
 
 <strong>-IDE:</strong> <br/>
-	- Apache NetBeans IDE 13
-	- Intellij Idea
+	* Apache NetBeans IDE 13 <br/>
+	* Intellij Idea <br/>
 >  *(Using: Apache Tomcat 10, jdbc42, jslt)*
 
 <strong>-Programing language:</strong> <br/>
-	- Back-end: Java
-	- Front-end: HTML/CSS/JS
+	* Back-end: Java <br/>
+	* Front-end: HTML/CSS/JS <br/>
 
 <strong>-Open-source CSS framework:</strong>
-	- Bootstrap v5
+	* Bootstrap v5 <br/>
 
 <strong>-Database:</strong><br/>
-	- SQL Server
+	* SQL Server <br/>
