@@ -64,11 +64,6 @@
                 overflow: auto  ;
             }
 
-            .last{
-                text-align: center;
-                font-size: 14px;
-                padding-bottom: 20px;
-            }
             .dhead{
                 margin: 5px auto;
                 background-color: #6b90da;
@@ -84,7 +79,7 @@
             }
             table td{
                 border: 1px solid #ccc;
-                padding: 0 5px;
+                padding: 5px 5px;
             }
             .table-details{
                 border-radius: 9px;
@@ -96,6 +91,9 @@
                 text-align: left;
                 padding: 0 10px;
             }
+            .table-details img{
+                width: 20px;
+            }
         </style>
     </head>
     <body>
@@ -106,7 +104,6 @@
             <div class="top">
                 <div class="topLeft">
                     <a href="home">Home</a>
-                    <a>| <b>View Schedule</b></a>
                 </div>
                 <div class="topRight">
                     Nickname:
@@ -157,66 +154,67 @@
                         </div>                        
                     </div>
                     <div class="group-details">
-                        <!--                        <div class="load" style="display: none">
-                                                    <img src="img/loading.gif">
-                                                </div> -->
-                        <table class="table-details">
-                            <tr class="dhead">
-                                <td>STUDENT</td>
-                                <td style="white-space: pre-wrap;">GROUP NAME</td>
-                                <c:forEach items="${requestScope.sessionsByGidAndLeid}" var="sesByGAL">
-                                    <td>Slot ${sesByGAL.index}<br>${sesByGAL.date}</td>
-                                    </c:forEach>
-                                <td style="color: white; font-weight: bold">Absent</td>
-                            </tr> 
-                            <c:forEach items="${requestScope.students}" var="stu">
-                                <tr>
-                                    <td class="fullname">${stu.name}</td>
-                                    <td>
-                                        ${requestScope.group.name}
-                                    </td>
-                                    <% int x = 0; int y = 0; double k;%>
+                        <c:if test="${requestScope.sessionsByGidAndLeid ne null}">
+                            <table class="table-details">
+                                <tr class="dhead">
+                                    <td>STUDENT</td>
+                                    <td style="white-space: pre-wrap;">GROUP NAME</td>
                                     <c:forEach items="${requestScope.sessionsByGidAndLeid}" var="sesByGAL">
+                                        <td>Slot ${sesByGAL.index}<br>${sesByGAL.date}</td>
+                                        </c:forEach>
+                                    <td style="color: white; font-weight: bold">Absent</td>
+                                </tr> 
+                                <c:forEach items="${requestScope.students}" var="stu">
+                                    <tr>
+                                        <td class="fullname">${stu.name}</td>
                                         <td>
-                                            <c:forEach items="${requestScope.attendances}" var="att">
-                                                <c:if test="${(att.student.id eq stu.id) and (att.session.id  eq sesByGAL.id)}">
-                                                    <c:if test="${att.present}">
-                                                        <a style="color: #5cb85c">v</a>
-                                                    </c:if>
-                                                    <c:if test="${!att.present}">
-                                                        <% x++; %>
-                                                        <a style="color: red">x</a>
-                                                    </c:if>
-                                                </c:if>
-                                            </c:forEach>
+                                            ${requestScope.group.name}
                                         </td>
-                                        <% y++; %>
-                                    </c:forEach>
+                                        <% int x = 0; int y = 0; double k;%>
+                                        <c:forEach items="${requestScope.sessionsByGidAndLeid}" var="sesByGAL">
+                                            <td>
+                                                <c:forEach items="${requestScope.attendances}" var="att">
+                                                    <c:if test="${(att.student.id eq stu.id) and (att.session.id  eq sesByGAL.id)}">
 
-                                    <%
-                                    k = x*100;
-                                    k/=y;
-                                    %>
+                                                        <c:if test="${!sesByGAL.attendated}">
+                                                            <a style="color: #ccc">- not yet -</a>
+                                                        </c:if>
+                                                        <c:if test="${sesByGAL.attendated}">
+                                                            <c:if test="${att.present}">
+                                                                <!--<a style="color: #5cb85c">present</a>-->
+                                                                <img src="assets/img/attend.png">
+                                                            </c:if>
+                                                            <c:if test="${!att.present}">
+                                                                <% x++; %>
+                                                                <img src="assets/img/absent.png">
+                                                            </c:if>
+                                                        </c:if>
+                                                    </c:if>
+                                                </c:forEach>
+                                            </td>
+                                            <% y++; %>
+                                        </c:forEach>
 
-                                    <% if (k>20) { %>
-                                    <td style="color: red">
-                                        <%=k%> %
-                                    </td>
-                                    <% } else { %>
-                                    <td style="color: green">
-                                        <%=k%> %
-                                    </td>
-                                    <% } %>
-                                </tr>
-                            </c:forEach>
-                        </table>
+                                        <%
+                                        k = (x*100)/y;
+                                        %>
+
+                                        <% if (k>20) { %>
+                                        <td style="color: red">
+                                            <%=k%> %
+                                        </td>
+                                        <% } else { %>
+                                        <td style="color: green">
+                                            <%=k%> %
+                                        </td>
+                                        <% } %>
+                                    </tr>
+                                </c:forEach>
+                            </table>
+                        </c:if>
                     </div>
 
                 </div>
-            </div>
-            <div class="last">
-                <b>For any comments or questions, please contact:</b> Student Service Department : Email: <a href="mailto:dichvusinhvien@fe.edu.vn">dichvusinhvien@fe.edu.vn</a> . Phone: <b>(024)7308.13.13</b><br>
-                Powered by <a href="">FPT University</a> |  <a href="">CMS</a> |  <a href="">library</a> |  <a href="">books24x7</a>
             </div>
         </div>
     </body>
