@@ -39,6 +39,13 @@
             .top a{
                 text-decoration: none;
             }
+            .topLeft a{
+                color: black;
+                font-size: 20px;
+                padding: 2px 10px;
+                border: 2px solid #ccc;
+                border-radius: 6px;
+            }
             .topRight span{
                 color:white;
                 background-color: #5cb85c;

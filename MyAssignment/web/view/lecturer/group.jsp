@@ -33,7 +33,9 @@
             .topLeft a {
                 color: black;
                 font-size: 20px;
-                font-weight: bold;
+                padding: 2px 10px;
+                border: 2px solid #ccc;
+                border-radius: 6px;
             }
             .topRight span{
                 color:white;
