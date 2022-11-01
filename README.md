@@ -13,16 +13,26 @@ Class: SE1643 (Slot2Day246) <br/>
  	(include: take attendance, view report attendance and view timetable)</p>
 
 <strong>-IDE:</strong> <br/>
-	* Apache NetBeans IDE 13 <br/>
-	* Intellij Idea <br/>
+* Apache NetBeans IDE 13 
+* Intellij Idea 
 >  *(Using: Apache Tomcat 10, jdbc42, jslt)*
 
 <strong>-Programing language:</strong> <br/>
-	* Back-end: Java <br/>
-	* Front-end: HTML/CSS/JS <br/>
+* Back-end: Java 
+* Front-end: HTML/CSS/JS 
 
 <strong>-Open-source CSS framework:</strong> <br/>
-	* Bootstrap v5 <br/>
+* Bootstrap v5 
 
 <strong>-Database:</strong><br/>
-	* SQL Server <br/>
+* SQL Server 
+
+<strong>-How to run this project:</strong><br/>	
+- Installing JDK 8u321	
+- Installing Apache Tomcat 10.xx.xx	
+- Installing Apache NetBeans IDE 13.	
+- Integrating Apache NetBeans IDE 13 with Apache Tomcat.	
+- Create Java Web project, Servlet, and Debug.	
+- Working with JSTL.	
+- Installing SQL Server (2018 version or higher)
+>  *Install the environment for jdbc*
