@@ -5,51 +5,33 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Login FAP for Student</title>
+        <link rel="stylesheet" href="assets/css/myStyle/Style.css">
+        <link rel="icon" href="assets/favicon/fu-favicon.jpg" />
         <style>
-            .login-form{
-                width: 300px;
-                margin: 10em auto;
-                padding: 15px;
-                border: 1px solid #ccc;
-                border-radius: 9px;
-            }
-            .login-form h2{
-                text-align: center; 
-            }
-            .noti p{
+            p{
                 color: red;
             }
         </style>
     </head>
     <body>
         <div class="login-form">
+            <img style="width: 100px;" src="assets/img/fpt-logo.png">
             <form action="studentLogin" method="POST">
-                <table>
+                <div class="login-t itle">
                     <h2>Login FAP for Student</h2>
-                    <tr>
-                        <td>Email</td>
-                        <td><input type="text" name="email" value=""/></td>
-                    </tr>
-                    <tr>
-                        <td>Password:</td>
-                        <td><input type="password" name="password" value=""/></td>
-                    </tr>
-                    <tr class="noti">
-                        <td colspan="2">
-                            <p>${noti}</p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td style="text-align: center"><input type="submit" value="Login" /> </td>
-                    </tr>
-                    
-                </table>
+                </div>
+                <div class="login-input-data">
+                    <div class="input-data"><input type="text" placeholder="Email" name="email" value=""/></div>
+                    <div class="input-data"><input type="password" placeholder="password" name="password" value=""/></div>
+                    <p>${noti}</p>
+                    <div class="input-data"><input class="login-button" type="submit" value="Login"/></div>
+                </div>                
             </form> 
         </div>   
     </body>

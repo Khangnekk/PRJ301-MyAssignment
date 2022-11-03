@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -77,10 +78,12 @@
                 <div class="topRight">
                     <a href="#">
                         <span>
-                            Khangnlhe161660
+                            <c:if test="${sessionScope.account ne null}">
+                                ${sessionScope.account.username}
+                            </c:if>
                         </span>
                     </a>
-                    <a href="#">
+                    <a href="studentLogout">
                         <span>
                             logout
                         </span>
@@ -94,7 +97,11 @@
             </div>
             <div class="description">
                 <div class="dhead">
-                    <h2> Activities for KhangNLHE161660 (Nguyen Luong Khang)</h2>
+                    <h2> Activities for 
+                        <c:if test="${sessionScope.account ne null}">
+                            ${sessionScope.account.username}
+                        </c:if>
+                    </h2>
                 </div>
                 <div>
                     <p><b>Note</b>: These activities do not include extra-curriculum activities, such as club activities ...</p>

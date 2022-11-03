@@ -14,7 +14,7 @@ import model.Account;
 
 /**
  *
- * @author sonnt
+ * @author Khangnekk
  */
 public class LoginController extends HttpServlet {
 

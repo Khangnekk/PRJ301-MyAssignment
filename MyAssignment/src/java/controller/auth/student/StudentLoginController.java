@@ -14,7 +14,7 @@ import model.Account;
 
 /**
  *
- * @author sonnt
+ * @author Khangnekk
  */
 public class StudentLoginController extends HttpServlet {
 
@@ -27,7 +27,7 @@ public class StudentLoginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String email = request.getParameter("email").trim().toLowerCase();
+       String email = request.getParameter("email").trim().toLowerCase();
         String password = request.getParameter("password");
         AccountDBContext db = new AccountDBContext();
         Account account = db.get(email, password);
@@ -43,4 +43,5 @@ public class StudentLoginController extends HttpServlet {
             request.getRequestDispatcher("/view/student/home.jsp").forward(request, response);
         }
     }
+
 }
