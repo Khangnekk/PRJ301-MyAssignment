@@ -10,6 +10,8 @@
         <!-- link bootstrap -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <!-- link Style.css -->
+        <link rel="stylesheet" href="assets/css/myStyle/Style.css">
         <style>
 
             html, body {
@@ -26,7 +28,7 @@
                 display: flex;
                 background-color: #f5f5f5;
                 padding: 10px;
-                justify-content: right;
+                justify-content: space-between;
                 border-radius: 6px;
             }
             .top a{
@@ -139,7 +141,7 @@
             </header>
             <div class="top">
                 <div class="topLeft">
-
+                    <a href="student_home">Home</a>
                 </div>
                 <div class="topRight">
                     <a href="#">
@@ -246,219 +248,7 @@
                 </div>
                 <div class="right-content col-lg-7">
                     <h3 class="partName part2">Academic Information</h3>
-                    <div class="acaInfo">
-                        <div class="covid">
-                            <input type="text" id="linkYoutube" name="linkYoutube" placeholder="URL of the test-covid process video uploaded to Youtube" style="width: 100%; border-radius: 6px; border:1px solid lightblue; padding: 5px;">
 
-                            <p id="content" style="color: red; font-weight: bold; display: none;"></p>
-                            LUK students register online by following the link below:
-                            <a href="https://bit.ly/K17P5HN-HocOnline" target="blank"style="font-size: 14px;">
-                                https://bit.ly/K17P5HN-HocOnline
-                            </a><br>         
-                            <input type="radio" id="checkLink" name="link" onclick="checkLink()" />Update status F0 (Valid for 7 days from the time of registration)
-                            <input type="submit" id="send"value="Send" style="border-radius: 50px; text-align: center; display: none;">
-                        </div>
-                        <div class="mainRight">
-                            <div class="container">
-                                <div class="row rightContent">
-                                    <div class="small-part col-lg-6">
-                                        <h3>Registration/Application</h3>
-                                        <div class="detail-small-part">
-                                            <ul>
-                                                <li>
-                                                    <a href="">Suspend one semester to take repeated course </a>
-                                                    &nbsp;|&nbsp;
-                                                    <a href="">Cancel</a>
-                                                </li>
-                                                <li>
-                                                    <a href="">Suspend one semester </a>
-                                                    &nbsp;|&nbsp; 
-                                                    <a href="">Cancel</a>
-                                                </li>
-                                                <li>
-                                                    <a href="">Move out class</a>
-                                                </li>
-                                                <li>
-                                                    <a href="">Register extra courses</a>
-                                                </li>
-                                                <li>
-                                                    <a href="">Register to improve mark</a>
-                                                </li>
-                                                <li>
-                                                    <a href="">Register to repeat a course</a>
-                                                </li>
-                                                <li>
-                                                    <a href="">Cancel registration (</a>
-                                                </li>
-                                                <li>
-                                                    <a href="">Register Free Elective Courses</a>
-                                                </li>
-                                                <li>
-                                                    <a href="">Send Application</a>
-                                                    &nbsp;|&nbsp; 
-                                                    <a href="">View Application </a>
-                                                </li>
-                                                <li>
-                                                    <a href="">Student confirmation</a>
-                                                </li>
-                                                <li>
-                                                    <a href="">Choose paid items</a>
-                                                    &nbsp;-&nbsp; 
-                                                    <a href="">View</a>
-                                                </li>
-                                                <li>
-                                                    <a href="">Request to change classes with students</a>
-                                                </li>
-                                            </ul>
-                                        </div>                                 
-                                    </div>
-                                    <div class="small-part col-lg-5">
-                                        <h3>Information Access</h3>     
-                                        <div class="detail-small-part">
-                                            <ul>
-                                                <li>
-                                                    <a href="">University timetable</a>
-                                                </li>
-                                                <li>
-                                                    <a href="">Tuition fee per course</a>
-                                                </li>
-                                                <li>
-                                                    <a href="studentTimetable">Weekly timetable</a>
-                                                </li>
-                                                <li>
-                                                    <a href="">Blended Online Course (BLOC) Schedules</a>
-                                                </li>
-                                                <li>
-                                                    <a href="">Class timetable</a>
-                                                </li>
-                                                <li>
-                                                    <a href="">View exam schedule</a>
-                                                </li>
-                                                <li>
-                                                    <a href="">View Syllabuses</a>
-                                                </li>
-                                                <li>
-                                                    <a href="">EduNext student guideline</a>
-                                                </li>
-                                                <li>
-                                                    <a href="">Help</a>
-                                                </li>
-                                                <li>
-                                                    <a href="">Handbook: Student Orientation</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="small-part col-lg-6">
-                                        <h3>Feedback</h3>
-                                        <div class="detail-small-part">
-                                            <ul>
-                                                <li>
-                                                    <a href="">Feedback about teaching</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="small-part col-lg-5">
-                                        <h3>Reports</h3>
-                                        <div class="detail-small-part">
-                                            <ul>
-                                                <li>
-                                                    <a href="Attendance_report.jsp">Attendance report</a>
-                                                </li>
-                                                <li>
-                                                    <a href="">Mark Report</a>
-                                                </li>
-                                                <li>
-                                                    <a href="">Academic Transcript </a>
-                                                </li>
-                                                <li>
-                                                    <a href="">Curriculum</a>
-                                                </li>
-                                                <li>
-                                                    <a href="">Student Fee</a>
-                                                </li>
-                                                <li>
-                                                    <a href="">Transaction history</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="small-part col-lg-6">
-                                        <h3>Others</h3>
-                                        <div class="detail-small-part">
-                                            <ul>
-                                                <li>
-                                                    <a href="">Student Profile</a>
-                                                    &nbsp;|&nbsp;
-                                                    <a href="">Update Profile</a>
-                                                </li>
-                                                <li>
-                                                    <a href="">View semester</a>
-                                                    &nbsp;,&nbsp;
-                                                    <a href="">room</a>
-                                                </li>
-                                                <li>
-                                                    <a href="">Accreditation and credit transfer of online university modules (FUNiX)</a>
-                                                </li>
-                                                <li>
-                                                    <a href="">List of subjects waiting for class placement</a>
-                                                </li>
-                                                <li>
-                                                    <a href="">Types of Certificates</a>
-                                                </li>
-                                                <li>
-                                                    <a href="">Report: movement</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="small-part col-lg-5">
-                                        <h3>Regulations</h3>
-                                        <div class="detail-small-part">
-                                            <ul>
-                                                <li>
-                                                    <a href="">Regulations...</a>
-                                                </li>
-                                                <li>
-                                                    <a href="">Dormitory regulations</a>
-                                                </li>
-                                            </ul>   
-                                        </div>
-                                    </div>
-                                    <div class="small-part col-lg-6">
-                                        <h3>Courses on FPTU-Coursera</h3>
-                                        <div class="detail-small-part">
-                                            <li>
-                                                <a href="">Announcement</a>
-                                            </li>
-                                            <li>
-                                                <a href="">Ask mentor</a>
-                                            </li>
-                                            <li>
-                                                <a href="">View answer</a>
-                                            </li>
-                                            <li>
-                                                <a href="">Submit certificates</a>
-                                            </li>
-                                            <li>
-                                                <a href="">Certificate submission guideline</a>
-                                            </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="small-part col-lg-5">
-                                        <h3>Dormitory Information</h3>
-                                        <div class="detail-small-part">
-                                            <ul>
-                                                <li><a href="">Dormitory Information => Hoa Lac - On Campus Dormitory</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
             <div class="last">
@@ -466,18 +256,5 @@
                 Powered by <a href="">FPT University</a> |  <a href="">CMS</a> |  <a href="">library</a> |  <a href="">books24x7</a>
             </div>
         </div>
-        <script>
-            function checkLink() {
-                var check = document.getElementById("linkYoutube").value;
-                const element = document.getElementById('content');
-                const send = document.getElementById('send');
-                if (check == "") {
-                    element.style.display = 'block'
-                    element.innerHTML = "The video needs to have a full face image during the sampling process and subsequent steps";
-                } else {
-                    send.style.display = 'block'
-                }
-            }
-        </script>
     </body>
 </html>

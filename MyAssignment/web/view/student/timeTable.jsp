@@ -1,81 +1,82 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<jsp:useBean id="DateTimeHelper" class="util.DateTimeHelper"/>
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Schedule Of Student</title>
+        <title>Schedule Of Lecturer</title>
         <!-- link favicon logo -->
-        <link rel="icon" href="#" />
+        <link rel="icon" href="assets/favicon/fu-favicon.jpg" />
         <!-- link bootstrap -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-              integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link rel="stylesheet" href="assets/css/bootstrap/bootstrap.min.css"/>
+        <!-- link Style.css -->
+        <link rel="stylesheet" href="assets/css/myStyle/Style.css">
+        <!--link font-awesome-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
         <style>
-
-            html, body {
-                height: 100%;
-            }
-            body{
-                margin: 0;
-                padding: 0;
-            }
-            .container{
-                margin: 0 auto;
-            }
-            .top{
-                display: flex;
-                background-color: #f5f5f5;
-                padding: 10px;
-                justify-content: space-between;
-                border-radius: 6px;
-            }
-            .top a{
-                text-decoration: none;
-            }
-            .topRight span{
-                margin-left: 10px;
-                color:white;
-                background-color: #5cb85c;
-                border-radius: 3px;
-                padding: 0 3px;
-                font-size: 75%;
-            }
-            .table{
-                height: 100%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
             table tr td {
                 padding:0 10px;
-                border:1px solid background;
+                border:1px solid black;
             }
             .table .htable{
                 background-color: #6b90da;
                 text-align: center;
             }
-
-            .last{
-                text-align: center;
-                font-size: 14px;
-                padding-bottom: 20px;
+            .dhead input{
+                border-radius: 6px;
+                border: 1px solid #ccc;
+                margin-top: 5px;
+                padding: 2px 5px;
             }
-            .dhead{
-                margin-top: 40px;
+
+            .info {
+                text-decoration: none;
+                color: #6b90da;
+            }
+            .attended {
+                text-decoration: none;
+                color: green;
+            }
+            .not_yet {
+                text-decoration: none;
+                color: red;
+            }
+            .table button{
+                background-color: #6b90da;
+                border-radius: 8px;
+                border: 1px solid white;
+                color: white;
+                line-height: 18px;
+            }
+            .table button:hover{
+                background-color: #3366cc;
+            }
+            .timeslot{
+                text-align: left;
+            }
+            .tdes{
+                color: #f08e01;
+                text-decoration: none;
+            }
+            .tname{
+                font-weight: bold;
+                color:black;
+                text-decoration: none;
             }
         </style>
     </head>
     <body>
         <div class="container">
             <header>
-                <h1>FPT University Academic Portal</h1>
+                <h1><img style="width: 100px;" src="assets/img/fpt-logo.png"> FPT University Academic Portal</h1>
             </header>
             <div class="top">
                 <div class="topLeft">
                     <a href="student_home">Home</a>
-                    <a>| <b>View Schedule</b></a>
                 </div>
                 <div class="topRight">
+                    Nickname:
                     <a href="#">
                         <span>
                             <c:if test="${sessionScope.account ne null}">
@@ -83,11 +84,13 @@
                             </c:if>
                         </span>
                     </a>
-                    <a href="studentLogout">
+                    &nbsp;|
+                    <a href="logout">
                         <span>
                             logout
                         </span>
                     </a>
+                    &nbsp;|
                     <a href="#">
                         <span>
                             Campus: FPTU - Hoa Lac
@@ -97,151 +100,48 @@
             </div>
             <div class="description">
                 <div class="dhead">
-                    <h2> Activities for 
-                        <c:if test="${sessionScope.account ne null}">
-                            ${sessionScope.account.username}
-                        </c:if>
-                    </h2>
-                </div>
-                <div>
-                    <p><b>Note</b>: These activities do not include extra-curriculum activities, such as club activities ...</p>
-                    <p> Rooms starting with AL : Alpha building<br>
-                        Rooms starting with BE : Beta building<br>
-                        Rooms starting with GA : Gammar building<br>
-                        Rooms starting with R : Vovinam<br>
-                        Rooms starting with DE : Delta building<br>
-                        Little UK (LUK) :  on the 5th floor of Delta building</p>
+                    <form action="timeTable" method="POST">
+                        <input type="hidden" name="leid" value="${requestScope.leid}"/>
+                        Lecturer: <input type="text" value="${requestScope.lecturer.name}"/>
+                        <input type="hidden" name="email" value="${requestScope.email}"/>
+                        From: <input type="date" name="from" value="${requestScope.from}"/>
+                        To: <input type="date" name="to" value="${requestScope.to}"/>
+                        <input type="submit" value="View"/> 
+                    </form>
                 </div>
             </div>
             <div class="table">
-                <table style="border:1px solid white;">
+                <table>
                     <tr class="htable">
-                        <td>Year:
-                            <select>
-                                <option>2019</option>
-                                <option>2020</option>
-                                <option>2021</option>
-                                <option>2022</option>
-                                <option>2023</option>
-                            </select>
-                        </td>
+                        <td></td>
+                        <c:forEach items="${requestScope.dates}" var="d">
+                            <td>${DateTimeHelper.getDayNameofWeek(d)}<br>${d}</td>
+                            </c:forEach>
+                    </tr>
+                    <c:forEach items="${requestScope.slots}" var="slot">
+                        <tr>
+                            <td class="timeslot"><a class="tname">${slot.name}: </a><br><a class="tdes">(${slot.description})</a></td>
+                                <c:forEach items="${requestScope.dates}" var="d">
+                                <td>
+                                    <c:forEach items="${requestScope.sessions}" var="ses">
+                                        <c:if test="${DateTimeHelper.compare(ses.date,d) eq 0 and (ses.timeslot.id eq slot.id)}">
+                                            <a href="takeAttendance?seid=${ses.id}">${ses.group.name}-${ses.group.subject.name}</a>
+                                            <br/>
+                                            at ${ses.room.name}
+                                            <c:if test="${ses.attendated}">
+                                                <a class="attended">(Attend)</a>
+                                            </c:if>
+                                            <c:if test="${!ses.attendated}">
+                                                <a class="not_yet">(Not Yet)</a>
+                                            </c:if>
+                                        </c:if>
 
-                        <td>MON</td>
-                        <td>TUE</td>
-                        <td>WED</td>
-                        <td>THU</td>
-                        <td>FRI</td>
-                        <td>SAT</td>
-                        <td>SUN</td>
-                    </tr>
-                    <tr class="htable">
-                        <td>Week:
-                            <select>
-                                <option>datefromto</option>
-                                <option>datefromto</option>
-                                <option>datefromto</option>
-                                <option>datefromto</option>
-                                <option>datefromto</option>
-                            </select>
-                        </td>
-
-                        <td>date</td>
-                        <td>date</td>
-                        <td>date</td>
-                        <td>date</td>
-                        <td>date</td>
-                        <td>date</td>
-                        <td>date</td>
-                    </tr>
-                    <tr>
-                        <td>Slot 1</td>
-                        <td>----------------</td>
-                        <td>----------------</td>
-                        <td>----------------</td>
-                        <td>----------------</td>
-                        <td>----------------</td>
-                        <td>----------------</td>
-                        <td>----------------</td>
-                    </tr>
-                    <tr>
-                        <td>Slot 2</td>
-                        <td>----------------</td>
-                        <td>----------------</td>
-                        <td>----------------</td>
-                        <td>----------------</td>
-                        <td>----------------</td>
-                        <td>----------------</td>
-                        <td>----------------</td>
-                    </tr>
-                    <tr>
-                        <td>Slot 3</td>
-                        <td>----------------</td>
-                        <td>----------------</td>
-                        <td>----------------</td>
-                        <td>----------------</td>
-                        <td>----------------</td>
-                        <td>----------------</td>
-                        <td>----------------</td>
-                    </tr>
-                    <tr>
-                        <td>Slot 4</td>
-                        <td>----------------</td>
-                        <td>----------------</td>
-                        <td>----------------</td>
-                        <td>----------------</td>
-                        <td>----------------</td>
-                        <td>----------------</td>
-                        <td>----------------</td>
-                    </tr>
-                    <tr>
-                        <td>Slot 5</td>
-                        <td>----------------</td>
-                        <td>----------------</td>
-                        <td>----------------</td>
-                        <td>----------------</td>
-                        <td>----------------</td>
-                        <td>----------------</td>
-                        <td>----------------</td>
-                    </tr>
-                    <tr>
-                        <td>Slot 6</td>
-                        <td>----------------</td>
-                        <td>----------------</td>
-                        <td>----------------</td>
-                        <td>----------------</td>
-                        <td>----------------</td>
-                        <td>----------------</td>
-                        <td>----------------</td>
-                    </tr>
-                    <tr>
-                        <td>Slot 7</td>
-                        <td>----------------</td>
-                        <td>----------------</td>
-                        <td>----------------</td>
-                        <td>----------------</td>
-                        <td>----------------</td>
-                        <td>----------------</td>
-                        <td>----------------</td>
-                    </tr>
-                    <tr>
-                        <td>Slot 8</td>
-                        <td>----------------</td>
-                        <td>----------------</td>
-                        <td>----------------</td>
-                        <td>----------------</td>
-                        <td>----------------</td>
-                        <td>----------------</td>
-                        <td>----------------</td>
-                    </tr>
+                                    </c:forEach>
+                                </td>
+                            </c:forEach>
+                        </tr>
+                    </c:forEach>
                 </table>
-            </div>
-            <div class="note">
-                <p><b>More note:</b></p>
-                <ul>
-                    <li><a style="color:    green;">(attended):</a> KhangNLHE161660 had attended this activity </li>
-                    <li><a style="color: red;">(absent):</a> KhangNLHE161660 had NOT attended this activity </li>
-                    <li>(-): no data was given </li>
-                </ul>
             </div>
             <div class="last">
                 <b>For any comments or questions, please contact:</b> Student Service Department : Email: <a href="mailto:dichvusinhvien@fe.edu.vn">dichvusinhvien@fe.edu.vn</a> . Phone: <b>(024)7308.13.13</b><br>

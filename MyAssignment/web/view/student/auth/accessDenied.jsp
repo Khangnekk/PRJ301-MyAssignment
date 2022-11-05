@@ -56,7 +56,7 @@
         </div>
         <script>
             function Login() {
-                window.location = "login";
+                window.location = "studentLogin";
             }
         </script>
     </body>
