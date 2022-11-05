@@ -85,7 +85,7 @@
                         </span>
                     </a>
                     &nbsp;|
-                    <a href="logout">
+                    <a href="studentLogout">
                         <span>
                             logout
                         </span>
@@ -100,10 +100,8 @@
             </div>
             <div class="description">
                 <div class="dhead">
-                    <form action="timeTable" method="POST">
-                        <input type="hidden" name="leid" value="${requestScope.leid}"/>
-                        Lecturer: <input type="text" value="${requestScope.lecturer.name}"/>
-                        <input type="hidden" name="email" value="${requestScope.email}"/>
+                    <form action="studentTimetable" method="POST">
+                        <input type="hidden" name="email" value="${sessionScope.account.email}"/>
                         From: <input type="date" name="from" value="${requestScope.from}"/>
                         To: <input type="date" name="to" value="${requestScope.to}"/>
                         <input type="submit" value="View"/> 
@@ -122,18 +120,19 @@
                         <tr>
                             <td class="timeslot"><a class="tname">${slot.name}: </a><br><a class="tdes">(${slot.description})</a></td>
                                 <c:forEach items="${requestScope.dates}" var="d">
-                                <td>
+                                <td style="text-align: center">
                                     <c:forEach items="${requestScope.sessions}" var="ses">
                                         <c:if test="${DateTimeHelper.compare(ses.date,d) eq 0 and (ses.timeslot.id eq slot.id)}">
-                                            <a href="takeAttendance?seid=${ses.id}">${ses.group.name}-${ses.group.subject.name}</a>
+                                            ${ses.room.name} <a>[ ${ses.lecturer.name} ]</a><br>
+                                            <a href="#">${ses.group.name}-${ses.group.subject.name}</a>
                                             <br/>
-                                            at ${ses.room.name}
                                             <c:if test="${ses.attendated}">
-                                                <a class="attended">(Attend)</a>
+                                                <a class="attended">(Status: Attend)</a>
                                             </c:if>
                                             <c:if test="${!ses.attendated}">
-                                                <a class="not_yet">(Not Yet)</a>
+                                                <a class="not_yet">(Status: Not Yet)</a>
                                             </c:if>
+                                            
                                         </c:if>
 
                                     </c:forEach>

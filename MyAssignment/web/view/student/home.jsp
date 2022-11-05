@@ -246,18 +246,18 @@
                         <div class="row">
                             <div class="col-md-6 items">
                                 <div class="item">
-                                    <a href="#">
+                                    <a href="studentAttendanceReport?email=${sessionScope.account.email}&gid=-1">
                                         <i class="fas fa-paste" style="font-size: 100px; color: orangered;"></i><br>
                                     </a>
-                                    <a href="#">View Report Attendance</a>
+                                    <a href="studentAttendanceReport?email=${sessionScope.account.email}&gid=-1">View Report Attendance</a>
                                 </div>
                             </div>
                             <div class="col-md-6 items">
                                 <div class="item">
-                                    <a href="#">
+                                    <a href="studentTimetable?email=${sessionScope.account.email}">
                                         <i class="fas fa-table" style="font-size: 100px; color: orangered;"></i><br>
                                     </a>
-                                    <a href="#">Timetable</a>
+                                    <a href="studentTimetable?email=${sessionScope.account.email}">Timetable</a>
                                 </div>
                             </div>
                         </div>
