@@ -37,14 +37,34 @@ public class LecturerDBContext extends DBContext<Lecturer> {
         }
         return null;
     }
-    
-    public int getIdByEmail(String leemail){
+
+    public Lecturer getLeidByGid(int gid_input) {
+        try {
+            String sql = "SELECT l.leid FROM Lecturer l \n"
+                    + "INNER JOIN [Group] g ON g.leid = l.leid\n"
+                    + "WHERE g.gid = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, gid_input);
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                Lecturer l = new Lecturer();
+                l.setId(rs.getInt("leid"));
+                l.setName(rs.getString("lename"));
+                return l;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(LecturerDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    public int getIdByEmail(String leemail) {
         try {
             String sql = "SELECT leid FROM Lecturer WHERE leemail = ?";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, leemail);
             ResultSet rs = stm.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 return rs.getInt("leid");
             }
         } catch (SQLException ex) {
@@ -52,7 +72,7 @@ public class LecturerDBContext extends DBContext<Lecturer> {
         }
         return -1;
     }
-    
+
     @Override
     public void insert(Lecturer model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
