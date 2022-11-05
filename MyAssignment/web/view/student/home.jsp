@@ -12,41 +12,9 @@
               integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <!-- link Style.css -->
         <link rel="stylesheet" href="assets/css/myStyle/Style.css">
+        <!--link font-awesome-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
         <style>
-
-            html, body {
-                height: 100%;
-            }
-            body{
-                margin: 0;
-                padding: 0;
-            }
-            .container{
-                margin: 0 auto;
-            }
-            .top{
-                display: flex;
-                background-color: #f5f5f5;
-                padding: 10px;
-                justify-content: space-between;
-                border-radius: 6px;
-            }
-            .top a{
-                text-decoration: none;
-            }
-            .topRight span{
-                margin-left: 10px;
-                color:white;
-                background-color: #5cb85c;
-                border-radius: 3px;
-                padding: 0 3px;
-                font-size: 75%;
-            }
-            .last{
-                text-align: center;
-                font-size: 14px;
-                padding-bottom: 20px;
-            }
             .content{
                 display: flex;
                 padding: 10px;
@@ -111,9 +79,6 @@
                 padding: 5px;
                 font-size: 18px;
             }
-            .acaInfo{
-
-            }
 
             .small-part{
                 border-radius: 6px;
@@ -131,6 +96,35 @@
             }
             .detail-small-part a:hover{
                 text-decoration: underline;
+            }
+            .item{
+                border: 2px solid background;
+                border-radius: 9px;
+                padding: 10px;
+            }
+            .item:hover{
+                border: 2px solid orangered;
+                border-radius: 9px;
+            }
+            .main-content-home{
+                margin: 40px auto;
+                text-align: center;
+                border: 1px solid #ccc;
+                border-radius: 9px;
+                padding: 20px 10px;
+            }
+            .main-content-home img{
+                width: 100px;
+                height: 100px;
+                padding: 10px;
+                border-radius: 9px;
+            }
+            .main-content-home a{
+                text-decoration: none;
+                color: orangered;
+                font-family: cursive;
+                font-size: 20px;
+                font-weight: bold;
             }
         </style>
     </head>
@@ -248,7 +242,26 @@
                 </div>
                 <div class="right-content col-lg-7">
                     <h3 class="partName part2">Academic Information</h3>
-
+                    <div class="container main-content-home">
+                        <div class="row">
+                            <div class="col-md-6 items">
+                                <div class="item">
+                                    <a href="#">
+                                        <i class="fas fa-paste" style="font-size: 100px; color: orangered;"></i><br>
+                                    </a>
+                                    <a href="#">View Report Attendance</a>
+                                </div>
+                            </div>
+                            <div class="col-md-6 items">
+                                <div class="item">
+                                    <a href="#">
+                                        <i class="fas fa-table" style="font-size: 100px; color: orangered;"></i><br>
+                                    </a>
+                                    <a href="#">Timetable</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="last">
