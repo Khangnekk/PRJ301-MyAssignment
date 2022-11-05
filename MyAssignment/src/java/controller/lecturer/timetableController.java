@@ -23,47 +23,10 @@ public class timetableController extends BaseAuthenticationController {
 
     @Override
     protected void processPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int leid = Integer.parseInt(req.getParameter("leid"));
-        String raw_from = req.getParameter("from");
-        String raw_to = req.getParameter("to");
-        java.sql.Date from = null;
-        java.sql.Date to = null;
-        if(raw_from ==null || raw_from.length() ==0)
-        {
-            Date today = new Date();
-            int todayOfWeek = DateTimeHelper.getDayofWeek(today);
-            Date e_from = DateTimeHelper.addDays(today, 2 - todayOfWeek);
-            Date e_to = DateTimeHelper.addDays(today, 8-todayOfWeek);
-            from = DateTimeHelper.toDateSql(e_from);
-            to = DateTimeHelper.toDateSql(e_to);
-        }
-        else
-        {
-            from = java.sql.Date.valueOf(raw_from);
-            to = java.sql.Date.valueOf(raw_to);
-        }
-        req.setAttribute("leid", leid);
-        req.setAttribute("from", from);
-        req.setAttribute("to", to);
-        req.setAttribute("dates", DateTimeHelper.getDateList(from, to));
-        
-        TimeSlotDBContext slotDB = new TimeSlotDBContext();
-        ArrayList<TimeSlot> slots = slotDB.list();
-        req.setAttribute("slots", slots);
-        
-        SessionDBContext sesDB = new SessionDBContext();
-        ArrayList<Session> sessions = sesDB.filter(leid, from, to);
-        req.setAttribute("sessions", sessions);
-        
-        LecturerDBContext lecDB = new LecturerDBContext();
-        Lecturer lecturer = lecDB.get(leid);
-        req.setAttribute("lecturer", lecturer);
-        
-        req.getRequestDispatcher("view/lecturer/timeTable.jsp").forward(req, resp);
+        processRequest(req, resp);
     }
-
-    @Override
-    protected void processGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    
+    protected void processRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String email = req.getParameter("email");        
         LecturerDBContext lecturerDB = new LecturerDBContext();
         int leid = lecturerDB.getIdByEmail(email);
@@ -114,4 +77,9 @@ public class timetableController extends BaseAuthenticationController {
         req.getRequestDispatcher("view/lecturer/timeTable.jsp").forward(req, resp);
     }
 
+    @Override
+    protected void processGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        processRequest(req, resp);
+    }
+    
 }

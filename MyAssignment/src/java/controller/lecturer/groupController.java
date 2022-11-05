@@ -25,11 +25,20 @@ import model.Student;
  *
  * @author Khangnekk
  */
-public class groupController extends BaseAuthorizationController {
+public class groupController extends BaseAuthenticationController {
 
     @Override
     protected void processPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        LecturerDBContext lecturerDB = new LecturerDBContext();
+        processRequest(req, resp);
+    }
+
+    @Override
+    protected void processGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        processRequest(req, resp);
+    }
+    
+    void processRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    LecturerDBContext lecturerDB = new LecturerDBContext();
         AttendanceDBContext attDB = new AttendanceDBContext();
         GroupDBContext groupDB = new GroupDBContext();
         SessionDBContext sesDB = new SessionDBContext();
@@ -49,29 +58,7 @@ public class groupController extends BaseAuthorizationController {
         req.setAttribute("groups", groups);
         req.setAttribute("students", students);
         req.setAttribute("attendances", attendances);
-        req.getRequestDispatcher("view/lecturer/group.jsp").forward(req, resp);
-    }
-
-    @Override
-    protected void processGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        LecturerDBContext lecturerDB = new LecturerDBContext();
-        GroupDBContext groupDB = new GroupDBContext();
-        int gid = Integer.parseInt(req.getParameter("gid"));
-        String email = req.getParameter("email");
-        int lid = lecturerDB.getIdByEmail(email);
-        ArrayList<Group> groups = groupDB.listGroupByLeid(lid);
-        req.setAttribute("groups", groups);
         req.setAttribute("email", email);
         req.getRequestDispatcher("view/lecturer/group.jsp").forward(req, resp);
-    }
-
-    @Override
-    protected void processPost(HttpServletRequest req, HttpServletResponse resp, Account account) throws ServletException, IOException {
-        processPost(req, resp);
-    }
-
-    @Override
-    protected void processGet(HttpServletRequest req, HttpServletResponse resp, Account account) throws ServletException, IOException {
-        processGet(req, resp);
     }
 }
