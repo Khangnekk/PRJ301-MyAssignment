@@ -131,6 +131,64 @@ public class SessionDBContext extends DBContext<Session> {
         return sessions;
     }
 
+    public ArrayList<Session> filterForStudent(int stuid_input, Date from, Date to) {
+
+        ArrayList<Session> sessions = new ArrayList<>();
+        Group g = new Group();
+        Room r = new Room();
+        Lecturer l = new Lecturer();
+        TimeSlot t = new TimeSlot();
+        Subject sub = new Subject();
+        try {
+            String sql_get_Sesion = "SELECT se.seid,se.gid,se.rid,se.[date],se.tid,se.leid,se.attend,se.[index] FROM [Session] se\n"
+                    + "INNER JOIN [Group] g ON se.gid = g.gid\n"
+                    + "INNER JOIN Student_Group sg ON sg.gid = g.gid\n"
+                    + "INNER JOIN Student s ON s.stuid = sg.stuid\n"
+                    + "WHERE s.stuid = ? "
+                    + "AND se.[date] >= ? "
+                    + "AND se.[date] <= ?";
+            PreparedStatement stm = connection.prepareStatement(sql_get_Sesion);
+            stm.setInt(1, stuid_input);
+            stm.setDate(2, from);
+            stm.setDate(3, to);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Session session = new Session();
+
+                session.setId(rs.getInt("seid"));
+                session.setDate(rs.getDate("date"));
+                session.setIndex(rs.getInt("index"));
+                session.setAttendated(rs.getBoolean("attend"));
+
+                l.setId(rs.getInt("leid"));
+                l.setName(rs.getString("lename"));
+                session.setLecturer(l);
+
+                g.setId(rs.getInt("gid"));
+                g.setName(rs.getString("gname"));
+                session.setGroup(g);
+
+                sub.setId(rs.getInt("subid"));
+                sub.setName(rs.getString("subname"));
+                g.setSubject(sub);
+
+                r.setId(rs.getInt("rid"));
+                r.setName(rs.getString("rname"));
+                session.setRoom(r);
+
+                t.setId(rs.getInt("tid"));
+                t.setName("tname");
+                t.setDescription(rs.getString("description"));
+                session.setTimeslot(t);
+
+                sessions.add(session);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(SessionDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return sessions;
+    }
+
     @Override
     public void insert(Session model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -313,4 +371,46 @@ public class SessionDBContext extends DBContext<Session> {
 
     }
 
+    public ArrayList<Session> listSessionByGid(int gid_input) {
+        ArrayList<Session> sessions = new ArrayList<>();
+
+        LecturerDBContext leDB = new LecturerDBContext();
+        GroupDBContext gDB = new GroupDBContext();
+        TimeSlotDBContext tiDB = new TimeSlotDBContext();
+        RoomDBContext rDB = new RoomDBContext();
+
+        ArrayList<Lecturer> ls = leDB.list();
+        ArrayList<Room> ros = rDB.list();
+        ArrayList<TimeSlot> ts = tiDB.list();
+        ArrayList<Group> gs = gDB.list();
+
+        try {
+            String sql_get_Sesion = "SELECT * FROM [Session] WHERE gid = ?";
+            PreparedStatement stm = connection.prepareStatement(sql_get_Sesion);
+            stm.setInt(1, gid_input);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+
+                Session s = new Session();
+                s.setId(rs.getInt("seid"));
+                s.setIndex(rs.getInt("index"));
+                s.setAttendated(rs.getBoolean("attend"));
+                s.setDate(rs.getDate("date"));
+
+                int leid = rs.getInt("leid");
+                s.setLecturer(ls.stream().filter(l -> l.getId() == leid).findAny().get());
+                int rid = rs.getInt("rid");
+                s.setRoom(ros.stream().filter(ro -> ro.getId() == rid).findAny().get());
+                int tid = rs.getInt("tid");
+                s.setTimeslot(ts.stream().filter(t -> t.getId() == tid).findAny().get());
+                int gid = rs.getInt("gid");
+                s.setGroup(gs.stream().filter(g -> g.getId() == gid).findAny().get());
+                sessions.add(s);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(SessionDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return sessions;
+
+    }
 }
