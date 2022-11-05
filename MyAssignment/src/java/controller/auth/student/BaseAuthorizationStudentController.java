@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package controller.auth.lecturer;
+package controller.auth.student;
 
+import controller.auth.lecturer.*;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -16,7 +17,7 @@ import model.Role;
  *
  * @author Khangnekk
  */
-public abstract class BaseAuthorizationController extends BaseAuthenticationController {
+public abstract class BaseAuthorizationStudentController extends BaseAuthenticationController {
 
     private boolean isAuthorized(HttpServletRequest req)
     {
@@ -39,7 +40,7 @@ public abstract class BaseAuthorizationController extends BaseAuthenticationCont
         }
         else
         {
-           req.getRequestDispatcher("view/lecturer/auth/accessDenied.jsp").forward(req, resp);
+            req.getRequestDispatcher("view/student/auth/accessDenied.jsp").forward(req, resp);
         }
     }
     
@@ -53,7 +54,7 @@ public abstract class BaseAuthorizationController extends BaseAuthenticationCont
         }
         else
         {
-            req.getRequestDispatcher("view/lecturer/auth/accessDenied.jsp").forward(req, resp);
+            req.getRequestDispatcher("view/student/auth/accessDenied.jsp").forward(req, resp);
         }
     }
     
