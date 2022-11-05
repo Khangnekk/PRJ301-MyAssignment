@@ -181,4 +181,44 @@ public class GroupDBContext extends DBContext<Group> {
         return students;
     }
 
+    public ArrayList<Group> listGroupByStudentId(int stuid) {
+        ArrayList<Group> groups = new ArrayList<>();
+        SubjectDBContext subDB = new SubjectDBContext();
+        LecturerDBContext lecDB = new LecturerDBContext();
+        ArrayList<Subject> subjects = subDB.list();
+        ArrayList<Lecturer> lecturers = lecDB.list();
+        try {
+            String sql = "SELECT \n"
+                    + "g.gid,g.gname,g.subid,g.leid,g.semester,g.[year]\n"
+                    + "FROM Student s\n"
+                    + "INNER JOIN [Student_Group] sg ON sg.stuid = s.stuid\n"
+                    + "INNER JOIN [Group] g ON g.gid = sg.gid\n"
+                    + "WHERE s.stuid = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, stuid);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Group g = new Group();
+                int id = rs.getInt("gid");
+                String name = rs.getString("gname");
+                int subid = rs.getInt("subid");
+                int leid = rs.getInt("leid");
+                String semester = rs.getString("semester");
+                int year = rs.getInt("year");
+
+                g.setId(id);
+                g.setName(name);
+                g.setSubject(subjects.stream().filter(sub -> sub.getId() == subid).findAny().get());
+                g.setLecturer(lecturers.stream().filter(lec -> lec.getId() == leid).findAny().get());
+                g.setSemester(semester);
+                g.setYear(year);
+                groups.add(g);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return groups;
+    }
+
 }
