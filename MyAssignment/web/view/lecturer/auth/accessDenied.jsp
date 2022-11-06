@@ -28,6 +28,11 @@
                 font-family: cursive;
                 color: red;
             }
+            .content h3{
+                font-size: 18px;
+                font-family: cursive;
+                color: white;
+            }
             button{
                 border: 1px solid #ccc;
                 border-radius: 9px;
@@ -38,12 +43,9 @@
             }
             .noti{
                 width: 70%;
-                text-align: left;
+                text-align: center;
                 margin: 10px auto;
-                
-            }
-            .noti td{
-                padding: 5px;
+
             }
         </style>
 
@@ -52,30 +54,15 @@
         <div class="content">
             <img style="width: 100px;" src="assets/img/fpt-logo.png">
             <h2>Access denied!</h2>
+            <h3><< You must have a lecturer account to access >></h3>
             <div class="noti">
-                <table>
-                    <tr>
-                        <td><a style="color: white;
-                       font-family: cursive;
-                       font-weight: bold;
-                       font-size: 16px;">You don't have permission to view this </a></td>
-                        <td><button onclick="Continue();">> Click here to continue</a</button></td>
-                    </tr>
-                    <tr>
-                        <td><a style="color: white;
-                       font-family: cursive;
-                       font-weight: bold;
-                       font-size: 16px;">If you are not logged in</a></td>
-                        <td><button onclick="Login();">> Click here to login</a</button</td>
-                    </tr>                   
-                </table>
+                <a style="color: white;
+                   font-family: cursive;
+                   font-weight: bold;
+                   font-size: 16px;">If you are not logged in</a>
+                <button onclick="Login();">> Click here to login</a</button
             </div>
         </div>
-        <script>
-            function Continue() {
-                window.location = "home";
-            }
-        </script>
         <script>
             function Login() {
                 window.location = "login";
