@@ -19,7 +19,7 @@ public class LogoutController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.getSession().setAttribute("account", null);
-        request.getRequestDispatcher("view/lecturer/auth/login.jsp").forward(request, response);
+        request.getRequestDispatcher("login").forward(request, response);
     }
 
     @Override

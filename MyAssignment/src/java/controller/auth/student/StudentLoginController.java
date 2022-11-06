@@ -40,7 +40,7 @@ public class StudentLoginController extends HttpServlet {
         else
         {
             request.getSession().setAttribute("account", account);
-            request.getRequestDispatcher("/view/student/home.jsp").forward(request, response);
+            response.sendRedirect("student_home");
         }
     }
 
