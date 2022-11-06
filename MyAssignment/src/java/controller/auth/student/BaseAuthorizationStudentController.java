@@ -3,8 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package controller.auth.student;
-
-import controller.auth.lecturer.*;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -17,7 +15,7 @@ import model.Role;
  *
  * @author Khangnekk
  */
-public abstract class BaseAuthorizationStudentController extends BaseAuthenticationController {
+public abstract class BaseAuthorizationStudentController extends BaseAuthenticationStudentController {
 
     private boolean isAuthorized(HttpServletRequest req)
     {

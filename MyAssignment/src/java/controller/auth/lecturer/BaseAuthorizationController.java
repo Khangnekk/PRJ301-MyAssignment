@@ -43,8 +43,6 @@ public abstract class BaseAuthorizationController extends BaseAuthenticationCont
         }
     }
     
-    protected abstract void processPost(HttpServletRequest req, HttpServletResponse resp,Account account) throws ServletException, IOException;
-    protected abstract void processGet(HttpServletRequest req, HttpServletResponse resp,Account account) throws ServletException, IOException;
     @Override
     protected void processGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if(isAuthorized(req))
@@ -56,5 +54,9 @@ public abstract class BaseAuthorizationController extends BaseAuthenticationCont
             req.getRequestDispatcher("view/lecturer/auth/accessDenied.jsp").forward(req, resp);
         }
     }
+    
+    protected abstract void processPost(HttpServletRequest req, HttpServletResponse resp,Account account) throws ServletException, IOException;
+    protected abstract void processGet(HttpServletRequest req, HttpServletResponse resp,Account account) throws ServletException, IOException;
+    
     
 }
