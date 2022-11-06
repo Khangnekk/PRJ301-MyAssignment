@@ -4,18 +4,13 @@
  */
 package controller.lecturer;
 
-import controller.auth.lecturer.BaseAuthenticationController;
+
 import controller.auth.lecturer.BaseAuthorizationController;
-import dal.AttendanceDBContext;
-import dal.GroupDBContext;
-import dal.LecturerDBContext;
 import dal.SessionDBContext;
-import dal.StudentDBContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
 import model.Account;
 import model.Attendance;
 import model.Session;
@@ -28,7 +23,7 @@ import model.Student;
 public class takeAttendance extends BaseAuthorizationController {
     
     @Override
-    protected void processPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void processPost(HttpServletRequest req, HttpServletResponse resp,Account account) throws ServletException, IOException {
         Session ses = new Session();
         ses.setId(Integer.parseInt(req.getParameter("seid")));
         String[] stdids = req.getParameterValues("stuid");
@@ -47,22 +42,12 @@ public class takeAttendance extends BaseAuthorizationController {
     }
     
     @Override
-    protected void processGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void processGet(HttpServletRequest req, HttpServletResponse resp,Account account) throws ServletException, IOException {
         int seid = Integer.parseInt(req.getParameter("seid"));
         SessionDBContext sesDB = new SessionDBContext();
         Session ses = sesDB.get(seid);
         req.setAttribute("ses", ses);
         req.setAttribute("seid", seid);
         req.getRequestDispatcher("add/takeAttendance.jsp").forward(req, resp);
-    }
-
-    @Override
-    protected void processPost(HttpServletRequest req, HttpServletResponse resp, Account account) throws ServletException, IOException {
-        processPost(req, resp);
-    }
-
-    @Override
-    protected void processGet(HttpServletRequest req, HttpServletResponse resp, Account account) throws ServletException, IOException {
-        processGet(req, resp);
     }
 }

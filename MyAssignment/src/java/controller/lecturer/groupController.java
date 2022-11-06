@@ -25,19 +25,10 @@ import model.Student;
  *
  * @author Khangnekk
  */
-public class groupController extends BaseAuthenticationController {
+public class groupController extends BaseAuthorizationController {
 
-    @Override
-    protected void processPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        processRequest(req, resp);
-    }
-
-    @Override
-    protected void processGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        processRequest(req, resp);
-    }
     
-    void processRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    void processRequest(HttpServletRequest req, HttpServletResponse resp,Account account) throws ServletException, IOException {
     LecturerDBContext lecturerDB = new LecturerDBContext();
         AttendanceDBContext attDB = new AttendanceDBContext();
         GroupDBContext groupDB = new GroupDBContext();
@@ -60,5 +51,15 @@ public class groupController extends BaseAuthenticationController {
         req.setAttribute("attendances", attendances);
         req.setAttribute("email", email);
         req.getRequestDispatcher("view/lecturer/group.jsp").forward(req, resp);
+    }
+
+    @Override
+    protected void processPost(HttpServletRequest req, HttpServletResponse resp, Account account) throws ServletException, IOException {
+        processRequest(req, resp, account);
+    }
+
+    @Override
+    protected void processGet(HttpServletRequest req, HttpServletResponse resp, Account account) throws ServletException, IOException {
+        processRequest(req, resp, account);
     }
 }

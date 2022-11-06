@@ -4,19 +4,17 @@
  */
 package controller.student;
 
-import dal.GroupDBContext;
-import dal.LecturerDBContext;
+import controller.auth.student.BaseAuthorizationStudentController;
 import dal.SessionDBContext;
 import dal.StudentDBContext;
 import dal.TimeSlotDBContext;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
-import model.Group;
+import model.Account;
 import model.Session;
 import model.TimeSlot;
 import util.DateTimeHelper;
@@ -25,19 +23,9 @@ import util.DateTimeHelper;
  *
  * @author Khangnekk
  */
-public class timetableStudentController extends HttpServlet {
+public class timetableStudentController extends BaseAuthorizationStudentController {
 
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        processRequest(req, resp);
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        processRequest(req, resp);
-    }
-
-    void processRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    void processRequest(HttpServletRequest req, HttpServletResponse resp, Account account) throws ServletException, IOException {
         StudentDBContext stDB = new StudentDBContext();
         String raw_from = req.getParameter("from");
         String raw_to = req.getParameter("to");
@@ -45,7 +33,7 @@ public class timetableStudentController extends HttpServlet {
         int stuid = stDB.getIdByEmail(email);
         java.sql.Date from = null;
         java.sql.Date to = null;
-        
+
         if (raw_from == null || raw_from.length() == 0) {
             Date today = new Date();
             int todayOfWeek = DateTimeHelper.getDayofWeek(today);
@@ -57,11 +45,11 @@ public class timetableStudentController extends HttpServlet {
             from = java.sql.Date.valueOf(raw_from);
             to = java.sql.Date.valueOf(raw_to);
         }
-        
+
         TimeSlotDBContext slotDB = new TimeSlotDBContext();
         ArrayList<TimeSlot> slots = slotDB.list();
         req.setAttribute("slots", slots);
-        
+
         SessionDBContext sesDB = new SessionDBContext();
         ArrayList<Session> sessions = sesDB.filter(stuid, from, to);
         req.setAttribute("sessions", sessions);
@@ -70,5 +58,15 @@ public class timetableStudentController extends HttpServlet {
         req.setAttribute("to", to);
         req.setAttribute("dates", DateTimeHelper.getDateList(from, to));
         req.getRequestDispatcher("view/student/timeTable.jsp").forward(req, resp);
+    }
+
+    @Override
+    protected void processPost(HttpServletRequest req, HttpServletResponse resp, Account account) throws ServletException, IOException {
+       processRequest(req, resp, account);
+    }
+
+    @Override
+    protected void processGet(HttpServletRequest req, HttpServletResponse resp, Account account) throws ServletException, IOException {
+        processRequest(req, resp, account);
     }
 }

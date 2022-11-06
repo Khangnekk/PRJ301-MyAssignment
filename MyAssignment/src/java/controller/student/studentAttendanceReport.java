@@ -4,16 +4,17 @@
  */
 package controller.student;
 
+import controller.auth.student.BaseAuthorizationStudentController;
 import dal.AttendanceDBContext;
 import dal.GroupDBContext;
 import dal.SessionDBContext;
 import dal.StudentDBContext;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
+import model.Account;
 import model.Attendance;
 import model.Group;
 import model.Session;
@@ -23,19 +24,10 @@ import model.Student;
  *
  * @author Khangnekk
  */
-public class studentAttendanceReport extends HttpServlet {
+public class studentAttendanceReport extends BaseAuthorizationStudentController {
 
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        processRequest(req, resp);
-    }
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        processRequest(req, resp);
-    }
-
-    void processRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    void processRequest(HttpServletRequest req, HttpServletResponse resp, Account account) throws ServletException, IOException {
         AttendanceDBContext attDB = new AttendanceDBContext();
          ArrayList<Attendance> attendances = attDB.list();
         StudentDBContext stDB = new StudentDBContext();
@@ -55,5 +47,15 @@ public class studentAttendanceReport extends HttpServlet {
         req.setAttribute("groups", groups);
         req.setAttribute("email", email);
         req.getRequestDispatcher("view/student/AttendanceReport.jsp").forward(req, resp);
+    }
+
+    @Override
+    protected void processPost(HttpServletRequest req, HttpServletResponse resp, Account account) throws ServletException, IOException {
+        processRequest(req, resp, account);
+    }
+
+    @Override
+    protected void processGet(HttpServletRequest req, HttpServletResponse resp, Account account) throws ServletException, IOException {
+        processRequest(req, resp, account);
     }
 }

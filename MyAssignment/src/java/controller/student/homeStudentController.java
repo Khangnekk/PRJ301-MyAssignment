@@ -4,29 +4,31 @@
  */
 package controller.student;
 
-import controller.auth.student.BaseAuthenticationStudentController;
+import controller.auth.student.BaseAuthorizationStudentController;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import model.Account;
 
 /**
  *
  * @author Khangnekk
  */
-public class homeStudentController extends BaseAuthenticationStudentController{
+public class homeStudentController extends BaseAuthorizationStudentController{
 
-    void processRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    void processRequest(HttpServletRequest req, HttpServletResponse resp,Account account) throws ServletException, IOException {
         req.getRequestDispatcher("view/student/home.jsp").forward(req, resp);
     }
 
+
     @Override
-    protected void processPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        processRequest(req, resp);
+    protected void processPost(HttpServletRequest req, HttpServletResponse resp, Account account) throws ServletException, IOException {
+        processRequest(req, resp, account);
     }
 
     @Override
-    protected void processGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        processRequest(req, resp);
+    protected void processGet(HttpServletRequest req, HttpServletResponse resp, Account account) throws ServletException, IOException {
+        processRequest(req, resp, account);
     }
 }

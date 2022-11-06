@@ -4,7 +4,8 @@
  */
 package controller.lecturer;
 
-import controller.auth.lecturer.BaseAuthenticationController;
+
+import controller.auth.lecturer.BaseAuthorizationController;
 import dal.*;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -19,14 +20,11 @@ import util.DateTimeHelper;
  *
  * @author Khangnekk
  */
-public class timetableController extends BaseAuthenticationController {
+public class timetableController extends BaseAuthorizationController {
 
-    @Override
-    protected void processPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        processRequest(req, resp);
-    }
+
     
-    protected void processRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void processRequest(HttpServletRequest req, HttpServletResponse resp,Account account) throws ServletException, IOException {
         String email = req.getParameter("email");        
         LecturerDBContext lecturerDB = new LecturerDBContext();
         int leid = lecturerDB.getIdByEmail(email);
@@ -78,8 +76,13 @@ public class timetableController extends BaseAuthenticationController {
     }
 
     @Override
-    protected void processGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        processRequest(req, resp);
+    protected void processPost(HttpServletRequest req, HttpServletResponse resp, Account account) throws ServletException, IOException {
+        processRequest(req, resp, account);
+    }
+
+    @Override
+    protected void processGet(HttpServletRequest req, HttpServletResponse resp, Account account) throws ServletException, IOException {
+        processRequest(req, resp, account);
     }
     
 }
