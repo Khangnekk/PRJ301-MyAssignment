@@ -56,11 +56,11 @@ public class timetableController extends BaseAuthorizationController {
         req.setAttribute("slots", slots);
         
         GroupDBContext groupDB = new GroupDBContext();
-        ArrayList<Group> groups = groupDB.list();
+        ArrayList<Group> groups = groupDB.listGroupByLeid(leid);
         req.setAttribute("groups", groups);
         
         SubjectDBContext subDB = new SubjectDBContext();
-        ArrayList<Subject> subjects = subDB.list();
+        ArrayList<Subject> subjects = subDB.listSubjectByLeid(leid);
         req.setAttribute("subjects", subjects);
         
         SessionDBContext sesDB = new SessionDBContext();

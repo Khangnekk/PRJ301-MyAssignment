@@ -123,7 +123,7 @@
                                 <td style="text-align: center">
                                     <c:forEach items="${requestScope.sessions}" var="ses">
                                         <c:if test="${DateTimeHelper.compare(ses.date,d) eq 0 and (ses.timeslot.id eq slot.id)}">
-                                            ${ses.room.name} <a>[ ${ses.lecturer.name} ]</a><br>
+                                            ${ses.room.name} <br><a>[ ${ses.lecturer.name} ]</a><br>
                                             <a href="#">${ses.group.name}-${ses.group.subject.name}</a>
                                             <br/>
                                             <c:if test="${ses.attendated}">

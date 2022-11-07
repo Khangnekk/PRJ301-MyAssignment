@@ -116,11 +116,13 @@
                         <td></td>
                         <c:forEach items="${requestScope.dates}" var="d">
                             <td>${DateTimeHelper.getDayNameofWeek(d)}<br>${d}</td>
-                            </c:forEach>
+                        </c:forEach>
                     </tr>
                     <c:forEach items="${requestScope.slots}" var="slot">
                         <tr>
-                            <td class="timeslot"><a class="tname">${slot.name}: </a><br><a class="tdes">(${slot.description})</a></td>
+                            <td class="timeslot"><a class="tname">
+                                    ${slot.name}: </a><br><a class="tdes">(${slot.description})</a>
+                            </td>
                                 <c:forEach items="${requestScope.dates}" var="d">
                                 <td>
                                     <c:forEach items="${requestScope.sessions}" var="ses">

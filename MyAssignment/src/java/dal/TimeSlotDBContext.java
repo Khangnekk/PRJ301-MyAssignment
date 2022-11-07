@@ -18,7 +18,7 @@ import model.TimeSlot;
  *
  * @author Khangnekk
  */
-public class TimeSlotDBContext extends DBContext<TimeSlot>{
+public class TimeSlotDBContext extends DBContext<TimeSlot> {
 
     @Override
     public ArrayList<TimeSlot> list() {
@@ -64,5 +64,32 @@ public class TimeSlotDBContext extends DBContext<TimeSlot>{
     public TimeSlot get(int id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
+    public ArrayList<TimeSlot> listSlotByLeid(int leid_input) {
+        ArrayList<TimeSlot> timeslots = new ArrayList<>();
+        String sql = "SELECT ts.tid FROM [Session] s\n"
+                + "INNER JOIN TimeSlot ts ON ts.tid = s.tid\n"
+                + "WHERE s.leid = ?";
+        try {
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, leid_input);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                TimeSlot t = new TimeSlot();
+                int id = rs.getInt("tid");
+                String name = rs.getString("tname");
+                String description = rs.getString("description");
+                t.setId(id);
+                t.setName(name);
+                t.setDescription(description);
+                timeslots.add(t);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(StudentDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return timeslots;
+    }
+
 }
