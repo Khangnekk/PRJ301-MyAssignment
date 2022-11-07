@@ -14,8 +14,15 @@
         <link rel="stylesheet" href="assets/css/myStyle/Style.css">
         <link rel="icon" href="assets/favicon/fu-favicon.jpg" />
         <style>
+            body{
+                background-image: url('assets/img/bg.jpg');
+            }
             p{
                 color: red;
+            }
+            h2{
+                color: white;
+                font-family: cursive;
             }
         </style>
     </head>
