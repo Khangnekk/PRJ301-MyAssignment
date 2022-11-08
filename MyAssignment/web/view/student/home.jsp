@@ -131,7 +131,7 @@
     <body>
         <div class="container">
             <header>
-                <h1>FPT University Academic Portal</h1>
+                <h1><img style="width: 100px;" src="assets/img/fpt-logo.png">FPT University Academic Portal</h1>
             </header>
             <div class="top">
                 <div class="topLeft">
