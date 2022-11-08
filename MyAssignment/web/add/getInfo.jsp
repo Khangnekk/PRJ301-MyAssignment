@@ -169,10 +169,6 @@
                 <p id="content" style="margin-top: 5px; color: red"></p>
                 <p id="content2" style="margin-top: 5px; color: red"></p>
             </div>
-            <div class="last">
-                <b>For any comments or questions, please contact:</b> Student Service Department : Email: <a href="mailto:dichvusinhvien@fe.edu.vn">dichvusinhvien@fe.edu.vn</a> . Phone: <b>(024)7308.13.13</b><br>
-                Powered by <a href="">FPT University</a> |  <a href="">CMS</a> |  <a href="">library</a> |  <a href="">books24x7</a>
-            </div>
         </div>
     </body>
     <script>
