@@ -100,10 +100,10 @@
             </div>
             <div class="description">
                 <div class="dhead">
-                    <form action="timeTable" method="POST">
+                    <form action="timeTable">
                         <input type="hidden" name="leid" value="${requestScope.leid}"/>
                         Lecturer: <input type="text" value="${requestScope.lecturer.name}"/>
-                        <input type="hidden" name="email" value="${requestScope.email}"/>
+                        <input type="hidden" name="email" value="${sessionScope.account.email}"/>
                         From: <input type="date" name="from" value="${requestScope.from}"/>
                         To: <input type="date" name="to" value="${requestScope.to}"/>
                         <input type="submit" value="View"/> 
@@ -116,14 +116,14 @@
                         <td></td>
                         <c:forEach items="${requestScope.dates}" var="d">
                             <td>${DateTimeHelper.getDayNameofWeek(d)}<br>${d}</td>
-                        </c:forEach>
+                            </c:forEach>
                     </tr>
                     <c:forEach items="${requestScope.slots}" var="slot">
                         <tr>
                             <td class="timeslot"><a class="tname">
                                     ${slot.name}: </a><br><a class="tdes">(${slot.description})</a>
                             </td>
-                                <c:forEach items="${requestScope.dates}" var="d">
+                            <c:forEach items="${requestScope.dates}" var="d">
                                 <td>
                                     <c:forEach items="${requestScope.sessions}" var="ses">
                                         <c:if test="${DateTimeHelper.compare(ses.date,d) eq 0 and (ses.timeslot.id eq slot.id)}">
