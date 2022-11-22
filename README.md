@@ -1,5 +1,8 @@
 # PRJ301_Assignment
 
+## Demo of this project
+[Video Demo](https://youtu.be/_gXIeen28BA)
+
 Author: Nguyen Luong Khang <br/>
 RollNum: HE161660 <br/>
 Class: SE1643 (Slot2Day246) <br/>
