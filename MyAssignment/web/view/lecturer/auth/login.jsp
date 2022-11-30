@@ -37,7 +37,7 @@
                     <div class="input-data"><input type="text" placeholder="Email" name="email" value=""/></div>
                     <div class="input-data"><input type="password" placeholder="password" name="password" value=""/></div>
                     <p>${noti}</p>
-                    <div class="input-data"><input class="login-button" type="submit" value="Login"/></div>
+                    <input class="login-button" type="submit" value="Login"/>
                 </div>                
             </form> 
         </div>   

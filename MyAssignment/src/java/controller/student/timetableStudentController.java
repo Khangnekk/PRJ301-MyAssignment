@@ -28,7 +28,6 @@ public class timetableStudentController extends BaseAuthorizationStudentControll
     void processRequest(HttpServletRequest req, HttpServletResponse resp, Account account) throws ServletException, IOException {
         StudentDBContext stDB = new StudentDBContext();
         String raw_from = req.getParameter("from");
-        String raw_to = req.getParameter("to");
         String email = req.getParameter("email");
         int stuid = stDB.getIdByEmail(email);
         java.sql.Date from = null;
@@ -43,7 +42,10 @@ public class timetableStudentController extends BaseAuthorizationStudentControll
             to = DateTimeHelper.toDateSql(e_to);
         } else {
             from = java.sql.Date.valueOf(raw_from);
-            to = java.sql.Date.valueOf(raw_to);
+            java.util.Date e_from = DateTimeHelper.toDateUtil(from);
+            java.util.Date e_to = DateTimeHelper.addDays(e_from, 6);
+            from = DateTimeHelper.toDateSql(e_from);
+            to = DateTimeHelper.toDateSql(e_to);
         }
 
         TimeSlotDBContext slotDB = new TimeSlotDBContext();

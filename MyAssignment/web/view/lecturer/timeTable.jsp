@@ -5,149 +5,178 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Schedule Of Lecturer</title>
+        <title>FAP University Academic Portal</title>
         <!-- link favicon logo -->
         <link rel="icon" href="assets/favicon/fu-favicon.jpg" />
         <!-- link bootstrap -->
         <link rel="stylesheet" href="assets/css/bootstrap/bootstrap.min.css"/>
         <!-- link Style.css -->
         <link rel="stylesheet" href="assets/css/myStyle/Style.css">
-        <!--link font-awesome-->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
-        <style>
-            table tr td {
-                padding:0 10px;
-                border:1px solid black;
-            }
-            .table .htable{
-                background-color: #6b90da;
-                text-align: center;
-            }
-            .dhead input{
-                border-radius: 6px;
-                border: 1px solid #ccc;
-                margin-top: 5px;
-                padding: 2px 5px;
-            }
-
-            .info {
-                text-decoration: none;
-                color: #6b90da;
-            }
-            .attended {
-                text-decoration: none;
-                color: green;
-            }
-            .not_yet {
-                text-decoration: none;
-                color: red;
-            }
-            .table button{
-                background-color: #6b90da;
-                border-radius: 8px;
-                border: 1px solid white;
-                color: white;
-                line-height: 18px;
-            }
-            .table button:hover{
-                background-color: #3366cc;
-            }
-            .timeslot{
-                text-align: left;
-            }
-            .tdes{
-                color: #f08e01;
-                text-decoration: none;
-            }
-            .tname{
-                font-weight: bold;
-                color:black;
-                text-decoration: none;
-            }
-        </style>
+        <!-- link font-awesome -->
+        <link rel="stylesheet" href="./assets/font/fontawesome-free-6.1.2-web/css/all.min.css">
     </head>
+    <style>
+        table tr td {
+            border:1px solid background;
+            padding: 3px 15px;
+        }
+    </style>
     <body>
-        <div class="container">
-            <header>
-                <h1><img style="width: 100px;" src="assets/img/fpt-logo.png"> FPT University Academic Portal</h1>
-            </header>
-            <div class="top">
-                <div class="topLeft">
-                    <a href="home">Home</a>
-                </div>
-                <div class="topRight">
-                    Nickname:
-                    <a href="#">
-                        <span>
-                            <c:if test="${sessionScope.account ne null}">
-                                ${sessionScope.account.username}
-                            </c:if>
-                        </span>
-                    </a>
-                    &nbsp;|
-                    <a href="logout">
-                        <span>
-                            logout
-                        </span>
-                    </a>
-                    &nbsp;|
-                    <a href="#">
-                        <span>
-                            Campus: FPTU - Hoa Lac
-                        </span>
-                    </a>
-                </div>
-            </div>
-            <div class="description">
-                <div class="dhead">
-                    <form action="timeTable">
-                        <input type="hidden" name="leid" value="${requestScope.leid}"/>
-                        Lecturer: <input type="text" value="${requestScope.lecturer.name}"/>
-                        <input type="hidden" name="email" value="${sessionScope.account.email}"/>
-                        From: <input type="date" name="from" value="${requestScope.from}"/>
-                        To: <input type="date" name="to" value="${requestScope.to}"/>
-                        <input type="submit" value="View"/> 
-                    </form>
-                </div>
-            </div>
-            <div class="table">
-                <table>
-                    <tr class="htable">
-                        <td></td>
-                        <c:forEach items="${requestScope.dates}" var="d">
-                            <td>${DateTimeHelper.getDayNameofWeek(d)}<br>${d}</td>
-                            </c:forEach>
-                    </tr>
-                    <c:forEach items="${requestScope.slots}" var="slot">
-                        <tr>
-                            <td class="timeslot"><a class="tname">
-                                    ${slot.name}: </a><br><a class="tdes">(${slot.description})</a>
-                            </td>
-                            <c:forEach items="${requestScope.dates}" var="d">
-                                <td>
-                                    <c:forEach items="${requestScope.sessions}" var="ses">
-                                        <c:if test="${DateTimeHelper.compare(ses.date,d) eq 0 and (ses.timeslot.id eq slot.id)}">
-                                            <a href="takeAttendance?seid=${ses.id}">${ses.group.name}-${ses.group.subject.name}</a>
-                                            <br/>
-                                            at ${ses.room.name}
-                                            <c:if test="${ses.attendated}">
-                                                <a class="attended">(Attend)</a>
-                                            </c:if>
-                                            <c:if test="${!ses.attendated}">
-                                                <a class="not_yet">(Not Yet)</a>
-                                            </c:if>
-                                        </c:if>
+        <button type="button" class="btn btn-danger btn-floating btn-lg" id="btn-back-to-top">
+            <i class="fas fa-arrow-up"></i> Back to top
+        </button>
+        <div class="header">
+            <nav class="nav-main">
+                <!-- Navigation for PC -->
+                <nav class="nav-pc" data-spy="affix">
+                    <div>
+                        <a href="home" class="nav-link-pc"><img style="width: 3em;" src="assets/img/fpt-logo.png">FPT University
+                        </a>
+                    </div>
+                    <div class="nav-pc-left">               
+                        <a href="#"><i class="fa-solid fa-bell"></i></a>
+                        <div class="dropdown nav-pc-left">
+                            <a href="#"><i class="fa-solid fa-user-tie"></i></a>
+                            <div class="dropdown-content" >
+                                <a href="#">
+                                    <i style="color: black;" class="fa-solid fa-address-card"></i>
+                                    <c:if test="${sessionScope.account ne null}">
+                                        ${sessionScope.account.username}
+                                    </c:if>
+                                </a>
+                                <a href="#"><i style="color: black;" class="fa-solid fa-earth-americas"></i> Language</a>
+                                <a href="#"><i style="color: black;" class="fa-solid fa-comment"></i> Feedback</a>
+                                <a onclick="Darkmode();"><i style="color: black;" class="fa-solid fa-circle-half-stroke"></i> Dark Mode (Off)</a>
+                                <a href="logout"><i style="color: black;" class="fa-solid fa-right-from-bracket"></i> Logout</a>
+                            </div>
+                        </div>
+                    </div>      
+                </nav>
+            </nav>
+        </div>
+        <div class="main">
+            <br>    
+            <div class="container-fluid main-content-home">
+                <div class="row">
+                    <div class="col-md-2 left">
+                        <ul style="padding: 0;">
+                            <li>
+                                <a href="timeTable?email=${sessionScope.account.email}" ><i class="fas fa-table"></i> Timetable</a>
+                            </li>
+                            <li>
+                                <a href="group?email=${sessionScope.account.email}&gid=-1" ><i class="fa-solid fa-file"></i> View Report Attendance</a>
+                            </li>
+                            <li>
+                                <a href="getInfo?emailInfo=${sessionScope.account.email}&gidInfo=-1&seInfo=-1&gid=-1&seid=-1&email=${sessionScope.account.email}" ><i class="fas fa-calendar-check"></i> Take Attendance</a>
+                            </li>
+                            <li>
+                                <a href="" ><i class="fa-solid fa-comment"></i> Feedback</a>
+                            </li>
+                            <li>
+                                <a href="" ><i class="fa-solid fa-scale-balanced"></i> Regulations</a>
+                            </li>
+                            <li>
+                                <a href="" ><i class="fa-solid fa-not-equal"></i> Others</a>
+                            </li>
+                            <li>
+                                <a href="" ><i class="fa-solid fa-c"></i> FPTU-Coursera</a>
+                            </li>
+                            <li>
+                                <a href="" ><i class="fa-solid fa-building"></i> Dormitory</a>
+                            </li>
+                            <li>
+                                <a href="" ><i class="fa-solid fa-triangle-exclamation"></i> Important Notice</a>
+                            </li>
+                        </ul>
+                        <h2 style="font-size: 20px;">Available on</h2>
+                        <ul style="padding: 0;">
+                            <li>
+                                <a target="_blank" href="https://apps.apple.com/app/id1527723314" ><img height="20px"  src="assets/favicon/appStore.png"> App Store</a>
+                            </li>
+                            <li>
+                                <a target="_blank" href="https://play.google.com/store/apps/details?id=com.fuct" ><img height="20px" src="assets/favicon/googlePlay.png"> Google Play</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-10 right">
+                        <div>
+                            <div class="description">
+                                <div style=" text-align: center">
+                                    <form action="timeTable">
+                                        <input type="hidden" name="leid" value="${requestScope.leid}"/> 
+                                        <input type="hidden" name="email" value="${sessionScope.account.email}"/>
+                                        From: <input type="date" name="from" value="${requestScope.from}"/>
+                                        <input type="submit" value="View"/> 
+                                        <b> ( View by 1 week after from ) </b>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="table">
+                                <table>
+                                    <tr class="htable">
+                                        <td></td>
+                                        <c:forEach items="${requestScope.dates}" var="d">
+                                            <td>${DateTimeHelper.getDayNameofWeek(d)}<br>${d}</td>
+                                            </c:forEach>
+                                    </tr>
+                                    <c:forEach items="${requestScope.slots}" var="slot">
+                                        <tr>
+                                            <td class="timeslot"><a class="tname">
+                                                    ${slot.name}: </a><br><a class="tdes">(${slot.description})</a>
+                                            </td>
+                                            <c:forEach items="${requestScope.dates}" var="d">
+                                                <td style="text-align: center">
+                                                    <c:forEach items="${requestScope.sessions}" var="ses">
+                                                        <c:if test="${DateTimeHelper.compare(ses.date,d) eq 0 and (ses.timeslot.id eq slot.id)}">
+                                                            <a href="takeAttendance?seid=${ses.id}">${ses.group.name}-${ses.group.subject.name}</a>
+                                                            <br/>
+                                                            at ${ses.room.name}<br>
+                                                            <c:if test="${ses.attendated}">
+                                                                <a class="attended">(Status: Attend)</a>
+                                                            </c:if>
+                                                            <c:if test="${!ses.attendated}">
+                                                                <a class="not_yet">(Status: Not Yet)</a>
+                                                            </c:if>
+                                                        </c:if>
 
+                                                    </c:forEach>
+                                                </td>
+                                            </c:forEach>
+                                        </tr>
                                     </c:forEach>
-                                </td>
-                            </c:forEach>
-                        </tr>
-                    </c:forEach>
-                </table>
-            </div>
-            <div class="last">               
-                Powered by <a href="">FPT University</a> |  <a href="">CMS</a> |  <a href="">library</a> |  <a href="">books24x7</a>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </body>
+    <script>
+        //Get the button
+        let mybutton = document.getElementById("btn-back-to-top");
+
+        // When the user scrolls down 20px from the top of the document, show the button
+        window.onscroll = function () {
+            scrollFunction();
+        };
+
+        function scrollFunction() {
+            if (
+                    document.body.scrollTop > 20 ||
+                    document.documentElement.scrollTop > 20
+                    ) {
+                mybutton.style.display = "block";
+            } else {
+                mybutton.style.display = "none";
+            }
+        }
+        // When the user clicks on the button, scroll to the top of the document
+        mybutton.addEventListener("click", backToTop);
+
+        function backToTop() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
+    </script>
 </html>

@@ -29,7 +29,6 @@ public class timetableController extends BaseAuthorizationController {
         LecturerDBContext lecturerDB = new LecturerDBContext();
         int leid = lecturerDB.getIdByEmail(email);
         String raw_from = req.getParameter("from");
-        String raw_to = req.getParameter("to");
         java.sql.Date from = null;
         java.sql.Date to = null;
         if(raw_from ==null || raw_from.length() ==0)
@@ -44,7 +43,10 @@ public class timetableController extends BaseAuthorizationController {
         else
         {
             from = java.sql.Date.valueOf(raw_from);
-            to = java.sql.Date.valueOf(raw_to);
+            java.util.Date e_from = DateTimeHelper.toDateUtil(from);
+            java.util.Date e_to = DateTimeHelper.addDays(e_from, 6);
+            from = DateTimeHelper.toDateSql(e_from);
+            to = DateTimeHelper.toDateSql(e_to);
         }
         req.setAttribute("leid", leid);
         req.setAttribute("from", from);
