@@ -181,45 +181,6 @@ ul li {
     border: 2px solid orangered;
     border-radius: 9px;
 }
-
-.login-form{
-    width: 30%;
-    margin: 8em auto;
-    padding: 15px;
-    border: 1px solid #ccc;
-    border-radius: 9px;
-    text-align: center;
-}
-.login-form h2{
-    text-align: center;
-}
-.login-button{
-    border-radius: 30px;
-    border: 2px solid orangered;
-    background-color: white;
-    font-size: 25px;
-    font-family: cursive;
-    font-weight: bold;
-    width: 45%;
-    cursor: pointer;
-}
-.login-form .input-data{
-    margin: 15px 0 15px 0;
-    width: 100%;
-}
-.input-data input{
-    padding: 8px;
-    width: 80%;
-}
-.login-title{
-    background-color: orangered;
-    color: white;
-    font-family: cursive;
-    margin: 0 -15px 0 -15px;
-}
-.login-input-data{
-    margin: 20px 0 20px 0;
-}
 .dhead{
     text-align: center;
     margin: 3px 0px 3px 0px;

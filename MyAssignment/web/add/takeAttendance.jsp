@@ -8,11 +8,11 @@
         <!-- link favicon logo -->
         <link rel="icon" href="assets/favicon/fu-favicon.jpg" />
         <!-- link bootstrap -->
-        <link rel="stylesheet" href="assets/css/bootstrap/bootstrap.min.css"/>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <!-- link Style.css -->
         <link rel="stylesheet" href="assets/css/myStyle/Style.css">
         <!-- link font-awesome -->
-        <link rel="stylesheet" href="./assets/font/fontawesome-free-6.1.2-web/css/all.min.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     </head>
     <style>
         table tr td{
