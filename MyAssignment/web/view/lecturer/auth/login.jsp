@@ -25,6 +25,7 @@
             
             p{
                 color: red;
+                font-weight: bold;
             }
 
             .main{
