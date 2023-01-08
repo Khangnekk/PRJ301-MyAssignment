@@ -114,8 +114,8 @@
                     <h4>Nice to see you again</h4>
                     <h1>WELCOME BACK</h1>
                     <div class="abc">
-                        <img style="width: 400px; height: 212px;margin-top: 2rem;"
-                             src="https://fpt.edu.vn/Content/images/assets/2021-FPTU-Eng.png">
+                        <img style="width: 400px; height: 300px;margin-top: 2rem;"
+                             src="https://cdn-icons-png.flaticon.com/512/2472/2472253.png">
                     </div>
                 </div>
                 <div class="login">

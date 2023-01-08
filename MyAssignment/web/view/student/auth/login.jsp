@@ -116,7 +116,7 @@
                     <h1>WELCOME BACK</h1>
                     <div class="abc">
                         <img style="width: 400px; height: 212px;margin-top: 2rem;"
-                             src="https://fpt.edu.vn/Content/images/assets/2021-FPTU-Eng.png">
+                             src="https://www.mystudentplan.ca/_images/student-plan-landing.png">
                     </div>
                 </div>
                 <div class="login">
